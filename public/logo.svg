@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 40" fill="none">
+  <circle cx="18" cy="20" r="14" fill="#F6A937"/>
+  <path d="M12 20 L18 10 L24 20 L18 14Z" fill="#5F6C37"/>
+  <path d="M12 20 L18 30 L24 20 L18 26Z" fill="#5F6C37"/>
+  <text x="40" y="27" font-family="Inter, sans-serif" font-weight="800" font-size="20" fill="#5F6C37">Vigor</text>
+  <text x="100" y="27" font-family="Inter, sans-serif" font-weight="800" font-size="20" fill="#F6A937">Energy</text>
+</svg>
