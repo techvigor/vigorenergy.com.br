@@ -5,7 +5,6 @@ import {
     TrendingDown,
     Smartphone,
     Leaf,
-    Clock,
     BadgePercent,
     Zap,
     PiggyBank
