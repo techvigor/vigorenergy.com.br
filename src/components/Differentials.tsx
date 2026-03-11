@@ -1,4 +1,5 @@
 import { CheckCircle } from 'lucide-react';
+import EnergyDistributionAnimation from './EnergyDistributionAnimation';
 
 interface DifferentialItem {
     title: string;
@@ -117,7 +118,11 @@ export default function Differentials() {
                                         : 'order-1'
                                     }`}
                             >
-                                <DifferentialCard imagePosition={item.imagePosition} gradient={item.gradient} />
+                                {index === 0 ? (
+                                    <EnergyDistributionAnimation />
+                                ) : (
+                                    <DifferentialCard imagePosition={item.imagePosition} gradient={item.gradient} />
+                                )}
                             </div>
 
                             {/* Text */}

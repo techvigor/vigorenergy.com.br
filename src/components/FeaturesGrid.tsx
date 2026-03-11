@@ -76,7 +76,7 @@ export default function FeaturesGrid() {
             <div className="w-full max-w-7xl mx-auto px-4 lg:px-8 relative z-20">
 
                 {/* Overlapping Benefits Card (from Screenshot) */}
-                <div className="relative z-20 -mt-20 md:-mt-32 mb-20 md:mb-32 bg-white rounded-[2rem] shadow-xl border border-gray-light/60 p-8 md:p-8 lg:p-12">
+                <div className="relative z-20 -mt-20 md:-mt-20 mb-20 md:mb-32 bg-white rounded-[2rem] shadow-xl border border-gray-light/60 p-8 md:p-8 lg:p-12">
 
                     {/* Card Grid Section */}
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-16">
@@ -87,7 +87,7 @@ export default function FeaturesGrid() {
                             </div>
                             <h3 className="text-xl font-bold text-text-dark mb-3">Investimento zero</h3>
                             <p className="text-text-muted leading-relaxed text-sm md:text-base">
-                                Economize imediatamente sem a necessidade de comprar painéis solares, realizar obras pesadas ou adaptações na sua residência.
+                                Economize imediatamente sem a necessidade de comprar painéis solares, realizar obras pesadas ou adaptações na sua empresa ou residência.
                             </p>
                         </div>
 
