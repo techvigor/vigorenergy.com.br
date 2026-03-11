@@ -33,7 +33,7 @@ const features = [
         icon: BadgePercent,
         title: 'Garantia de 3 Meses',
         description:
-            'Após começar a receber o desconto em sua fatura, você tem 3 meses de carêncai ',
+            'Após começar a receber o desconto em sua fatura, você tem 3 meses de carência.',
     },
 ];
 
@@ -69,7 +69,10 @@ export default function FeaturesGrid() {
     }, [vantaEffect]);
 
     return (
-        <section ref={vantaRef} id="vantagens" className="pt-0 pb-20 md:pb-28 relative overflow-hidden bg-offwhite">
+        <section id="vantagens" className="pt-0 pb-20 md:pb-28 relative bg-offwhite">
+            {/* Vanta.js Background container */}
+            <div ref={vantaRef} className="absolute inset-0 z-0" />
+            
             <div className="max-w-7xl mx-auto px-4 lg:px-8 relative z-20">
 
                 {/* Overlapping Benefits Card (from Screenshot) */}
