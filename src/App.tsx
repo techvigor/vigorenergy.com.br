@@ -1,25 +1,14 @@
-import Navbar from './components/Navbar';
-import HeroSection from './components/HeroSection';
-import FeaturesGrid from './components/FeaturesGrid';
-import Differentials from './components/Differentials';
-
-import SimulatorForm from './components/SimulatorForm';
-import FAQAccordion from './components/FAQAccordion';
-import Footer from './components/Footer';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import SelecaoVigorEnergy from './pages/SelecaoVigorEnergy';
 
 export default function App() {
   return (
-    <div className="min-h-screen">
-      <Navbar />
-      <main>
-        <HeroSection />
-        <FeaturesGrid />
-        <Differentials />
-
-        <SimulatorForm />
-        <FAQAccordion />
-      </main>
-      <Footer />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/selecao-vigor-energy" element={<SelecaoVigorEnergy />} />
+      </Routes>
+    </Router>
   );
 }

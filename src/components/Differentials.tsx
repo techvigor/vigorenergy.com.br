@@ -1,5 +1,7 @@
 import { CheckCircle } from 'lucide-react';
 import EnergyDistributionAnimation from './EnergyDistributionAnimation';
+import SmartMonitoringAnimation from './SmartMonitoringAnimation';
+import HumanizedServiceAnimation from './HumanizedServiceAnimation';
 
 interface DifferentialItem {
     title: string;
@@ -120,6 +122,10 @@ export default function Differentials() {
                             >
                                 {index === 0 ? (
                                     <EnergyDistributionAnimation />
+                                ) : index === 1 ? (
+                                    <SmartMonitoringAnimation />
+                                ) : index === 2 ? (
+                                    <HumanizedServiceAnimation />
                                 ) : (
                                     <DifferentialCard imagePosition={item.imagePosition} gradient={item.gradient} />
                                 )}

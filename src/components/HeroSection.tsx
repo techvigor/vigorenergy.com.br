@@ -22,28 +22,22 @@ export default function HeroSection() {
                         Reduza sua conta de luz em até{' '}
                         <span className="text-accent">28%</span> sem investir nada
                     </h1>
-                    <p className="text-lg md:text-xl text-white/80 mb-10 max-w-2xl leading-relaxed">
-                        Assine energia solar e comece a economizar imediatamente. Sem obras,
-                        sem equipamentos, sem burocracia. Energia limpa direto na sua conta.
+                    <p className="text-lg md:text-xl text-white/80 mb-10 max-w-3xl leading-relaxed">
+                        Assine energia solar e comece a economizar imediatamente.
+                        Sem obras, sem equipamentos, sem burocracia. Energia limpa direto na sua conta.
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4">
                         <a
                             href="#simular"
-                            className="inline-flex items-center justify-center px-8 py-4 rounded-xl bg-accent text-white font-bold text-base hover:bg-accent-hover transition-all duration-200 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+                            className="inline-flex items-center justify-center px-8 py-4 rounded-xl bg-accent text-white font-bold text-base hover:bg-accent-hover transition-all duration-200 shadow-lg hover:shadow-xl hover:-translate-y-0.5 animate-pulse-orange"
                         >
                             Simular minha economia
-                        </a>
-                        <a
-                            href="#vantagens"
-                            className="inline-flex items-center justify-center px-8 py-4 rounded-xl border-2 border-white/30 text-white font-semibold text-base hover:bg-white/10 transition-all duration-200 backdrop-blur-sm"
-                        >
-                            Saiba mais
                         </a>
                     </div>
                 </div>
             </div>
 
 
-        </section>
+        </section >
     );
 }
