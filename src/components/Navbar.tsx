@@ -4,7 +4,7 @@ import { Menu, X } from 'lucide-react';
 const navLinks = [
     { label: 'Vantagens', href: '#vantagens' },
     { label: 'Diferenciais', href: '#diferenciais' },
-    { label: 'FAQ', href: '#faq' },
+    { label: 'Tire suas dúvidas', href: '#faq' },
 ];
 
 export default function Navbar() {
@@ -47,7 +47,7 @@ export default function Navbar() {
                         href="#simular"
                         className="inline-flex items-center justify-center px-6 py-2 rounded-full border border-gray-light/60 text-text-dark text-sm font-medium hover:border-accent hover:text-accent transition-all duration-300 shadow-sm"
                     >
-                        Contato
+                        Fale com a Vigor Energy
                     </a>
                 </div>
 
