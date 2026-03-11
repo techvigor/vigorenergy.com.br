@@ -69,10 +69,10 @@ export default function FeaturesGrid() {
     }, [vantaEffect]);
 
     return (
-        <section id="vantagens" className="pt-0 pb-20 md:pb-28 relative bg-offwhite">
+        <section id="vantagens" className="pt-0 pb-20 md:pb-28 relative z-20 bg-offwhite">
             {/* Vanta.js Background container */}
             <div ref={vantaRef} className="absolute inset-0 z-0" />
-            
+
             <div className="max-w-7xl mx-auto px-4 lg:px-8 relative z-20">
 
                 {/* Overlapping Benefits Card (from Screenshot) */}
