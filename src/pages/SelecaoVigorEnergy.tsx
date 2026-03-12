@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react';
-import { Plus, Trash2, CheckCircle, Gift, Users, Zap, ArrowLeft, Trophy, Clock, Award, ShieldCheck, AlertCircle } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Plus, Trash2, CheckCircle, Gift, Users, Zap, ArrowLeft, Trophy, Clock, ShieldCheck, AlertCircle } from 'lucide-react';
 import Footer from '../components/Footer';
 
 export default function SelecaoVigorEnergy() {
     // Lógica de Datas
     const [isClosed, setIsClosed] = useState(false);
-    
+
     useEffect(() => {
         // Define o limite como 10 de Abril de 2026, às 23:59:59
         const deadline = new Date('2026-04-10T23:59:59');
@@ -18,8 +17,8 @@ export default function SelecaoVigorEnergy() {
 
     // Estados do Formulário
     // 'register' | 'referrals' | 'warning' | 'success'
-    const [currentStep, setCurrentStep] = useState<'register' | 'referrals' | 'warning' | 'success'>('register'); 
-    
+    const [currentStep, setCurrentStep] = useState<'register' | 'referrals' | 'warning' | 'success'>('register');
+
     const [userData, setUserData] = useState({
         name: '',
         phone: '',
@@ -37,7 +36,7 @@ export default function SelecaoVigorEnergy() {
 
     const goToReferrals = (e: React.FormEvent) => {
         e.preventDefault();
-        if(userData.name && userData.phone && userData.email) {
+        if (userData.name && userData.phone && userData.email) {
             setCurrentStep('referrals');
         }
     };
@@ -64,7 +63,7 @@ export default function SelecaoVigorEnergy() {
     const handleFinish = () => {
         // Filtra apenas indicações que tenham pelo menos nome e whatsapp preenchidos
         const validReferrals = referrals.filter(r => r.name.trim() !== '' && r.whatsapp.trim() !== '');
-        
+
         if (validReferrals.length < 3) {
             setCurrentStep('warning');
         } else {
@@ -99,101 +98,47 @@ export default function SelecaoVigorEnergy() {
                 .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
                 html { scroll-behavior: smooth; }
             `}</style>
-            
-            {/* Minimal Header */}
-            <header className="fixed w-full z-50 transition-all duration-300 bg-white/90 backdrop-blur-md border-b border-gray-200">
-                <div className="max-w-7xl mx-auto px-4 lg:px-8 h-20 flex items-center justify-between">
-                    <Link to="/" className="flex items-center gap-2 group">
-                        <img 
-                            src="https://vigorenergy.com.br/wp-content/uploads/2024/07/LOGO-01.webp" 
-                            alt="Logo Vigor Energy" 
-                            className="h-10 w-auto object-contain transition-transform group-hover:scale-105"
+
+            {/* Hero Section - Navbar removida para layout imersivo */}
+            <section
+                className="relative flex items-center min-h-screen py-12 px-4 md:px-8 bg-white bg-[length:100%_auto] bg-no-repeat bg-bottom md:bg-right-center"
+                style={{ backgroundImage: "url('https://vigorenergy.com.br/wp-content/uploads/2026/03/camiseta_bg-scaled.png')" }}
+            >
+                {/* Gradiente para garantir legibilidade do texto no lado esquerdo */}
+                <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/80 to-transparent"></div>
+                <div className="absolute inset-0 bg-white/40 md:hidden"></div> {/* Extra legibilidade no mobile */}
+
+                <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12 relative z-10 w-full">
+                    <div className="md:w-4/5 space-y-6">
+                        <img
+                            src="https://vigorenergy.com.br/wp-content/uploads/2024/07/LOGO-01.webp"
+                            alt="Logo Vigor Energy"
+                            className="h-14 md:h-20 w-auto object-contain mb-4"
                         />
-                    </Link>
-                    <Link 
-                        to="/" 
-                        className="hidden md:flex items-center gap-2 text-text-muted hover:text-primary transition-colors font-medium text-sm"
-                    >
-                        <ArrowLeft className="w-4 h-4" />
-                        Voltar para o site Principal
-                    </Link>
-                </div>
-            </header>
-
-            {/* Hero Section */}
-            <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-32 overflow-hidden bg-primary-dark">
-                {/* Background Pattern */}
-                <div className="absolute inset-0 opacity-10">
-                    <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                            <pattern id="hero-pattern" width="60" height="60" patternUnits="userSpaceOnUse">
-                                <path d="M 60 0 L 0 0 0 60" fill="none" stroke="white" strokeWidth="1"/>
-                            </pattern>
-                        </defs>
-                        <rect width="100%" height="100%" fill="url(#hero-pattern)" />
-                    </svg>
-                </div>
-                {/* Gradient Overlays */}
-                <div className="absolute inset-0 bg-gradient-to-br from-primary-dark/90 to-primary/80 z-0"></div>
-                <div className="absolute bottom-0 w-full h-40 bg-gradient-to-t from-offwhite to-transparent z-10"></div>
-
-                <div className="max-w-7xl mx-auto px-4 lg:px-8 relative z-20">
-                    <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
-                        {/* Text Content */}
-                        <div className="w-full lg:w-1/2 space-y-8 text-center lg:text-left">
-                            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/20 border border-accent/40 text-accent font-semibold text-sm backdrop-blur-sm shadow-inner mb-2 animate-fade-in-up">
-                                <Trophy className="w-4 h-4" />
-                                <span>Sorteio Especial de Copa do Mundo</span>
-                            </div>
-                            
-                            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight drop-shadow-lg">
-                                Programa de Indicação <br/>
-                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FFDF00] to-[#009C3B]">Seleção Vigor Energy</span>
-                            </h1>
-                            
-                            <p className="text-lg md:text-xl text-white/90 font-medium leading-relaxed max-w-2xl mx-auto lg:mx-0">
-                                Ajude seus amigos a economizarem energia e concorra a <strong className="text-accent text-xl">1 Camiseta Oficial da Seleção Brasileira 2026</strong>! Espalhe a melhor energia e vista a amarelinha.
-                            </p>
-                            
-                            <div className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start pt-4">
-                                <a 
-                                    href="#participar" 
-                                    className="inline-flex items-center justify-center px-8 py-4 rounded-xl bg-accent text-white font-bold text-lg hover:bg-accent-hover transition-all duration-300 shadow-xl hover:shadow-2xl hover:-translate-y-1 animate-pulse-orange w-full sm:w-auto"
-                                >
-                                    Quero Participar!
-                                </a>
-                                <a 
-                                    href="#regras" 
-                                    className="inline-flex items-center justify-center px-8 py-4 rounded-xl border-2 border-white/30 text-white font-semibold text-lg hover:bg-white/10 transition-all duration-300 backdrop-blur-sm w-full sm:w-auto"
-                                >
-                                    Ler as Regras
-                                </a>
-                            </div>
+                        <h1 className="text-4xl md:text-5xl lg:text-[54px] font-extrabold text-vigor-dark leading-tight drop-shadow-sm">
+                            Programa de Indicação <br />
+                            <span className="text-vigor-accent">Seleção Vigor Energy</span>
+                        </h1>
+                        <p className="text-xl md:text-2xl text-gray-900 font-medium max-w-xl">
+                            Nesta época de Copa do Mundo, a Vigor Energy vai sortear <strong>1 Camiseta Oficial da Seleção Brasileira</strong> para quem espalhar a melhor energia!
+                        </p>
+                        <div className="bg-white/90 p-6 rounded-2xl border-l-8 border-vigor-accent shadow-xl backdrop-blur-sm max-w-lg">
+                            <p className="font-bold text-lg text-vigor-dark">Regra de Ouro:</p>
+                            <p className="text-base text-gray-800 mt-2">Indique ao menos <strong>3 pessoas</strong> (com consumo médio acima de 500kWh/mês) para validar sua participação no sorteio.</p>
                         </div>
 
-                        {/* Image Presentation */}
-                        <div className="w-full lg:w-1/2 relative lg:h-[600px] flex justify-center items-center">
-                            {/* Decorative Elements behind image */}
-                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 md:w-96 md:h-96 bg-accent/40 rounded-full blur-[80px] z-0 animate-pulse"></div>
-                            
-                            <div className="relative w-full max-w-md mx-auto transform hover:scale-105 transition-transform duration-700 z-10">
-                                <img 
-                                    src="https://images.tcdn.com.br/img/img_prod/1044362/camisa_futebol_brasil_copa_do_mundo_2026_torcedor_1_20260115095620_f188f201e95b.jpg" 
-                                    alt="Camisa Oficial da Seleção Brasileira 2026" 
-                                    className="w-full h-auto rounded-3xl shadow-2xl border-4 border-white/10 object-cover"
-                                />
-                                {/* Floating Badge */}
-                                <div className="absolute -bottom-6 -right-6 md:-right-10 bg-white p-4 rounded-2xl shadow-xl flex items-center gap-4 border border-gray-100 animate-float">
-                                    <div className="w-12 h-12 bg-[#009C3B]/10 rounded-full flex items-center justify-center">
-                                        <Award className="w-6 h-6 text-[#009C3B]" />
-                                    </div>
-                                    <div>
-                                        <p className="text-xs text-gray-500 font-bold uppercase tracking-wider">Prêmio Oficial</p>
-                                        <p className="text-gray-900 font-extrabold">Modelo Torcedor</p>
-                                    </div>
-                                </div>
-                            </div>
+                        {/* Botão com animação contínua */}
+                        <div className="pt-6">
+                            <a
+                                href="#participar"
+                                className="inline-flex items-center justify-center px-10 py-5 rounded-2xl bg-vigor-accent text-white font-black text-xl hover:bg-[#d5891e] transition-all duration-300 shadow-[0_15px_30px_-10px_rgba(230,154,37,0.5)] hover:-translate-y-1 animate-pulse-orange"
+                            >
+                                Quero participar!
+                            </a>
                         </div>
+                    </div>
+                    <div className="md:w-1/5 hidden md:block">
+                        {/* Espaço vazio para não cobrir a parte da imagem de fundo */}
                     </div>
                 </div>
             </section>
@@ -210,7 +155,7 @@ export default function SelecaoVigorEnergy() {
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
                         {/* Desktop connector line */}
                         <div className="hidden md:block absolute top-1/2 left-0 w-full h-0.5 bg-gray-200 -z-10 -translate-y-1/2"></div>
-                        
+
                         <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 text-center relative hover:-translate-y-2 transition-transform duration-300">
                             <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6 text-primary">
                                 <Users className="w-8 h-8" />
@@ -246,9 +191,9 @@ export default function SelecaoVigorEnergy() {
                 <div className="max-w-7xl mx-auto px-4 lg:px-8">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                         <div>
-                            <img 
-                                src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop" 
-                                alt="Equipe comemorando" 
+                            <img
+                                src="/brazil-2026-home-kit.jpg"
+                                alt="Equipe comemorando"
                                 className="rounded-3xl shadow-xl w-full h-[500px] object-cover"
                             />
                         </div>
@@ -300,7 +245,7 @@ export default function SelecaoVigorEnergy() {
                     <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
                         <defs>
                             <pattern id="form-grid" width="40" height="40" patternUnits="userSpaceOnUse">
-                                <path d="M 40 0 L 0 0 0 40" fill="none" stroke="black" strokeWidth="0.5"/>
+                                <path d="M 40 0 L 0 0 0 40" fill="none" stroke="black" strokeWidth="0.5" />
                             </pattern>
                         </defs>
                         <rect width="100%" height="100%" fill="url(#form-grid)" />
@@ -325,7 +270,7 @@ export default function SelecaoVigorEnergy() {
                                     O prazo para cadastrar suas indicações finalizou no dia <strong>10 de Abril</strong>.
                                 </p>
                                 <p className="text-gray-600 text-lg">
-                                    Fique ligado em nossas redes sociais para acompanhar o grande sorteio no dia <strong>15 de Abril</strong>.<br/>
+                                    Fique ligado em nossas redes sociais para acompanhar o grande sorteio no dia <strong>15 de Abril</strong>.<br />
                                     <strong>Boa sorte a todos os participantes!</strong>
                                 </p>
                             </div>
@@ -349,7 +294,7 @@ export default function SelecaoVigorEnergy() {
                                             <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">Seus Dados Pessoais</h2>
                                             <p className="text-gray-500">Iremos usar esses dados para te contatar caso seja o ganhador da camisa!</p>
                                         </div>
-                                        
+
                                         <form onSubmit={goToReferrals} className="space-y-6 max-w-xl mx-auto">
                                             <div>
                                                 <label className="block text-sm font-semibold text-gray-700 mb-2">Nome Completo *</label>
@@ -388,7 +333,7 @@ export default function SelecaoVigorEnergy() {
                                                 Indicações atuais: <strong className="text-lg">{referrals.filter(r => r.name.trim() !== '').length}</strong>
                                             </div>
                                         </div>
-                                        
+
                                         {/* Container para as indicações (Scrollável se forem muitas) */}
                                         <div className="overflow-y-auto custom-scrollbar pr-2 lg:pr-4 pb-4 space-y-6 max-h-[500px]">
                                             {referrals.map((referral, index) => (
@@ -396,16 +341,16 @@ export default function SelecaoVigorEnergy() {
                                                     <div className="absolute top-4 right-4 flex items-center gap-3">
                                                         <span className="text-xs font-black text-white bg-primary px-3 py-1 rounded-full shadow-sm">INDICAÇÃO {index + 1}</span>
                                                         {referrals.length > 1 && (
-                                                            <button 
-                                                                onClick={() => removeReferral(index)} 
-                                                                className="text-gray-300 hover:text-red-500 hover:bg-red-50 p-1.5 rounded-md transition-all" 
+                                                            <button
+                                                                onClick={() => removeReferral(index)}
+                                                                className="text-gray-300 hover:text-red-500 hover:bg-red-50 p-1.5 rounded-md transition-all"
                                                                 title="Remover indicação"
                                                             >
                                                                 <Trash2 className="w-5 h-5" />
                                                             </button>
                                                         )}
                                                     </div>
-                                                    
+
                                                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 mt-6">
                                                         <div className="lg:col-span-12">
                                                             <label className="block text-sm font-bold text-gray-700 mb-2">Nome Completo do Indicado</label>
@@ -425,14 +370,14 @@ export default function SelecaoVigorEnergy() {
                                         </div>
 
                                         <div className="mt-8 pt-8 border-t border-gray-200 flex flex-col lg:flex-row gap-4 items-center justify-between">
-                                            <button 
-                                                onClick={addReferral} 
+                                            <button
+                                                onClick={addReferral}
                                                 className="w-full lg:w-auto flex items-center justify-center gap-2 px-6 py-4 border-2 border-dashed border-accent text-accent font-bold rounded-xl hover:bg-accent/5 transition-colors focus:ring-4 focus:ring-accent/20 outline-none"
                                             >
-                                                <Plus className="w-5 h-5"/> Adicionar mais um indicado
+                                                <Plus className="w-5 h-5" /> Adicionar mais um indicado
                                             </button>
-                                            <button 
-                                                onClick={handleFinish} 
+                                            <button
+                                                onClick={handleFinish}
                                                 className="w-full lg:w-auto px-10 py-4 bg-primary hover:bg-primary-dark text-white font-bold rounded-xl shadow-[0_10px_20px_-10px_rgba(95,108,55,0.7)] transform transition-all hover:-translate-y-1 active:scale-[0.98] text-lg"
                                             >
                                                 Finalizar e Concorrer
@@ -449,21 +394,21 @@ export default function SelecaoVigorEnergy() {
                                         <h2 className="text-3xl font-extrabold text-gray-900 mb-4">Atenção! Faltam Indicações!</h2>
                                         <div className="bg-gray-50 p-6 rounded-2xl border border-gray-100 mb-8">
                                             <p className="text-gray-700 text-lg leading-relaxed">
-                                                Você nos enviou os dados de apenas <strong>{referrals.filter(r => r.name.trim() !== '').length} pessoa(s)</strong>.<br/>
+                                                Você nos enviou os dados de apenas <strong>{referrals.filter(r => r.name.trim() !== '').length} pessoa(s)</strong>.<br />
                                             </p>
                                             <div className="mt-4 p-4 bg-accent/10 border border-accent/20 rounded-xl">
                                                 <p className="font-bold text-accent-hover text-lg">Para ter o direito de concorrer à camisa oficial, você precisa de no mínimo <span className="underline decoration-wavy decoration-accent">3 indicações</span>.</p>
                                             </div>
                                         </div>
                                         <div className="flex flex-col gap-3">
-                                            <button 
-                                                onClick={() => setCurrentStep('referrals')} 
+                                            <button
+                                                onClick={() => setCurrentStep('referrals')}
                                                 className="w-full bg-accent hover:bg-accent-hover text-white font-bold py-4 px-6 rounded-xl shadow-lg transition-all text-lg hover:-translate-y-0.5"
                                             >
                                                 ← Quero adicionar mais pessoas
                                             </button>
-                                            <button 
-                                                onClick={confirmWarning} 
+                                            <button
+                                                onClick={confirmWarning}
                                                 className="w-full text-gray-500 hover:text-gray-900 font-semibold py-4 px-6 rounded-xl hover:bg-gray-100 transition-colors"
                                             >
                                                 Confirmar e finalizar mesmo assim
@@ -479,7 +424,7 @@ export default function SelecaoVigorEnergy() {
                                             <CheckCircle className="w-24 h-24 text-[#009C3B] relative z-10" />
                                         </div>
                                         <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-6 tracking-tight">Show de bola, {userData.name.split(' ')[0]}!</h2>
-                                        
+
                                         <div className="bg-gray-50 p-8 rounded-3xl border border-gray-100 mb-8 shadow-sm">
                                             {referrals.filter(r => r.name.trim() !== '').length >= 3 ? (
                                                 <>
@@ -488,21 +433,21 @@ export default function SelecaoVigorEnergy() {
                                                     </p>
                                                     <div className="bg-green-50 border border-green-200 text-green-800 p-5 rounded-2xl shadow-inner">
                                                         <strong className="text-lg flex items-center justify-center gap-2">
-                                                            <Trophy className="w-6 h-6 text-[#FFDF00] drop-shadow-sm" /> 
+                                                            <Trophy className="w-6 h-6 text-[#FFDF00] drop-shadow-sm" />
                                                             Você já deu um grande passo para vestir a amarelinha! 🇧🇷
                                                         </strong>
                                                     </div>
                                                 </>
                                             ) : (
                                                 <p className="text-gray-600 text-xl leading-relaxed">
-                                                    Suas indicações foram registradas. Que pena que você não atingiu as 3 indicações mínimas para participar do sorteio desta vez.<br/><br/>
+                                                    Suas indicações foram registradas. Que pena que você não atingiu as 3 indicações mínimas para participar do sorteio desta vez.<br /><br />
                                                     <strong>Mas agradecemos demais a sua parceria com a Vigor Energy! Toda energia positiva conta.</strong>
                                                 </p>
                                             )}
                                         </div>
-                                        
-                                        <button 
-                                            onClick={() => window.location.reload()} 
+
+                                        <button
+                                            onClick={() => window.location.reload()}
                                             className="inline-flex items-center gap-2 px-8 py-3 bg-white border-2 border-gray-200 text-gray-600 font-bold hover:border-gray-300 hover:text-gray-900 rounded-xl transition-all shadow-sm"
                                         >
                                             <RotateCcw className="w-4 h-4" />

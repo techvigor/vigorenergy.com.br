@@ -1,4 +1,4 @@
-import { MapPin, Phone, Mail, Instagram, Facebook, Linkedin } from 'lucide-react';
+import { MapPin, Phone, Mail, Instagram, Facebook, Linkedin, Target } from 'lucide-react';
 
 const quickLinks = [
     { label: 'Vantagens', href: '#vantagens' },
@@ -9,9 +9,8 @@ const quickLinks = [
 ];
 
 const socialLinks = [
-    { icon: Instagram, href: '#', label: 'Instagram' },
-    { icon: Facebook, href: '#', label: 'Facebook' },
-    { icon: Linkedin, href: '#', label: 'LinkedIn' },
+    { icon: Instagram, href: 'https://www.instagram.com/vigorenergyoficial/', target: '_blank', label: 'Instagram' },
+    { icon: Linkedin, href: 'https://www.linkedin.com/company/vigor-energy/', target: '_blank', label: 'LinkedIn' },
 ];
 
 export default function Footer() {
@@ -53,18 +52,18 @@ export default function Footer() {
                             <li className="flex items-start gap-3">
                                 <MapPin className="text-accent flex-shrink-0 mt-0.5" size={16} />
                                 <span className="text-white/70 text-sm">
-                                    Rua das Energias, 100
+                                    R. 7, 530 - St. Oeste
                                     <br />
-                                    São Paulo - SP, 01000-000
+                                    Goiânia - GO, 74110-090
                                 </span>
                             </li>
                             <li className="flex items-center gap-3">
                                 <Phone className="text-accent flex-shrink-0" size={16} />
                                 <a
-                                    href="tel:+5511999999999"
+                                    href="tel:+5562991183449"
                                     className="text-white/70 text-sm hover:text-accent transition-colors"
                                 >
-                                    (11) 99999-9999
+                                    (62) 99118-3449
                                 </a>
                             </li>
                             <li className="flex items-center gap-3">
@@ -83,10 +82,11 @@ export default function Footer() {
                     <div>
                         <h4 className="text-base font-bold mb-4">Redes Sociais</h4>
                         <div className="flex gap-3 mb-6">
-                            {socialLinks.map(({ icon: Icon, href, label }) => (
+                            {socialLinks.map(({ icon: Icon, href, target, label }) => (
                                 <a
                                     key={label}
                                     href={href}
+                                    target={target}
                                     aria-label={label}
                                     className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center hover:bg-accent transition-colors duration-200"
                                 >
