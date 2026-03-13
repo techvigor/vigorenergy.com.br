@@ -1,4 +1,4 @@
-import { MapPin, Phone, Mail, Instagram, Facebook, Linkedin, Target } from 'lucide-react';
+import { MapPin, Phone, Mail, Instagram, Linkedin } from 'lucide-react';
 
 const quickLinks = [
     { label: 'Vantagens', href: '#vantagens' },
