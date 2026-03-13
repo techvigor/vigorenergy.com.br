@@ -20,7 +20,7 @@ export default function Footer() {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
                     {/* Logo & About */}
                     <div className="lg:col-span-1">
-                        <img src="/logo.svg" alt="Vigor Energy" className="h-9 mb-4 brightness-0 invert" />
+                        <img src="/logomarca_transp.png" alt="Vigor Energy" className="h-9 mb-4 brightness-0 invert" />
                         <p className="text-white/70 text-sm leading-relaxed">
                             Energia solar por assinatura. Economia garantida, sem
                             complexidade. Junte-se a milhares de clientes que já estão

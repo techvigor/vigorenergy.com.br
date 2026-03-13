@@ -1,8 +1,34 @@
 import { useState, useEffect } from 'react';
-import { Plus, Trash2, CheckCircle, Gift, Users, Zap, ArrowLeft, Trophy, Clock, ShieldCheck, AlertCircle } from 'lucide-react';
+import { Plus, Trash2, CheckCircle, Gift, Users, Zap, ArrowLeft, Trophy, Clock, ShieldCheck, AlertCircle, ChevronDown, ArrowDown, Shirt, Wind, Palette } from 'lucide-react';
 import Footer from '../components/Footer';
 
 export default function SelecaoVigorEnergy() {
+    const [openFaq, setOpenFaq] = useState<number | null>(0);
+    const [activePrizeImage, setActivePrizeImage] = useState(0);
+
+    const prizeImages = [
+        {
+            url: "brazil-2026-home-kit2.jpg",
+            title: "Amarelinha",
+            subtitle: "Modelo original da Seleção Brasileira"
+        },
+        {
+            url: "/camisa-azul-brasil.webp",
+            title: "Modelo azul",
+            subtitle: "As cinco estrelas"
+        },
+        {
+            url: "/camisa-amarela-brasil.jpg",
+            title: "Um clássico da história",
+            subtitle: "O futebol em cada detalhe"
+        },
+        {
+            url: "/detalhe-camisa-azul-brasil.avif",
+            title: "Em Campo",
+            subtitle: "A emoção de vestir o manto"
+        }
+    ];
+
     // Lógica de Datas
     const [isClosed, setIsClosed] = useState(false);
 
@@ -101,7 +127,7 @@ export default function SelecaoVigorEnergy() {
 
             {/* Hero Section - Navbar removida para layout imersivo */}
             <section
-                className="relative flex items-center min-h-screen py-12 px-4 md:px-8 bg-white bg-[length:100%_auto] bg-no-repeat bg-bottom md:bg-right-center"
+                className="relative flex items-center min-h-screen py-12 px-4 md:px-8 bg-white bg-[length:120%_auto] md:bg-[length:100%_auto] bg-no-repeat bg-bottom md:bg-right-center"
                 style={{ backgroundImage: "url('https://vigorenergy.com.br/wp-content/uploads/2026/03/camiseta_bg-scaled.png')" }}
             >
                 {/* Gradiente para garantir legibilidade do texto no lado esquerdo */}
@@ -113,11 +139,11 @@ export default function SelecaoVigorEnergy() {
                         <img
                             src="https://vigorenergy.com.br/wp-content/uploads/2024/07/LOGO-01.webp"
                             alt="Logo Vigor Energy"
-                            className="h-14 md:h-20 w-auto object-contain mb-4"
+                            className="h-16 md:h-20 w-auto object-contain mb-4"
                         />
-                        <h1 className="text-4xl md:text-5xl lg:text-[54px] font-extrabold text-vigor-dark leading-tight drop-shadow-sm">
+                        <h1 className="text-3xl md:text-5xl lg:text-[54px] font-extrabold text-vigor-dark leading-tight drop-shadow-sm">
                             Programa de Indicação <br />
-                            <span className="text-vigor-accent">Seleção Vigor Energy</span>
+                            <span className="text-[35px] md:text-[54px] text-vigor-accent">Seleção Vigor Energy</span>
                         </h1>
                         <p className="text-xl md:text-2xl text-gray-900 font-medium max-w-xl">
                             Nesta época de Copa do Mundo, a Vigor Energy vai sortear <strong>1 Camiseta Oficial da Seleção Brasileira</strong> para quem espalhar a melhor energia!
@@ -145,7 +171,7 @@ export default function SelecaoVigorEnergy() {
 
             {/* Cronograma Section */}
             <section id="cronograma" className="py-20 bg-offwhite">
-                <div className="max-w-7xl mx-auto px-4 lg:px-8">
+                <div className="max-w-7xl mx-auto px-4">
                     <div className="text-center mb-16">
                         <h2 className="text-sm font-bold text-accent tracking-widest uppercase mb-3">Cronograma</h2>
                         <h3 className="text-3xl md:text-4xl font-extrabold text-primary-dark">Fique de olho nas datas</h3>
@@ -183,18 +209,27 @@ export default function SelecaoVigorEnergy() {
                             <p className="text-white/80">O sorteio será realizado e divulgado nas nossas redes sociais!</p>
                         </div>
                     </div>
+                    <div className="text-center mt-12">
+                        <a
+                            href="#participar"
+                            className="inline-flex items-center gap-2 bg-vigor-accent text-white font-bold px-8 py-4 rounded-full hover:bg-[#d5891e] transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
+                        >
+                            Participe agora
+                            <ArrowDown className="w-5 h-5 animate-bounce" />
+                        </a>
+                    </div>
                 </div>
             </section>
 
             {/* Regras e Informações */}
             <section id="regras" className="py-20 bg-white">
-                <div className="max-w-7xl mx-auto px-4 lg:px-8">
+                <div className="max-w-7xl mx-auto px-4">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                         <div>
                             <img
-                                src="/brazil-2026-home-kit.jpg"
-                                alt="Equipe comemorando"
-                                className="rounded-3xl shadow-xl w-full h-[500px] object-cover"
+                                src="/camisa-azul-brasil.webp"
+                                alt="Camiseta Oficial da Seleção Brasileira 2026"
+                                className="w-full h-[700px] object-cover"
                             />
                         </div>
                         <div className="space-y-8">
@@ -233,7 +268,96 @@ export default function SelecaoVigorEnergy() {
                                     </div>
                                 </li>
                             </ul>
+                            <div className="text-center mt-12">
+                                <a
+                                    href="#participar"
+                                    className="inline-flex items-center gap-2 bg-vigor-accent text-white font-bold px-8 py-4 rounded-full hover:bg-[#d5891e] transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
+                                >
+                                    Participe agora
+                                    <ArrowDown className="w-5 h-5 animate-bounce" />
+                                </a>
+                            </div>
                         </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Dúvidas Frequentes (FAQ) */}
+            <section className="py-20 bg-gray-50 border-t border-gray-100">
+                <div className="max-w-4xl mx-auto px-4">
+                    <div className="text-center mb-12">
+                        <h2 className="text-sm font-bold text-accent tracking-widest uppercase mb-3">Tire suas dúvidas</h2>
+                        <h3 className="text-3xl md:text-4xl font-extrabold text-primary-dark">Perguntas Frequentes</h3>
+                        <p className="text-lg text-gray-600 mt-4 leading-relaxed">
+                            Ainda não tem certeza de como funciona? Separamos as principais dúvidas para te ajudar a participar agora mesmo.
+                        </p>
+                    </div>
+
+                    <div className="space-y-6">
+                        {/* FAQ Item 1 */}
+                        <div className={`bg-white rounded-2xl shadow-sm border ${openFaq === 0 ? 'border-accent ring-1 ring-accent/20' : 'border-gray-100'} overflow-hidden transition-all duration-300`}>
+                            <button
+                                onClick={() => setOpenFaq(openFaq === 0 ? null : 0)}
+                                className="w-full flex items-center justify-between p-6 md:p-8 text-left focus:outline-none"
+                            >
+                                <h4 className="flex items-start text-lg md:text-xl font-bold text-gray-900 gap-3">
+                                    <span>Como sei se meu indicado consome mais de 500kWh?</span>
+                                </h4>
+                                <ChevronDown className={`w-6 h-6 flex-shrink-0 text-gray-400 transition-transform duration-300 ${openFaq === 0 ? 'rotate-180' : ''}`} />
+                            </button>
+                            <div className={`overflow-hidden transition-all duration-300 ease-in-out ${openFaq === 0 ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
+                                <p className="px-6 md:px-8 pb-6 md:pb-8 text-gray-600 leading-relaxed text-base md:text-lg">
+                                    O ideal é focar em amigos que moram em casas maiores com ar-condicionado, ou que possuem comércios (padarias, clínicas, etc). Geralmente, faturas acima de R$450 a R$500 reais já se enquadram. Você não precisa ter certeza absoluta, nossa equipe comercial fará a validação final!
+                                </p>
+                            </div>
+                        </div>
+
+                        {/* FAQ Item 2 */}
+                        <div className={`bg-white rounded-2xl shadow-sm border ${openFaq === 1 ? 'border-accent ring-1 ring-accent/20' : 'border-gray-100'} overflow-hidden transition-all duration-300`}>
+                            <button
+                                onClick={() => setOpenFaq(openFaq === 1 ? null : 1)}
+                                className="w-full flex items-center justify-between p-6 md:p-8 text-left focus:outline-none"
+                            >
+                                <h4 className="flex items-start text-lg md:text-xl font-bold text-gray-900 gap-3">
+                                    <span>Meus indicados precisam fechar contrato ou apenas se cadastrar?</span>
+                                </h4>
+                                <ChevronDown className={`w-6 h-6 flex-shrink-0 text-gray-400 transition-transform duration-300 ${openFaq === 1 ? 'rotate-180' : ''}`} />
+                            </button>
+                            <div className={`overflow-hidden transition-all duration-300 ease-in-out ${openFaq === 1 ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
+                                <p className="px-6 md:px-8 pb-6 md:pb-8 text-gray-600 leading-relaxed text-base md:text-lg">
+                                    Para validar a sua participação no sorteio, o seu indicado precisa ter a conta de energia aprovada no nosso sistema e se tornar um cliente ativo Vigor Energy. É bom para ele que vai economizar, e ótimo para você que concorre ao prêmio.
+                                </p>
+                            </div>
+                        </div>
+
+                        {/* FAQ Item 3 */}
+                        <div className={`rounded-2xl shadow-sm border overflow-hidden transition-all duration-300 ${openFaq === 2 ? 'bg-orange-50/50 border-orange-200 ring-1 ring-orange-200/50' : 'bg-white border-gray-100'}`}>
+                            <button
+                                onClick={() => setOpenFaq(openFaq === 2 ? null : 2)}
+                                className="w-full flex items-center justify-between p-6 md:p-8 text-left focus:outline-none"
+                            >
+                                <h4 className="flex items-start text-lg md:text-xl font-bold text-gray-900 gap-3">
+                                    <span>Se apenas 2 dos meus 3 indicados tiverem o consumo mínimo, eu concorro?</span>
+                                </h4>
+                                <ChevronDown className={`w-6 h-6 flex-shrink-0 text-gray-400 transition-transform duration-300 ${openFaq === 2 ? 'rotate-180' : ''}`} />
+                            </button>
+                            <div className={`overflow-hidden transition-all duration-300 ease-in-out ${openFaq === 2 ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
+                                <p className="px-6 md:px-8 pb-6 md:pb-8 text-gray-700 leading-relaxed text-base md:text-lg font-medium">
+                                    <span className="text-red-600 font-bold">Infelizmente não.</span> A regra base para gerar o seu 1º número da sorte é ter exatamente 3 indicados validados no sistema com o consumo {'>'} 500kWh.<br /><br />
+                                    <strong className="text-primary-dark">💡 A dica de ouro é:</strong> indique 5 ou 6 pessoas, assim você garante que pelo menos 3 serão aprovadas!
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="text-center mt-12">
+                        <a
+                            href="#participar"
+                            className="inline-flex items-center gap-2 bg-vigor-accent text-white font-bold px-8 py-4 rounded-full hover:bg-[#d5891e] transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
+                        >
+                            Participe agora
+                            <ArrowDown className="w-5 h-5 animate-bounce" />
+                        </a>
                     </div>
                 </div>
             </section>
@@ -457,6 +581,88 @@ export default function SelecaoVigorEnergy() {
                                 )}
                             </>
                         )}
+                    </div>
+                </div>
+            </section>
+
+            {/* O Prêmio Section */}
+            <section className="py-20 bg-white">
+                <div className="max-w-7xl mx-auto px-4">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                        {/* Texto */}
+                        <div className="order-2 lg:order-1 space-y-8">
+                            <div>
+                                <h2 className="text-sm font-bold text-vigor-accent tracking-widest uppercase mb-3">O Prêmio</h2>
+                                <h3 className="text-3xl md:text-5xl font-extrabold text-vigor-dark mb-6 leading-tight">O Manto Sagrado que você já conhece</h3>
+                                <p className="text-lg text-gray-600 leading-relaxed">
+                                    Não estamos falando de réplicas. O vencedor levará para casa a <strong>Camisa Oficial Nike (Modelo Torcedor) 2026</strong> da Seleção Brasileira. Você escolhe o tamanho (P, M, G ou GG) e nós teremos o prazer de te entregar.
+                                </p>
+                            </div>
+
+                            <ul className="space-y-6">
+                                <li className="flex items-center gap-4">
+                                    <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 text-green-600">
+                                        <ShieldCheck className="w-6 h-6" />
+                                    </div>
+                                    <span className="text-lg md:text-xl font-bold text-gray-800">Selo de Autenticidade</span>
+                                </li>
+                                <li className="flex items-center gap-4">
+                                    <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 text-green-600">
+                                        <Wind className="w-6 h-6" />
+                                    </div>
+                                    <span className="text-lg md:text-xl font-bold text-gray-800">Tecnologia AERO-FIT</span>
+                                </li>
+                                <li className="flex items-center gap-4">
+                                    <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 text-green-600">
+                                        <Palette className="w-6 h-6" />
+                                    </div>
+                                    <span className="text-lg md:text-xl font-bold text-gray-800">Você Escolhe a Cor e o Tamanho</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        {/* Galeria Interativa */}
+                        <div className="order-1 lg:order-2 space-y-4">
+                            {/* Imagem Principal */}
+                            <div className="relative rounded-3xl overflow-hidden shadow-2xl h-[400px] md:h-[500px] border border-gray-100 bg-gray-50 group">
+                                <img
+                                    src={prizeImages[activePrizeImage].url}
+                                    alt={prizeImages[activePrizeImage].title}
+                                    className="w-full h-full object-cover transition-opacity duration-500"
+                                />
+                                {/* Overlay Gradiente Padrão */}
+                                <div className="absolute inset-0 bg-gradient-to-t from-gray-900/60 via-transparent to-black/30 pointer-events-none"></div>
+
+                                {/* Info Superior Esquerda */}
+                                <div className="absolute top-6 left-6 flex items-center gap-2">
+                                    <Shirt className="w-5 h-5 text-white" />
+                                    <span className="text-white font-semibold tracking-wider text-sm drop-shadow-md">
+                                        {prizeImages[activePrizeImage].title}
+                                    </span>
+                                </div>
+
+                                {/* Categoria Base */}
+                                <div className="absolute bottom-6 left-6">
+                                    <h4 className="text-white font-extrabold text-2xl drop-shadow-lg">
+                                        {prizeImages[activePrizeImage].subtitle}
+                                    </h4>
+                                </div>
+                            </div>
+
+                            {/* Miniaturas */}
+                            <div className="p-2 flex gap-4 overflow-x-auto pb-2 custom-scrollbar">
+                                {prizeImages.map((img, idx) => (
+                                    <button
+                                        key={idx}
+                                        onClick={() => setActivePrizeImage(idx)}
+                                        className={`relative flex-shrink-0 w-24 h-24 md:w-32 md:h-28 rounded-2xl overflow-hidden transition-all duration-300 ${activePrizeImage === idx ? 'ring-4 ring-vigor-accent ring-offset-2 scale-[1.02] shadow-md' : 'opacity-60 hover:opacity-100 hover:scale-[1.02]'}`}
+                                    >
+                                        <img src={img.url} alt={img.title} className="w-full h-full object-cover" />
+                                        <div className={`absolute inset-0 transition-colors ${activePrizeImage === idx ? 'bg-transparent' : 'bg-black/20 group-hover:bg-transparent'}`}></div>
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
