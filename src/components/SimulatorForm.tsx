@@ -5,7 +5,7 @@ export default function SimulatorForm() {
     const [step, setStep] = useState(1);
     const [billValue, setBillValue] = useState('');
     const [profile, setProfile] = useState('Residência');
-    
+
     // Modal & Lead Form State
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [leadForm, setLeadForm] = useState({ name: '', whatsapp: '', city: '' });
@@ -48,10 +48,10 @@ export default function SimulatorForm() {
             };
 
             console.log('Enviando dados consolidados:', allData);
-            
+
             // Simulando requisição
             await new Promise(resolve => setTimeout(resolve, 1500));
-            
+
             setSubmitStatus('success');
             // Após 3 segundos fecha o modal e reseta
             setTimeout(() => {
@@ -98,7 +98,18 @@ export default function SimulatorForm() {
     );
 
     return (
-        <section id="simulador" className="py-20 md:py-28 bg-vigor-dark text-white font-sans overflow-hidden">
+        <section id="simulador" className="py-20 md:py-28 bg-vigor-dark text-white font-sans relative overflow-hidden">
+            {/* Background Pattern */}
+            <div className="absolute inset-0 opacity-20 pointer-events-none">
+                <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <pattern id="form-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="black" strokeWidth="0.5" />
+                        </pattern>
+                    </defs>
+                    <rect width="100%" height="100%" fill="url(#form-grid)" />
+                </svg>
+            </div>
             <div className="max-w-7xl mx-auto px-4 relative z-10">
                 <div className="text-center mb-10">
                     <h2 className="text-3xl md:text-5xl lg:text-[54px] font-extrabold mb-8 leading-tight">
@@ -283,7 +294,7 @@ export default function SimulatorForm() {
             {isModalOpen && (
                 <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
                     {/* Backdrop */}
-                    <div 
+                    <div
                         className="absolute inset-0 bg-vigor-dark/90 backdrop-blur-sm transition-opacity"
                         onClick={() => submitStatus !== 'loading' && setIsModalOpen(false)}
                     ></div>
@@ -314,7 +325,7 @@ export default function SimulatorForm() {
                                         </div>
                                         <h3 className="text-2xl font-black text-vigor-dark">Finalize seu cadastro</h3>
                                     </div>
-                                    <button 
+                                    <button
                                         onClick={() => setIsModalOpen(false)}
                                         className="p-2 hover:bg-gray-100 rounded-full transition-colors text-gray-400"
                                     >
@@ -328,7 +339,7 @@ export default function SimulatorForm() {
                                         <label className="text-sm font-bold text-gray-500 uppercase tracking-wider ml-1">Nome Completo</label>
                                         <div className="relative group">
                                             <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-300 group-focus-within:text-vigor-accent transition-colors" />
-                                            <input 
+                                            <input
                                                 required
                                                 type="text"
                                                 value={leadForm.name}
@@ -344,7 +355,7 @@ export default function SimulatorForm() {
                                         <label className="text-sm font-bold text-gray-500 uppercase tracking-wider ml-1">WhatsApp</label>
                                         <div className="relative group">
                                             <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-300 group-focus-within:text-vigor-accent transition-colors" />
-                                            <input 
+                                            <input
                                                 required
                                                 type="tel"
                                                 value={leadForm.whatsapp}
@@ -360,7 +371,7 @@ export default function SimulatorForm() {
                                         <label className="text-sm font-bold text-gray-500 uppercase tracking-wider ml-1">Cidade</label>
                                         <div className="relative group">
                                             <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-300 group-focus-within:text-vigor-accent transition-colors" />
-                                            <input 
+                                            <input
                                                 required
                                                 type="text"
                                                 value={leadForm.city}
@@ -371,7 +382,7 @@ export default function SimulatorForm() {
                                         </div>
                                     </div>
 
-                                    <button 
+                                    <button
                                         type="submit"
                                         disabled={submitStatus === 'loading'}
                                         className="w-full bg-primary text-white font-black text-xl py-5 rounded-2xl hover:bg-primary-dark transition-all shadow-[0_10px_20px_-10px_rgba(3,211,102,0.6)] flex items-center justify-center gap-3 disabled:opacity-50"

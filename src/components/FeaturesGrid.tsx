@@ -83,7 +83,7 @@ export default function FeaturesGrid() {
                         {/* Column 1 */}
                         <div>
                             <div className="mb-6">
-                                <Zap className="text-text-dark" strokeWidth={1.5} size={36} />
+                                <Zap className="text-primary" strokeWidth={1.5} size={36} />
                             </div>
                             <h3 className="text-xl font-bold text-text-dark mb-3">Investimento zero</h3>
                             <p className="text-text-muted leading-relaxed text-sm md:text-base">
@@ -94,7 +94,7 @@ export default function FeaturesGrid() {
                         {/* Column 2 */}
                         <div>
                             <div className="mb-6">
-                                <PiggyBank className="text-text-dark" strokeWidth={1.5} size={36} />
+                                <PiggyBank className="text-primary" strokeWidth={1.5} size={36} />
                             </div>
                             <h3 className="text-xl font-bold text-text-dark mb-3">Economia garantida</h3>
                             <p className="text-text-muted leading-relaxed text-sm md:text-base">
@@ -105,7 +105,7 @@ export default function FeaturesGrid() {
                         {/* Column 3 */}
                         <div>
                             <div className="mb-6">
-                                <Smartphone className="text-text-dark" strokeWidth={1.5} size={36} />
+                                <Smartphone className="text-primary" strokeWidth={1.5} size={36} />
                             </div>
                             <h3 className="text-xl font-bold text-text-dark mb-3">Processo 100% digital</h3>
                             <p className="text-text-muted leading-relaxed text-sm md:text-base">

@@ -5,7 +5,7 @@ const faqs = [
     {
         question: 'Como funciona a assinatura de energia solar?',
         answer:
-            'A Vigor Energy possui fazendas solares que geram energia limpa. Ao assinar nosso serviço, os créditos de energia gerados são transferidos para sua conta de luz, gerando um desconto automático. Você não precisa instalar nenhum equipamento na sua residência.',
+            'A Vigor Energy possui fazendas solares que geram energia limpa. Ao assinar nosso serviço, os créditos de energia gerados são transferidos para sua conta de luz, gerando um desconto automático. Você não precisa instalar nenhum equipamento na sua residência, condomínio ou empresa.',
     },
     {
         question: 'Preciso fazer alguma instalação na minha casa?',
@@ -15,22 +15,22 @@ const faqs = [
     {
         question: 'Qual a economia média na conta de luz?',
         answer:
-            'Nossos clientes economizam em média de 15% a 28% na conta de luz, dependendo do seu consumo e região. Ao fazer a simulação, informamos exatamente quanto você pode economizar.',
+            'Nossos clientes economizam em média de 15% a 28% na conta de luz, dependendo do seu consumo e região. Após você realizar a simulação de economia, nós calculamos sua média de consumo à partir da sua conta de luz e informamos exatamente quanto você pode economizar.',
     },
     {
         question: 'Existe algum contrato de fidelidade?',
         answer:
-            'Não! Você pode cancelar sua assinatura a qualquer momento, sem multas ou taxas de cancelamento. Acreditamos que você vai ficar por causa dos benefícios, não por obrigação.',
+            'Depende do plano que você escolher. Temos planos sem contrato de fidelidade e planos com contrato de fidelidade. De qualquer forma, caso você opte por um plano com fidelidade, nós damos 90 dias para você se acostumar com a economia e caso você decida cancelar dentro desse período, não há multas ou taxas extras. Acreditamos que você vai ficar por causa dos benefícios, não por obrigação.',
     },
     {
         question: 'Como acompanho minha economia?',
         answer:
-            'Através do nosso aplicativo exclusivo, disponível para iOS e Android. Nele você acompanha sua economia em tempo real, histórico de consumo, faturas e muito mais.',
+            'Em nossos boletos consta toda a informação de sua economia, como valor total, valor de crédito e valor de desconto. Teremos em breve o lançamento do nosso aplicativo exclusivo, disponível para iOS e Android. Nele você acompanhará sua economia em tempo real, histórico de consumo, faturas e muito mais.',
     },
     {
         question: 'Em quais regiões a Vigor Energy atende?',
         answer:
-            'Atualmente atendemos em diversas regiões do Brasil. Para verificar a disponibilidade na sua cidade, basta preencher o formulário de simulação e nossa equipe entrará em contato.',
+            'Atualmente atendemos todo o estado de Goiás. Em breve teremos a disponibilidade em outros estados. Para verificar a disponibilidade na sua cidade, basta preencher o formulário de simulação e nossa equipe entrará em contato.',
     },
 ];
 
@@ -61,8 +61,8 @@ export default function FAQAccordion() {
                             <div
                                 key={index}
                                 className={`rounded-2xl border transition-all duration-200 ${isOpen
-                                        ? 'border-primary/20 bg-primary/[0.02] shadow-sm'
-                                        : 'border-gray-light bg-offwhite hover:border-gray-light/80'
+                                    ? 'border-primary/20 bg-primary/[0.02] shadow-sm'
+                                    : 'border-gray-light bg-offwhite hover:border-gray-light/80'
                                     }`}
                             >
                                 <button
