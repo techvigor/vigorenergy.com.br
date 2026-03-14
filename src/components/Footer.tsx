@@ -4,7 +4,7 @@ const quickLinks = [
     { label: 'Vantagens', href: '#vantagens' },
     { label: 'Diferenciais', href: '#diferenciais' },
 
-    { label: 'Simulação', href: '#simular' },
+    { label: 'Simulação', href: '#simulador' },
     { label: 'FAQ', href: '#faq' },
 ];
 

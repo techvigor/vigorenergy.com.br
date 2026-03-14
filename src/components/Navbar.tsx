@@ -44,10 +44,10 @@ export default function Navbar() {
                 {/* Right CTA (Desktop only) */}
                 <div className="hidden md:flex items-center shrink-0 z-10">
                     <a
-                        href="#simular"
-                        className="inline-flex items-center justify-center px-6 py-2 rounded-full border border-gray-light/60 text-text-dark text-sm font-medium hover:border-accent hover:text-accent transition-all duration-300 shadow-sm"
+                        href="#simulador"
+                        className="bg-accent inline-flex items-center justify-center px-6 py-2 rounded-full border border-gray-light/60 text-text-dark text-md font-bold hover:border-accent hover:animate-pulse-orange transition-all duration-300"
                     >
-                        Fale com a Vigor Energy
+                        Simular economia
                     </a>
                 </div>
 
