@@ -12,6 +12,7 @@ export default function PartnerRegistrationModal({ isOpen, onClose }: PartnerReg
     name: '',
     whatsapp: '',
     cnpj: '',
+    cidade: '',
     model: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -65,6 +66,7 @@ export default function PartnerRegistrationModal({ isOpen, onClose }: PartnerReg
             nome: formData.name,
             whatsapp: formData.whatsapp,
             cnpj: formData.cnpj,
+            cidade: formData.cidade,
             modelo_atuacao: formData.model
           }
         ]);
@@ -83,7 +85,7 @@ export default function PartnerRegistrationModal({ isOpen, onClose }: PartnerReg
   };
 
   const resetAndClose = () => {
-    setFormData({ name: '', whatsapp: '', cnpj: '', model: '' });
+    setFormData({ name: '', whatsapp: '', cnpj: '', cidade: '', model: '' });
     setIsSubmitted(false);
     setErrorMsg('');
     onClose();
@@ -183,6 +185,22 @@ export default function PartnerRegistrationModal({ isOpen, onClose }: PartnerReg
                   maxLength={18}
                   className="w-full px-4 py-3 rounded-xl border border-gray-light/80 bg-offwhite focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all text-text-dark"
                   placeholder="00.000.000/0000-00"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="cidade" className="block text-sm font-semibold text-text-dark mb-1">
+                  Cidade *
+                </label>
+                <input
+                  type="text"
+                  id="cidade"
+                  name="cidade"
+                  required
+                  value={formData.cidade}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 rounded-xl border border-gray-light/80 bg-offwhite focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all text-text-dark"
+                  placeholder="Nome da sua cidade"
                 />
               </div>
 
