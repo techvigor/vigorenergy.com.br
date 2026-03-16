@@ -230,7 +230,7 @@ export default function SimulatorForm() {
                                     </div>
                                     <div className="text-gray-800 font-black flex flex-col items-center md:items-start leading-none gap-1">
                                         <span className="text-sm tracking-widest text-gray-500 uppercase">Para:</span>
-                                        <span className="text-4xl lg:text-5xl text-primary drop-shadow-sm">{formatBRL(newTotal)}</span>
+                                        <span className="text-4xl lg:text-4xl text-primary drop-shadow-sm">{formatBRL(newTotal)}</span>
                                     </div>
                                 </div>
                             </div>
@@ -253,11 +253,11 @@ export default function SimulatorForm() {
                                     </div>
 
                                     <div className="grid grid-cols-2 gap-4">
-                                        <div className="bg-black/15 rounded-2xl p-5 border border-white/10 shadow-inner">
+                                        <div className="bg-black/15 rounded-2xl p-3 border border-white/10 shadow-inner">
                                             <div className="text-sm text-white/80 font-semibold mb-2 uppercase tracking-wider">Por mês</div>
                                             <div className="text-2xl font-black">{formatBRL(discount)}</div>
                                         </div>
-                                        <div className="bg-black/15 rounded-2xl p-5 border border-white/10 shadow-inner">
+                                        <div className="bg-black/15 rounded-2xl p-3 border border-white/10 shadow-inner">
                                             <div className="text-sm text-white/80 font-semibold mb-2 uppercase tracking-wider">Por ano</div>
                                             <div className="text-2xl font-black text-secondary">{formatBRL(discount * 12)}</div>
                                         </div>
@@ -265,7 +265,7 @@ export default function SimulatorForm() {
 
                                     <div className="pt-2">
                                         <p className="text-base text-white/90 text-center font-medium mb-6">
-                                            Gostou? Cadastre seus dados e comece a economizar hoje mesmo!
+                                            Gostou? Clique abaixo e comece a economizar hoje mesmo!
                                         </p>
 
                                         <button

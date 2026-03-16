@@ -55,8 +55,8 @@ export default function FeaturesGrid() {
                 scaleMobile: 1.00,
                 color: 0xed7d2d,
                 color2: 0xffffff,
-                backgroundColor: 0xffffff,
-                size: 2.20,
+                backgroundColor: 0xf7f7f7,
+                size: 4.20,
                 spacing: 30.00,
                 showLines: false,
             });
@@ -71,7 +71,7 @@ export default function FeaturesGrid() {
     return (
         <section id="vantagens" className="flex flex-col pt-0 pb-20 md:pb-28 relative z-20 bg-offwhite">
             {/* Vanta.js Background container */}
-            <div ref={vantaRef} className="absolute inset-0 z-0" />
+            <div ref={vantaRef} className="absolute opacity-30 inset-0 z-0" />
 
             <div className="w-full max-w-7xl mx-auto px-4 lg:px-8 relative z-20">
 
