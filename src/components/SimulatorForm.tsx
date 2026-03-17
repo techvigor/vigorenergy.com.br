@@ -1,5 +1,6 @@
 import { useState, type ChangeEvent, type FormEvent } from 'react';
 import { Home, Building2, Building, PiggyBank, RotateCcw, Plus, Equal, X, MapPin, Phone, User, Send, CheckCircle } from 'lucide-react';
+import { supabase } from '../lib/supabase';
 
 export default function SimulatorForm() {
     const [step, setStep] = useState(1);
@@ -49,8 +50,19 @@ export default function SimulatorForm() {
 
             console.log('Enviando dados consolidados:', allData);
 
-            // Simulando requisição
-            await new Promise(resolve => setTimeout(resolve, 1500));
+            const { error: supabaseError } = await supabase.from('pre_venda').insert([
+                {
+                    nome_completo: leadForm.name,
+                    whatsapp: leadForm.whatsapp,
+                    cidade: leadForm.city,
+                    valor_conta_luz: parsedValue,
+                    tipo_conta: profile,
+                    economia_mes: discount,
+                    economia_ano: discount * 12
+                }
+            ]);
+
+            if (supabaseError) throw supabaseError;
 
             setSubmitStatus('success');
             // Após 3 segundos fecha o modal e reseta
