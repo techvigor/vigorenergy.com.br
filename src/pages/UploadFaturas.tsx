@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { Zap, FileText, Check, Receipt, Loader2, CheckCircle, Copy } from 'lucide-react';
+import { upload } from '@vercel/blob/client';
 
 
 export default function UploadFaturas() {
@@ -59,54 +60,42 @@ export default function UploadFaturas() {
     }
   };
 
-  const enviarArquivos = () => {
+  const enviarArquivos = async () => {
     if (!file1 || !file2) return;
 
     setUploadState('uploading');
     setProgress(0);
     
-    const formData = new FormData();
-    formData.append('fatura_concessionaria', file1);
-    formData.append('boleto_vigor', file2);
+    try {
+      const nomeLimpo1 = file1.name.replace(/[^a-zA-Z0-9_.-]/g, '').replace(/\s+/g, '-');
+      const nomeLimpo2 = file2.name.replace(/[^a-zA-Z0-9_.-]/g, '').replace(/\s+/g, '-');
 
-    const xhr = new XMLHttpRequest();
+      let p1 = 0;
+      let p2 = 0;
+      const updateProg = () => setProgress((p1 + p2) / 2);
 
-    xhr.upload.addEventListener('progress', (e) => {
-      if (e.lengthComputable) {
-        const percent = (e.loaded / e.total) * 100;
-        setProgress(percent);
-      }
-    });
+      const [blob1, blob2] = await Promise.all([
+        upload(`docs/faturas/${nomeLimpo1}`, file1, {
+          access: 'public',
+          handleUploadUrl: '/api/upload',
+          onUploadProgress: (e) => { p1 = e.percentage; updateProg(); }
+        }),
+        upload(`docs/faturas/${nomeLimpo2}`, file2, {
+          access: 'public',
+          handleUploadUrl: '/api/upload',
+          onUploadProgress: (e) => { p2 = e.percentage; updateProg(); }
+        }),
+      ]);
 
-    xhr.onload = () => {
-      if (xhr.status === 200) {
-        try {
-          const res = JSON.parse(xhr.responseText);
-          if (res.sucesso) {
-            setUploadState('success');
-            setResult1(res.arquivos.fatura_concessionaria);
-            setResult2(res.arquivos.boleto_vigor);
-          } else {
-            alert('Erro: ' + (res.mensagens ? res.mensagens.join(', ') : res.mensagem));
-            setUploadState('idle');
-          }
-        } catch (e) {
-          alert('Erro ao ler resposta.');
-          setUploadState('idle');
-        }
-      } else {
-        alert('Erro de servidor.');
-        setUploadState('idle');
-      }
-    };
-
-    xhr.onerror = () => {
-      alert('Erro na requisição. Verifique sua conexão.');
+      setUploadState('success');
+      setProgress(100);
+      setResult1(blob1.url.split('/').pop() || blob1.url);
+      setResult2(blob2.url.split('/').pop() || blob2.url);
+    } catch (e: any) {
+      console.error(e);
+      alert('Erro de servidor: ' + (e.message || 'Falha no upload.'));
       setUploadState('idle');
-    };
-
-    xhr.open('POST', '/api/upload');
-    xhr.send(formData);
+    }
   };
 
   const copyText = (text: string) => {
