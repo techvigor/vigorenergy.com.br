@@ -93,8 +93,8 @@ export default function UploadFaturas() {
       const nomeFinal1 = blob1.url.split('/').pop() || blob1.url;
       const nomeFinal2 = blob2.url.split('/').pop() || blob2.url;
 
-      setResult1(`${window.location.origin}/docs/faturas/${nomeFinal1}`);
-      setResult2(`${window.location.origin}/docs/faturas/${nomeFinal2}`);
+      setResult1(nomeFinal1);
+      setResult2(nomeFinal2);
     } catch (e: any) {
       console.error(e);
       alert('Erro de servidor: ' + (e.message || 'Falha no upload.'));
