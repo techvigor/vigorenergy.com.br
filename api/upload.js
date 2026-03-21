@@ -1,89 +1,73 @@
 import { put } from '@vercel/blob';
+import formidable from 'formidable';
+import fs from 'fs/promises';
 
+// Fundamental: desativa o parser padrão da Vercel para conseguirmos ler os arquivos físicos
 export const config = {
-    runtime: 'edge', // Usa o ambiente Edge da Vercel, super rápido e lê FormData nativamente
+    api: {
+        bodyParser: false,
+    },
 };
 
-export default async function handler(request) {
-    // Garante que só aceita POST, como no seu PHP original
-    if (request.method !== 'POST') {
-        return new Response(JSON.stringify({ sucesso: false, mensagem: 'Método inválido.' }), {
-            status: 405,
-            headers: { 'Content-Type': 'application/json' }
-        });
+export default async function handler(req, res) {
+    if (req.method !== 'POST') {
+        return res.status(405).json({ sucesso: false, mensagem: 'Método inválido.' });
     }
 
     try {
-        // Lê os arquivos enviados pelo formulário
-        const formData = await request.formData();
+        // Inicializa o formidable para processar o formulário
+        const form = formidable({ keepExtensions: true });
+        const [fields, files] = await form.parse(req);
 
-        // Mantemos os mesmos campos e extensões do seu PHP original
         const campos = ['fatura_concessionaria', 'boleto_vigor'];
         const extensoesPermitidas = ['pdf', 'doc', 'docx', 'jpg', 'jpeg', 'png'];
-
         const resposta = { sucesso: true, arquivos: {} };
         const erros = [];
 
-        // Prepara as promessas de upload para enviar tudo simultaneamente (mais rápido)
         const promessasUpload = campos.map(async (campo) => {
-            const arquivo = formData.get(campo);
+            // O formidable retorna um array de arquivos por campo, pegamos o primeiro
+            const arquivoLista = files[campo];
+            const arquivo = arquivoLista ? arquivoLista[0] : null;
 
-            if (arquivo && arquivo.name) {
-                const nomePartes = arquivo.name.split('.');
+            if (arquivo && arquivo.originalFilename) {
+                const nomePartes = arquivo.originalFilename.split('.');
                 const extensao = nomePartes[nomePartes.length - 1].toLowerCase();
 
-                // Valida a extensão
                 if (!extensoesPermitidas.includes(extensao)) {
                     erros.push(`Erro em ${campo}: Extensão .${extensao} não permitida.`);
                     return;
                 }
 
-                // Sanitiza o nome (Remove caracteres especiais e espaços)
                 const nomeOriginal = nomePartes.slice(0, -1).join('.');
                 const nomeLimpo = nomeOriginal.replace(/[^a-zA-Z0-9_-]/g, '').replace(/\s+/g, '-');
                 const novoNome = `${nomeLimpo}.${extensao}`;
 
-                /* 
-                  Faz o upload para o Blob na pasta docs/faturas/
-                  O Vercel Blob automaticamente adiciona um sufixo aleatório (ex: nome-do-arquivo-1A2B3C.pdf)
-                  Isso substitui a sua lógica antiga de verificar se o arquivo já existe!
-                */
-                const blob = await put(`docs/faturas/${novoNome}`, arquivo, {
+                // Lê o arquivo que o formidable salvou temporariamente no disco do servidor
+                const fileBuffer = await fs.readFile(arquivo.filepath);
+
+                // Envia para o Blob
+                const blob = await put(`docs/faturas/${novoNome}`, fileBuffer, {
                     access: 'public',
                 });
 
-                // Pega a URL completa, divide nas barras '/' e extrai apenas o último item (o nome do arquivo)
+                // Extrai e salva apenas o nome final
                 const nomeFinal = blob.url.split('/').pop();
-
-                // Salva apenas o nome do arquivo, mantendo o exato comportamento do seu PHP antigo
                 resposta.arquivos[campo] = nomeFinal;
             } else {
                 erros.push(`O arquivo para '${campo}' é obrigatório.`);
             }
         });
 
-        // Aguarda todos os uploads terminarem
         await Promise.all(promessasUpload);
 
-        // Se houver erros, retorna a estrutura de erro esperada pelo seu frontend
         if (erros.length > 0) {
-            return new Response(JSON.stringify({ sucesso: false, mensagens: erros }), {
-                status: 400,
-                headers: { 'Content-Type': 'application/json' }
-            });
+            return res.status(400).json({ sucesso: false, mensagens: erros });
         }
 
-        // Retorna sucesso com as URLs dos arquivos
-        return new Response(JSON.stringify(resposta), {
-            status: 200,
-            headers: { 'Content-Type': 'application/json' }
-        });
+        return res.status(200).json(resposta);
 
     } catch (error) {
         console.error("Erro no upload:", error);
-        return new Response(JSON.stringify({ sucesso: false, mensagem: 'Erro interno no servidor.' }), {
-            status: 500,
-            headers: { 'Content-Type': 'application/json' }
-        });
+        return res.status(500).json({ sucesso: false, mensagem: 'Erro interno no servidor.' });
     }
 }
