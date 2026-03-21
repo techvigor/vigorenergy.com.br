@@ -1,6 +1,10 @@
 {
   "rewrites": [
     {
+      "source": "/docs/faturas/:match*",
+      "destination": "https://8aiu9icxgorbs3k4.public.blob.vercel-storage.com/docs/faturas/:match*"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
