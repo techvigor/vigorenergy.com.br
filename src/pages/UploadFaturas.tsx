@@ -1,4 +1,6 @@
 import React, { useState, useRef } from 'react';
+import { Zap, FileText, Check, Receipt, Loader2, CheckCircle, Copy } from 'lucide-react';
+
 
 export default function UploadFaturas() {
   const [file1, setFile1] = useState<File | null>(null);
@@ -135,7 +137,7 @@ export default function UploadFaturas() {
         <div className="bg-vigor-900 p-6 text-white flex justify-between items-center">
             <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-vigor-500 rounded-lg flex items-center justify-center text-white text-xl shadow-lg">
-                    <i className="fa-solid fa-bolt"></i>
+                    <Zap className="text-white w-6 h-6" />
                 </div>
                 <div>
                     <h1 className="text-xl font-bold tracking-tight">Vigor Energy</h1>
@@ -170,7 +172,7 @@ export default function UploadFaturas() {
                               
                               {!file1 ? (
                                 <div className="pointer-events-none">
-                                    <i className="fa-solid fa-file-invoice-dollar text-3xl text-slate-300 mb-2 group-hover:text-vigor-500 transition-colors"></i>
+                                    <FileText className="w-8 h-8 text-slate-300 mb-2 group-hover:text-vigor-500 transition-colors" />
                                     <p className="text-sm text-slate-500 font-medium">Clique ou arraste</p>
                                 </div>
                               ) : (
@@ -197,7 +199,7 @@ export default function UploadFaturas() {
                               
                               {!file2 ? (
                                 <div className="pointer-events-none">
-                                    <i className="fa-solid fa-receipt text-3xl text-slate-300 mb-2 group-hover:text-vigor-500 transition-colors"></i>
+                                    <Receipt className="w-8 h-8 text-slate-300 mb-2 group-hover:text-vigor-500 transition-colors" />
                                     <p className="text-sm text-slate-500 font-medium">Clique ou arraste</p>
                                 </div>
                               ) : (
@@ -228,7 +230,7 @@ export default function UploadFaturas() {
                   <div className="w-full bg-slate-100 rounded-full h-2 overflow-hidden mb-2">
                       <div className="bg-vigor-500 h-2 rounded-full transition-all duration-300" style={{ width: `${progress}%` }}></div>
                   </div>
-                  <p className="text-xs text-slate-500"><i className="fa-solid fa-spinner fa-spin mr-1"></i> Enviando arquivos...</p>
+                  <p className="text-xs text-slate-500 flex items-center justify-center gap-1"><Loader2 className="w-3 h-3 animate-spin" /> Enviando arquivos...</p>
               </div>
             )}
 
@@ -236,7 +238,7 @@ export default function UploadFaturas() {
             {uploadState === 'success' && (
               <div className="mt-6 fade-in animate-[fadeIn_0.5s_ease-in-out]">
                   <div className="bg-green-50 border border-green-100 rounded-lg p-4 mb-6 flex items-start gap-3">
-                      <i className="fa-solid fa-check-circle text-green-600 mt-0.5"></i>
+                      <CheckCircle className="text-green-600 w-5 h-5 mt-0.5" />
                       <div>
                           <h4 className="text-sm font-semibold text-green-800">Uploads concluídos!</h4>
                           <p className="text-xs text-green-600 mt-0.5">Os arquivos foram renomeados e salvos.</p>
@@ -250,7 +252,7 @@ export default function UploadFaturas() {
                           <div className="flex shadow-sm rounded-md">
                               <input type="text" readOnly value={result1} className="flex-1 block w-full rounded-l-md border border-slate-300 bg-slate-50 px-3 py-2 text-sm text-slate-600 focus:outline-none" />
                               <button onClick={() => copyText(result1)} className="px-4 py-2 border border-l-0 border-slate-300 bg-slate-100 text-slate-700 rounded-r-md hover:bg-slate-200 text-sm font-medium transition-colors">
-                                  <i className="fa-regular fa-copy"></i>
+                                  <Copy className="w-4 h-4" />
                               </button>
                           </div>
                       </div>
@@ -261,7 +263,7 @@ export default function UploadFaturas() {
                           <div className="flex shadow-sm rounded-md">
                               <input type="text" readOnly value={result2} className="flex-1 block w-full rounded-l-md border border-slate-300 bg-slate-50 px-3 py-2 text-sm text-slate-600 focus:outline-none" />
                               <button onClick={() => copyText(result2)} className="px-4 py-2 border border-l-0 border-slate-300 bg-slate-100 text-slate-700 rounded-r-md hover:bg-slate-200 text-sm font-medium transition-colors">
-                                  <i className="fa-regular fa-copy"></i>
+                                  <Copy className="w-4 h-4" />
                               </button>
                           </div>
                       </div>
@@ -278,7 +280,7 @@ export default function UploadFaturas() {
 
       {/* Toast */}
       <div className={`fixed bottom-5 right-5 bg-slate-800 text-white px-4 py-3 rounded-lg shadow-lg transform transition-all duration-300 flex items-center gap-3 z-50 ${toastVisible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'}`}>
-          <i className="fa-solid fa-check text-green-400"></i>
+          <Check className="text-green-400 w-5 h-5" />
           <span className="text-sm font-medium">Nome do arquivo copiado!</span>
       </div>
     </div>
