@@ -128,7 +128,7 @@ export default function SelecaoVigorEnergy() {
             {/* Hero Section - Navbar removida para layout imersivo */}
             <section
                 className="relative flex items-center min-h-screen py-12 px-4 md:px-8 bg-white bg-[length:120%_auto] md:bg-[length:100%_auto] bg-no-repeat bg-bottom md:bg-right-center"
-                style={{ backgroundImage: "url('https://vigorenergy.com.br/wp-content/uploads/2026/03/camiseta_bg-scaled.png')" }}
+                style={{ backgroundImage: "url('/camiseta_bg-scaled.png')" }}
             >
                 {/* Gradiente para garantir legibilidade do texto no lado esquerdo */}
                 <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/80 to-transparent"></div>
@@ -137,7 +137,7 @@ export default function SelecaoVigorEnergy() {
                 <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12 relative z-10 w-full">
                     <div className="md:w-4/5 space-y-6">
                         <img
-                            src="https://vigorenergy.com.br/wp-content/uploads/2024/07/LOGO-01.webp"
+                            src="LOGO-01.webp"
                             alt="Logo Vigor Energy"
                             className="h-16 md:h-20 w-auto object-contain mb-4"
                         />
