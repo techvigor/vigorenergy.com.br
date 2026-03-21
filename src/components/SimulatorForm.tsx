@@ -259,12 +259,12 @@ export default function SimulatorForm() {
                                         <div className="bg-white/20 p-3 rounded-2xl backdrop-blur-sm">
                                             <PiggyBank className="w-8 h-8 text-white" />
                                         </div>
-                                        <h3 className="text-xl md:text-2xl font-bold leading-tight pt-1 text-white text-shadow-sm">
+                                        <h3 className="text-lg md:text-2xl font-bold leading-tight text-white text-shadow-sm">
                                             Veja o quanto você<br />economizará na fatura
                                         </h3>
                                     </div>
 
-                                    <div className="grid grid-cols-2 gap-4">
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                         <div className="bg-black/15 rounded-2xl p-3 border border-white/10 shadow-inner">
                                             <div className="text-sm text-white/80 font-semibold mb-2 uppercase tracking-wider">Por mês</div>
                                             <div className="text-2xl font-black">{formatBRL(discount)}</div>

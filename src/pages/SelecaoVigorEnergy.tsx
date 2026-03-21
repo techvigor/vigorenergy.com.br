@@ -8,7 +8,7 @@ export default function SelecaoVigorEnergy() {
 
     const prizeImages = [
         {
-            url: "brazil-2026-home-kit2.jpg",
+            url: "uniforme-1-brasil-1.jpg",
             title: "Amarelinha",
             subtitle: "Modelo original da Seleção Brasileira"
         },
@@ -18,7 +18,7 @@ export default function SelecaoVigorEnergy() {
             subtitle: "As cinco estrelas"
         },
         {
-            url: "/camisa-amarela-brasil.jpg",
+            url: "/uniforme-1-brasil-2.jpg",
             title: "Um clássico da história",
             subtitle: "O futebol em cada detalhe"
         },
