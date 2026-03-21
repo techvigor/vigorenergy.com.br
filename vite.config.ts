@@ -8,7 +8,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': 'http://localhost:3001',
-      '/docs/faturas': {
+      '/docs': {
         target: 'https://8aiu9icxgorbs3k4.public.blob.vercel-storage.com',
         changeOrigin: true,
       },
