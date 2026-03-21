@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vigor Energy - Upload Duplo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        vigor: { 50: '#f0fdf4', 100: '#dcfce7', 500: '#22c55e', 600: '#16a34a', 700: '#15803d', 900: '#14532d' }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .drag-active {
+            border-color: #22c55e !important;
+            background-color: #f0fdf4 !important;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 text-slate-800 min-h-screen flex items-center justify-center p-4">
+
+    <div class="w-full max-w-3xl bg-white rounded-2xl shadow-xl overflow-hidden border border-slate-100">
+
+        <!-- Header -->
+        <div class="bg-vigor-900 p-6 text-white flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div
+                    class="w-10 h-10 bg-vigor-500 rounded-lg flex items-center justify-center text-white text-xl shadow-lg">
+                    <i class="fa-solid fa-bolt"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold tracking-tight">Vigor Energy</h1>
+                    <p class="text-xs text-vigor-100 opacity-80">Gestão de Documentos</p>
+                </div>
+            </div>
+            <div class="w-8 h-8 rounded-full bg-vigor-700 flex items-center justify-center text-xs">
+                <span class="font-semibold">VE</span>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="p-8">
+            <h2 class="text-xl font-semibold text-slate-800 mb-2">Envio de Documentos</h2>
+            <p class="text-slate-500 text-sm mb-6">Por favor, anexe a Fatura da Concessionária e o Boleto Vigor Energy
+                para processamento.</p>
+
+            <!-- Form Container -->
+            <div id="upload-form" class="space-y-6">
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Campo 1: Fatura Concessionária -->
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-2">Fatura Concessionária</label>
+                        <div id="drop-zone-1"
+                            class="h-40 border-2 border-dashed border-slate-300 rounded-xl flex flex-col items-center justify-center text-center cursor-pointer hover:border-vigor-500 hover:bg-slate-50 transition-all group p-4 relative">
+                            <input type="file" id="file-1" class="hidden" accept=".pdf,.doc,.docx,.jpg,.png">
+                            <div id="content-1" class="pointer-events-none">
+                                <i
+                                    class="fa-solid fa-file-invoice-dollar text-3xl text-slate-300 mb-2 group-hover:text-vigor-500 transition-colors"></i>
+                                <p class="text-sm text-slate-500 font-medium">Clique ou arraste</p>
+                            </div>
+                            <!-- Preview de Seleção -->
+                            <div id="preview-1"
+                                class="hidden absolute inset-0 bg-vigor-50 flex-col items-center justify-center rounded-xl border border-vigor-200">
+                                <i class="fa-solid fa-check text-vigor-600 text-2xl mb-2"></i>
+                                <p id="filename-1"
+                                    class="text-xs text-vigor-800 font-semibold px-2 truncate w-full text-center"></p>
+                                <button type="button" onclick="clearFile(1, event)"
+                                    class="mt-2 text-xs text-red-500 hover:text-red-700 underline">Remover</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Campo 2: Boleto Vigor -->
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-2">Boleto Vigor Energy</label>
+                        <div id="drop-zone-2"
+                            class="h-40 border-2 border-dashed border-slate-300 rounded-xl flex flex-col items-center justify-center text-center cursor-pointer hover:border-vigor-500 hover:bg-slate-50 transition-all group p-4 relative">
+                            <input type="file" id="file-2" class="hidden" accept=".pdf,.doc,.docx,.jpg,.png">
+                            <div id="content-2" class="pointer-events-none">
+                                <i
+                                    class="fa-solid fa-receipt text-3xl text-slate-300 mb-2 group-hover:text-vigor-500 transition-colors"></i>
+                                <p class="text-sm text-slate-500 font-medium">Clique ou arraste</p>
+                            </div>
+                            <!-- Preview de Seleção -->
+                            <div id="preview-2"
+                                class="hidden absolute inset-0 bg-vigor-50 flex-col items-center justify-center rounded-xl border border-vigor-200">
+                                <i class="fa-solid fa-check text-vigor-600 text-2xl mb-2"></i>
+                                <p id="filename-2"
+                                    class="text-xs text-vigor-800 font-semibold px-2 truncate w-full text-center"></p>
+                                <button type="button" onclick="clearFile(2, event)"
+                                    class="mt-2 text-xs text-red-500 hover:text-red-700 underline">Remover</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Botão de Enviar -->
+                <button id="btn-enviar" onclick="enviarArquivos()" disabled
+                    class="w-full py-3 bg-slate-300 text-white rounded-lg font-semibold shadow-sm cursor-not-allowed transition-all">
+                    Enviar Arquivos
+                </button>
+            </div>
+
+            <!-- Progress Area -->
+            <div id="progress-area" class="hidden mt-6 text-center">
+                <div class="w-full bg-slate-100 rounded-full h-2 overflow-hidden mb-2">
+                    <div id="progress-bar" class="bg-vigor-500 h-2 rounded-full transition-all duration-300 w-0"></div>
+                </div>
+                <p class="text-xs text-slate-500"><i class="fa-solid fa-spinner fa-spin mr-1"></i> Enviando arquivos...
+                </p>
+            </div>
+
+            <!-- Result Area -->
+            <div id="result-area" class="hidden mt-6 fade-in">
+                <div class="bg-green-50 border border-green-100 rounded-lg p-4 mb-6 flex items-start gap-3">
+                    <i class="fa-solid fa-check-circle text-green-600 mt-0.5"></i>
+                    <div>
+                        <h4 class="text-sm font-semibold text-green-800">Uploads concluídos!</h4>
+                        <p class="text-xs text-green-600 mt-0.5">Os arquivos foram renomeados e salvos.</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 gap-4">
+                    <!-- Resultado 1 -->
+                    <div>
+                        <label class="block text-xs font-medium text-slate-500 mb-1 uppercase">Fatura
+                            Concessionária</label>
+                        <div class="flex shadow-sm rounded-md">
+                            <input type="text" id="res-fatura" readonly
+                                class="flex-1 block w-full rounded-l-md border border-slate-300 bg-slate-50 px-3 py-2 text-sm text-slate-600 focus:outline-none">
+                            <button onclick="copyText('res-fatura')"
+                                class="px-4 py-2 border border-l-0 border-slate-300 bg-slate-100 text-slate-700 rounded-r-md hover:bg-slate-200 text-sm font-medium transition-colors">
+                                <i class="fa-regular fa-copy"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Resultado 2 -->
+                    <div>
+                        <label class="block text-xs font-medium text-slate-500 mb-1 uppercase">Boleto Vigor
+                            Energy</label>
+                        <div class="flex shadow-sm rounded-md">
+                            <input type="text" id="res-boleto" readonly
+                                class="flex-1 block w-full rounded-l-md border border-slate-300 bg-slate-50 px-3 py-2 text-sm text-slate-600 focus:outline-none">
+                            <button onclick="copyText('res-boleto')"
+                                class="px-4 py-2 border border-l-0 border-slate-300 bg-slate-100 text-slate-700 rounded-r-md hover:bg-slate-200 text-sm font-medium transition-colors">
+                                <i class="fa-regular fa-copy"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <button onclick="location.reload()"
+                    class="mt-6 w-full text-center text-sm text-slate-500 hover:text-vigor-600 font-medium transition-colors">
+                    Iniciar novo envio
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div id="toast"
+        class="fixed bottom-5 right-5 bg-slate-800 text-white px-4 py-3 rounded-lg shadow-lg transform translate-y-20 opacity-0 transition-all duration-300 flex items-center gap-3 z-50">
+        <i class="fa-solid fa-check text-green-400"></i>
+        <span class="text-sm font-medium">Nome do arquivo copiado!</span>
+    </div>
+
+    <script>
+        const MODO_DEMONSTRACAO = false; // Mude para false no servidor
+        const UPLOAD_ENDPOINT = '/api/upload';
+
+        // Elementos
+        const fileInput1 = document.getElementById('file-1');
+        const fileInput2 = document.getElementById('file-2');
+        const btnEnviar = document.getElementById('btn-enviar');
+
+        // Setup Dropzones
+        setupDropZone(1);
+        setupDropZone(2);
+
+        function setupDropZone(id) {
+            const zone = document.getElementById(`drop-zone-${id}`);
+            const input = document.getElementById(`file-${id}`);
+
+            zone.addEventListener('click', (e) => {
+                if (e.target.tagName !== 'BUTTON') input.click();
+            });
+
+            zone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                zone.classList.add('drag-active');
+            });
+
+            zone.addEventListener('dragleave', () => zone.classList.remove('drag-active'));
+
+            zone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                zone.classList.remove('drag-active');
+                if (e.dataTransfer.files.length) {
+                    handleSelection(id, e.dataTransfer.files[0]);
+                }
+            });
+
+            input.addEventListener('change', () => {
+                if (input.files.length) handleSelection(id, input.files[0]);
+            });
+        }
+
+        function handleSelection(id, file) {
+            // Validação simples
+            if (file.size > 10 * 1024 * 1024) { alert('Arquivo muito grande (Max 10MB)'); return; }
+
+            // Atualiza UI
+            document.getElementById(`content-${id}`).classList.add('hidden');
+            document.getElementById(`preview-${id}`).classList.remove('hidden');
+            document.getElementById(`preview-${id}`).classList.add('flex');
+            document.getElementById(`filename-${id}`).textContent = file.name;
+
+            checkFormValidity();
+        }
+
+        function clearFile(id, e) {
+            e.stopPropagation();
+            document.getElementById(`file-${id}`).value = ''; // Limpa input
+            document.getElementById(`content-${id}`).classList.remove('hidden');
+            document.getElementById(`preview-${id}`).classList.add('hidden');
+            document.getElementById(`preview-${id}`).classList.remove('flex');
+            checkFormValidity();
+        }
+
+        function checkFormValidity() {
+            const f1 = document.getElementById('file-1').files.length > 0 || (document.getElementById(`filename-1`).textContent !== "");
+            const f2 = document.getElementById('file-2').files.length > 0 || (document.getElementById(`filename-2`).textContent !== "");
+
+            // Verifica se o texto do preview tem conteúdo, 
+            // pois no drag n drop o input file as vezes não popula da mesma forma que o click
+            // Mas para o envio, usaremos o objeto File guardado ou do Input.
+
+            if (f1 && f2) {
+                btnEnviar.disabled = false;
+                btnEnviar.classList.remove('bg-slate-300', 'cursor-not-allowed');
+                btnEnviar.classList.add('bg-vigor-500', 'hover:bg-vigor-600', 'text-white');
+            } else {
+                btnEnviar.disabled = true;
+                btnEnviar.classList.add('bg-slate-300', 'cursor-not-allowed');
+                btnEnviar.classList.remove('bg-vigor-500', 'hover:bg-vigor-600');
+            }
+        }
+
+        function enviarArquivos() {
+            const f1 = document.getElementById('file-1').files[0];
+            const f2 = document.getElementById('file-2').files[0];
+
+            // UI changes
+            document.getElementById('upload-form').classList.add('hidden');
+            document.getElementById('progress-area').classList.remove('hidden');
+
+            if (MODO_DEMONSTRACAO) {
+                simularEnvio(f1, f2);
+            } else {
+                realizarUpload(f1, f2);
+            }
+        }
+
+        function realizarUpload(file1, file2) {
+            const formData = new FormData();
+            formData.append('fatura_concessionaria', file1);
+            formData.append('boleto_vigor', file2);
+
+            const xhr = new XMLHttpRequest();
+
+            xhr.upload.addEventListener('progress', (e) => {
+                if (e.lengthComputable) {
+                    const percent = (e.loaded / e.total) * 100;
+                    document.getElementById('progress-bar').style.width = `${percent}%`;
+                }
+            });
+
+            xhr.onload = () => {
+                if (xhr.status === 200) {
+                    try {
+                        const res = JSON.parse(xhr.responseText);
+                        if (res.sucesso) {
+                            mostrarResultado(res.arquivos.fatura_concessionaria, res.arquivos.boleto_vigor);
+                        } else {
+                            alert('Erro: ' + (res.mensagens ? res.mensagens.join(', ') : res.mensagem));
+                            location.reload();
+                        }
+                    } catch (e) { alert('Erro ao ler resposta.'); location.reload(); }
+                } else { alert('Erro de servidor.'); location.reload(); }
+            };
+
+            xhr.open('POST', UPLOAD_ENDPOINT);
+            xhr.send(formData);
+        }
+
+        function simularEnvio(f1, f2) {
+            let p = 0;
+            const int = setInterval(() => {
+                p += 5;
+                document.getElementById('progress-bar').style.width = `${p}%`;
+                if (p >= 100) {
+                    clearInterval(int);
+                    const n1 = f1 ? f1.name.replace(/\s/g, '-') : 'fatura_teste.pdf';
+                    const n2 = f2 ? f2.name.replace(/\s/g, '-') : 'boleto_teste.pdf';
+                    mostrarResultado(n1, n2);
+                }
+            }, 100);
+        }
+
+        function mostrarResultado(nome1, nome2) {
+            document.getElementById('progress-area').classList.add('hidden');
+            document.getElementById('result-area').classList.remove('hidden');
+
+            document.getElementById('res-fatura').value = nome1;
+            document.getElementById('res-boleto').value = nome2;
+        }
+
+        function copyText(elementId) {
+            const el = document.getElementById(elementId);
+            el.select();
+            el.setSelectionRange(0, 99999);
+
+            try {
+                navigator.clipboard.writeText(el.value);
+            } catch (err) {
+                document.execCommand("copy");
+            }
+
+            const toast = document.getElementById('toast');
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => toast.classList.add('translate-y-20', 'opacity-0'), 3000);
+        }
+    </script>
+</body>
+
+</html>
