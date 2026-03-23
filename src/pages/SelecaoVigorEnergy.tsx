@@ -129,12 +129,12 @@ export default function SelecaoVigorEnergy() {
             // Insere cada indicação no Supabase atrelando ao participante
             // Participante = userData.name, phone, email
             const indicacoesToInsert = validReferrals.map(referral => ({
-                participante_nome: userData.name,
-                participante_whatsapp: userData.phone,
-                participante_email: userData.email,
-                indicado_nome: referral.name,
-                indicado_whatsapp: referral.whatsapp,
-                indicado_cidade: referral.city
+                nome_participante: userData.name,
+                whatsapp_participante: userData.phone,
+                email_participante: userData.email,
+                nome_indicado: referral.name,
+                whatsapp_indicado: referral.whatsapp,
+                cidade_indicado: referral.city
             }));
 
             // Assumindo que a tabela se chama 'indicacoes' e tem essas colunas
