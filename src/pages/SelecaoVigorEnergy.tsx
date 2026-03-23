@@ -56,13 +56,27 @@ export default function SelecaoVigorEnergy() {
     ]);
 
     // Handlers do Usuário
+    const formatWhatsApp = (value: string) => {
+        const digits = value.replace(/\D/g, '').slice(0, 11);
+        if (digits.length === 0) return '';
+        if (digits.length <= 2) return digits;
+        if (digits.length <= 7) return `(${digits.slice(0, 2)}) ${digits.slice(2)}`;
+        return `(${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7)}`;
+    };
+
     const handleUserChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setUserData({ ...userData, [e.target.name]: e.target.value });
+        const { name, value } = e.target;
+        const finalValue = name === 'phone' ? formatWhatsApp(value) : value;
+        setUserData({ ...userData, [name]: finalValue });
     };
 
     const goToReferrals = (e: React.FormEvent) => {
         e.preventDefault();
-        if (userData.name && userData.phone && userData.email) {
+        // Garante que tenha 10 ou 11 dígitos na checagem se desejar: (opcional, deixaremos só como preenchido ou não)
+        if (userData.name && userData.phone.replace(/\D/g, '').length >= 10 && userData.email) {
+            setCurrentStep('referrals');
+        } else if (userData.name && userData.phone && userData.email) {
+            // Apenas para não quebrar a lógica anterior, avançar se preenchidos
             setCurrentStep('referrals');
         }
     };
@@ -70,7 +84,8 @@ export default function SelecaoVigorEnergy() {
     // Handlers de Indicações
     const handleReferralChange = (index: number, field: string, value: string) => {
         const newReferrals = [...referrals];
-        newReferrals[index] = { ...newReferrals[index], [field]: value };
+        const finalValue = field === 'whatsapp' ? formatWhatsApp(value) : value;
+        newReferrals[index] = { ...newReferrals[index], [field]: finalValue };
         setReferrals(newReferrals);
     };
 
