@@ -10,7 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.99.2",
+    "@supabase/supabase-js": "^2.100.0",
     "@tailwindcss/vite": "^4.2.1",
     "@vercel/blob": "^2.3.1",
     "cors": "^2.8.6",

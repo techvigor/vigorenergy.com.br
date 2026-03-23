@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Plus, Trash2, CheckCircle, Gift, Users, Zap, ArrowLeft, Trophy, Clock, ShieldCheck, AlertCircle, ChevronDown, ArrowDown, Shirt, Wind, Palette } from 'lucide-react';
 import Footer from '../components/Footer';
+import { supabase } from '../lib/supabase';
 
 export default function SelecaoVigorEnergy() {
     const [openFaq, setOpenFaq] = useState<number | null>(0);
@@ -101,32 +102,59 @@ export default function SelecaoVigorEnergy() {
     };
 
     // Lógica de Submissão
-    const handleFinish = () => {
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitError, setSubmitError] = useState('');
+
+    const handleFinish = async () => {
         // Filtra apenas indicações que tenham pelo menos nome e whatsapp preenchidos
         const validReferrals = referrals.filter(r => r.name.trim() !== '' && r.whatsapp.trim() !== '');
 
         if (validReferrals.length < 3) {
             setCurrentStep('warning');
         } else {
-            submitData(validReferrals);
-            setCurrentStep('success');
+            await submitData(validReferrals);
         }
     };
 
-    const confirmWarning = () => {
+    const confirmWarning = async () => {
         const validReferrals = referrals.filter(r => r.name.trim() !== '' && r.whatsapp.trim() !== '');
-        submitData(validReferrals);
-        setCurrentStep('success');
+        await submitData(validReferrals);
     };
 
-    const submitData = (validReferrals: any[]) => {
-        const payload = {
-            user: userData,
-            referrals: validReferrals,
-            timestamp: new Date().toISOString()
-        };
-        // AQUI: Disparo do webhook para o Make/n8n/RD Station
-        console.log("Dados prontos para automação:", payload);
+    const submitData = async (validReferrals: any[]) => {
+        setIsSubmitting(true);
+        setSubmitError('');
+
+        try {
+            // Insere cada indicação no Supabase atrelando ao participante
+            // Participante = userData.name, phone, email
+            const indicacoesToInsert = validReferrals.map(referral => ({
+                participante_nome: userData.name,
+                participante_whatsapp: userData.phone,
+                participante_email: userData.email,
+                indicado_nome: referral.name,
+                indicado_whatsapp: referral.whatsapp,
+                indicado_cidade: referral.city
+            }));
+
+            // Assumindo que a tabela se chama 'indicacoes' e tem essas colunas
+            const { error } = await supabase
+                .from('indicacoes')
+                .insert(indicacoesToInsert);
+
+            if (error) {
+                console.error("Erro ao salvar no Supabase:", error);
+                throw error;
+            }
+
+            setCurrentStep('success');
+
+        } catch (error: any) {
+            console.error("Erro geral na submissão:", error);
+            setSubmitError(error.message || 'Ocorreu um erro ao enviar suas indicações. Tente novamente.');
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     return (
@@ -511,16 +539,21 @@ export default function SelecaoVigorEnergy() {
                                         <div className="mt-8 pt-8 border-t border-gray-200 flex flex-col lg:flex-row gap-4 items-center justify-between">
                                             <button
                                                 onClick={addReferral}
-                                                className="w-full lg:w-auto flex items-center justify-center gap-2 px-6 py-4 border-2 border-dashed border-accent text-accent font-bold rounded-xl hover:bg-accent/5 transition-colors focus:ring-4 focus:ring-accent/20 outline-none"
+                                                disabled={isSubmitting}
+                                                className="w-full lg:w-auto flex items-center justify-center gap-2 px-6 py-4 border-2 border-dashed border-accent text-accent font-bold rounded-xl hover:bg-accent/5 transition-colors focus:ring-4 focus:ring-accent/20 outline-none disabled:opacity-50"
                                             >
                                                 <Plus className="w-5 h-5" /> Adicionar mais um indicado
                                             </button>
-                                            <button
-                                                onClick={handleFinish}
-                                                className="w-full lg:w-auto px-10 py-4 bg-primary hover:bg-primary-dark text-white font-bold rounded-xl shadow-[0_10px_20px_-10px_rgba(95,108,55,0.7)] transform transition-all hover:-translate-y-1 active:scale-[0.98] text-lg"
-                                            >
-                                                Finalizar e Concorrer
-                                            </button>
+                                            <div className="flex flex-col items-center w-full lg:w-auto gap-2">
+                                                <button
+                                                    onClick={handleFinish}
+                                                    disabled={isSubmitting}
+                                                    className="w-full lg:w-auto px-10 py-4 bg-primary hover:bg-primary-dark text-white font-bold rounded-xl shadow-[0_10px_20px_-10px_rgba(95,108,55,0.7)] transform transition-all hover:-translate-y-1 active:scale-[0.98] text-lg disabled:opacity-50 disabled:hover:translate-y-0"
+                                                >
+                                                    {isSubmitting ? 'Enviando...' : 'Finalizar e Concorrer'}
+                                                </button>
+                                                {submitError && <p className="text-red-500 text-sm font-semibold">{submitError}</p>}
+                                            </div>
                                         </div>
                                     </div>
                                 )}
@@ -542,16 +575,19 @@ export default function SelecaoVigorEnergy() {
                                         <div className="flex flex-col gap-3">
                                             <button
                                                 onClick={() => setCurrentStep('referrals')}
-                                                className="w-full bg-accent hover:bg-accent-hover text-white font-bold py-4 px-6 rounded-xl shadow-lg transition-all text-lg hover:-translate-y-0.5"
+                                                disabled={isSubmitting}
+                                                className="w-full bg-accent hover:bg-accent-hover text-white font-bold py-4 px-6 rounded-xl shadow-lg transition-all text-lg hover:-translate-y-0.5 disabled:opacity-50"
                                             >
                                                 ← Quero adicionar mais pessoas
                                             </button>
                                             <button
                                                 onClick={confirmWarning}
-                                                className="w-full text-gray-500 hover:text-gray-900 font-semibold py-4 px-6 rounded-xl hover:bg-gray-100 transition-colors"
+                                                disabled={isSubmitting}
+                                                className="w-full text-gray-500 hover:text-gray-900 font-semibold py-4 px-6 rounded-xl hover:bg-gray-100 transition-colors disabled:opacity-50"
                                             >
-                                                Confirmar e finalizar mesmo assim
+                                                {isSubmitting ? 'Enviando...' : 'Confirmar e finalizar mesmo assim'}
                                             </button>
+                                            {submitError && <p className="text-red-500 text-sm font-semibold mt-2">{submitError}</p>}
                                         </div>
                                     </div>
                                 )}
