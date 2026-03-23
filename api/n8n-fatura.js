@@ -24,13 +24,25 @@ export default async function handler(req, res) {
     // Exemplo: "DEZ/2025" vira "DEZ_2025"
     const contaMesLimpo = contaMes.replace(/\//g, '_');
 
-    // Mapeamento idêntico ao que o SharePoint fazia:
+    // Lê extensão e base
+    const fileParts = fileName.split('.');
+    const extension = fileParts.pop();
+    const baseName = fileParts.join('.');
+
+    // Timestamp
+    const now = new Date();
+    const opts = { timeZone: 'America/Sao_Paulo', hour12: false };
+    const dateStr = now.toLocaleDateString('pt-BR', opts).replace(/\//g, '-');
+    const timeStr = now.toLocaleTimeString('pt-BR', opts).replace(/:/g, '-');
+    const finalFileName = `${contaMesLimpo}-${baseName}_${dateStr}_${timeStr}.${extension}`;
+
     // pasta: /docs/faturas/{ucCodigo}
-    // nome do arquivo: {contaMesLimpo}-{fileName}
-    const blobPath = `docs/faturas/${ucCodigo}/${contaMesLimpo}-${fileName}`;
+    // nome do arquivo: {contaMesLimpo}-{fileName}_{data}_{hora}.{ext}
+    const blobPath = `docs/faturas/${ucCodigo}/${finalFileName}`;
 
     const blob = await put(blobPath, req, {
       access: 'public',
+      addRandomSuffix: false,
       token: process.env.BLOB_READ_WRITE_TOKEN,
     });
 

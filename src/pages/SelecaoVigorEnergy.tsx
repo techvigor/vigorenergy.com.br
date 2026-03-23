@@ -33,8 +33,8 @@ export default function SelecaoVigorEnergy() {
     const [isClosed, setIsClosed] = useState(false);
 
     useEffect(() => {
-        // Define o limite como 10 de Abril de 2026, às 23:59:59
-        const deadline = new Date('2026-04-10T23:59:59');
+        // Define o limite como 29 de Abril de 2026, às 23:59:59
+        const deadline = new Date('2026-04-29T23:59:59');
         const now = new Date();
         if (now > deadline) {
             setIsClosed(true);
@@ -186,7 +186,7 @@ export default function SelecaoVigorEnergy() {
                             <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6 text-primary">
                                 <Users className="w-8 h-8" />
                             </div>
-                            <span className="inline-block px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-bold mb-4">16 Mar - 10 Abr</span>
+                            <span className="inline-block px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-bold mb-4">16 Mar - 29 Abr</span>
                             <h4 className="text-xl font-bold text-gray-900 mb-2">Inscrições & Apuração</h4>
                             <p className="text-gray-600">Período para você fazer sua inscrição e cadastrar suas indicações.</p>
                         </div>
@@ -195,7 +195,7 @@ export default function SelecaoVigorEnergy() {
                             <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-6 text-accent">
                                 <Clock className="w-8 h-8" />
                             </div>
-                            <span className="inline-block px-3 py-1 bg-red-100 text-red-700 rounded-full text-sm font-bold mb-4">10 de Abril</span>
+                            <span className="inline-block px-3 py-1 bg-red-100 text-red-700 rounded-full text-sm font-bold mb-4">29 de Abril</span>
                             <h4 className="text-xl font-bold text-gray-900 mb-2">Encerramento</h4>
                             <p className="text-gray-600">Data limite (23:59h) para o preenchimento do formulário no site.</p>
                         </div>
@@ -204,7 +204,7 @@ export default function SelecaoVigorEnergy() {
                             <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-6 text-white">
                                 <Gift className="w-8 h-8" />
                             </div>
-                            <span className="inline-block px-3 py-1 bg-white/20 text-white rounded-full text-sm font-bold mb-4 border border-white/30">15 de Abril</span>
+                            <span className="inline-block px-3 py-1 bg-white/20 text-white rounded-full text-sm font-bold mb-4 border border-white/30">04 de Maio</span>
                             <h4 className="text-xl font-bold text-white mb-2">O Grande Sorteio</h4>
                             <p className="text-white/80">O sorteio será realizado e divulgado nas nossas redes sociais!</p>
                         </div>
@@ -391,10 +391,10 @@ export default function SelecaoVigorEnergy() {
                                 </div>
                                 <h2 className="text-3xl md:text-4xl font-bold text-primary-dark mb-4">Inscrições Encerradas!</h2>
                                 <p className="text-gray-600 mb-6 text-lg max-w-lg mx-auto">
-                                    O prazo para cadastrar suas indicações finalizou no dia <strong>10 de Abril</strong>.
+                                    O prazo para cadastrar suas indicações finalizou no dia <strong>29 de Abril</strong>.
                                 </p>
                                 <p className="text-gray-600 text-lg">
-                                    Fique ligado em nossas redes sociais para acompanhar o grande sorteio no dia <strong>15 de Abril</strong>.<br />
+                                    Fique ligado em nossas redes sociais para acompanhar o grande sorteio no dia <strong>04 de Maio</strong>.<br />
                                     <strong>Boa sorte a todos os participantes!</strong>
                                 </p>
                             </div>

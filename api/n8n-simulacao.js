@@ -27,12 +27,24 @@ export default async function handler(req, res) {
     const nomePastaLimpo = clienteNome.replace(/[^a-zA-Z0-9]/g, '_');
     const folderName = `${negociacaoId}_${nomePastaLimpo}`;
 
-    // Caminho destino no Blob (ex: docs/negociacoes/328_Luciana_Pereira_Da_Silva/Simulacao_Vigor_Luciana...pdf)
-    const blobPath = `docs/negociacoes/${folderName}/${fileName}`;
+    // Gera sufixo de data/hora seguro (ex: 23-03-2026_17-59-30) para evitar colisão e ficar legível
+    const fileParts = fileName.split('.');
+    const extension = fileParts.pop();
+    const baseName = fileParts.join('.');
+    const now = new Date();
+    const opts = { timeZone: 'America/Sao_Paulo', hour12: false };
+    const dateStr = now.toLocaleDateString('pt-BR', opts).replace(/\//g, '-');
+    const timeStr = now.toLocaleTimeString('pt-BR', opts).replace(/:/g, '-');
+    const finalFileName = `${baseName}_${dateStr}_${timeStr}.${extension}`;
+
+    // Caminho destino no Blob (ex: docs/negociacoes/328_Luciana_Pereira_Da_Silva/arquivo_23-03-2026_17-59-30.pdf)
+    const blobPath = `docs/negociacoes/${folderName}/${finalFileName}`;
 
     // A Vercel lê o body binário do request diretamente e salva no Blob
+    // addRandomSuffix: false desliga o final "-K2s8dL.pdf" feio que a Vercel gera por padrão
     const blob = await put(blobPath, req, {
       access: 'public',
+      addRandomSuffix: false,
       token: process.env.BLOB_READ_WRITE_TOKEN,
     });
 
