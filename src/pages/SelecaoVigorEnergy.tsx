@@ -134,7 +134,8 @@ export default function SelecaoVigorEnergy() {
                 email_participante: userData.email,
                 nome_indicado: referral.name,
                 whatsapp_indicado: referral.whatsapp,
-                cidade_indicado: referral.city
+                cidade_indicado: referral.city,
+                nome_promocao: "Seleção Vigor Energy"
             }));
 
             // Assumindo que a tabela se chama 'indicacoes' e tem essas colunas
