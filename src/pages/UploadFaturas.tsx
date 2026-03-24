@@ -67,8 +67,8 @@ export default function UploadFaturas() {
     setProgress(0);
     
     try {
-      const nomeLimpo1 = file1.name.replace(/[^a-zA-Z0-9_.-]/g, '').replace(/\s+/g, '-');
-      const nomeLimpo2 = file2.name.replace(/[^a-zA-Z0-9_.-]/g, '').replace(/\s+/g, '-');
+      const nomeLimpo1 = file1.name.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, "-").replace(/[^a-zA-Z0-9_.-]/g, "");
+      const nomeLimpo2 = file2.name.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, "-").replace(/[^a-zA-Z0-9_.-]/g, "");
 
       let p1 = 0;
       let p2 = 0;

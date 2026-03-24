@@ -24,13 +24,13 @@ export default async function handler(req, res) {
 
     // Criar uma pasta segura baseada no nome do cliente, removendo caracteres que possam quebrar a URL
     // (Por exemplo, "A&B Cia" vira "A_B_Cia")
-    const nomePastaLimpo = clienteNome.replace(/[^a-zA-Z0-9]/g, '_');
+    const nomePastaLimpo = clienteNome.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-zA-Z0-9]/g, '_');
     const folderName = `${negociacaoId}_${nomePastaLimpo}`;
 
     // Gera sufixo de data/hora seguro (ex: 23-03-2026_17-59-30) para evitar colisão e ficar legível
     const fileParts = fileName.split('.');
     const extension = fileParts.pop();
-    const baseName = fileParts.join('.');
+    const baseName = fileParts.join('.').normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, "_").replace(/[^a-zA-Z0-9_.-]/g, "");
     const now = new Date();
     const opts = { timeZone: 'America/Sao_Paulo', hour12: false };
     const dateStr = now.toLocaleDateString('pt-BR', opts).replace(/\//g, '-');

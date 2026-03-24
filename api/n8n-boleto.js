@@ -24,7 +24,7 @@ export default async function handler(req, res) {
     // Lê extensão e base
     const fileParts = fileName.split('.');
     const extension = fileParts.pop();
-    const baseName = fileParts.join('.');
+    const baseName = fileParts.join('.').normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, "_").replace(/[^a-zA-Z0-9_.-]/g, "");
 
     // Timestamp
     const now = new Date();
