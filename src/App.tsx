@@ -4,6 +4,7 @@ import SelecaoVigorEnergy from './pages/SelecaoVigorEnergy';
 import Parceiros from './pages/Parceiros';
 import UploadFaturas from './pages/UploadFaturas';
 import ParceirosMotoristas from './pages/ParceirosMotoristas';
+import PassageiroVigor from './pages/PassageiroVigor';
 
 export default function App() {
   return (
@@ -13,6 +14,7 @@ export default function App() {
         <Route path="/selecao-vigor-energy" element={<SelecaoVigorEnergy />} />
         <Route path="/parceiros" element={<Parceiros />} />
         <Route path="/parceiros-motoristas" element={<ParceirosMotoristas />} />
+        <Route path="/passageiro" element={<PassageiroVigor />} />
         <Route path="/upload" element={<UploadFaturas />} />
       </Routes>
     </Router>
