@@ -84,7 +84,7 @@ export default function ParceirosMotoristas() {
           {/* Trust Badges */}
           <div className="mt-16 flex flex-col md:flex-row flex-wrap justify-center gap-4 md:gap-6 text-sm font-semibold text-white/80 bg-black/30 backdrop-blur-xl py-5 px-6 md:px-10 rounded-3xl md:inline-flex border border-white/10 shadow-2xl">
             <div className="flex items-center gap-2 px-2"><CheckCircle2 className="w-5 h-5 text-accent" /> Adesão 100% Gratuita</div>
-            <div className="flex items-center gap-2 px-2 border-t md:border-t-0 border-white/10 pt-4 md:pt-0"><ShieldCheck className="w-5 h-5 text-accent" /> Necessário CNPJ (pode ser MEI)</div>
+            <div className="flex items-center gap-2 px-2 border-t md:border-t-0 border-white/10 pt-4 md:pt-0"><ShieldCheck className="w-5 h-5 text-accent" /> Autorização via CPF ou CNPJ</div>
             <div className="flex items-center gap-2 px-2 border-t md:border-t-0 border-white/10 pt-4 md:pt-0"><GraduationCap className="w-5 h-5 text-accent" /> Treinamento & Material Inclusos</div>
           </div>
 
@@ -156,9 +156,9 @@ export default function ParceirosMotoristas() {
               </div>
               <div className="w-full md:w-2/3 space-y-4 text-center md:text-left">
                 <div className="inline-flex items-center justify-center w-12 h-12 bg-primary text-white rounded-xl font-bold text-xl shadow-md mb-2">1</div>
-                <h4 className="text-2xl font-bold text-text-dark tracking-tight">Cadastro e CNPJ</h4>
+                <h4 className="text-2xl font-bold text-text-dark tracking-tight">Termo de Autorização</h4>
                 <p className="text-lg text-text-muted leading-relaxed">
-                  <strong>Exigência Obrigatória:</strong> É obrigatório possuir um CNPJ ativo (pode ser MEI). Não aceitamos cadastros como Pessoa Física (CPF). Você se cadastra em nosso portal e assina digitalmente o "Contrato de Parceria".
+                  <strong>Autorização de Espaço:</strong> Você autoriza a veiculação de publicidade no seu veículo. Aceitamos cadastro tanto via CPF quanto CNPJ. O processo é 100% digital e você assina o "Termo de Autorização" diretamente pelo portal.
                 </p>
               </div>
             </div>
@@ -242,9 +242,9 @@ export default function ParceirosMotoristas() {
               <div className="w-16 h-16 bg-accent/20 rounded-xl flex items-center justify-center mx-auto mb-6">
                 <DollarSign className="w-8 h-8 text-accent" />
               </div>
-              <h4 className="text-xl font-bold mb-3 tracking-tight text-accent">Sua Comissão</h4>
+              <h4 className="text-xl font-bold mb-3 tracking-tight text-accent">Sua Bonificação</h4>
               <p className="text-gray-300">
-                Ganhe <strong>10% sobre o valor médio</strong> da fatura do consumidor ou <strong>R$50,00 fixo</strong> por fechamento.
+                Receba uma bonificação fixa de <strong>R$50,00</strong> por cada passageiro que contratar os serviços através do seu QR Code.
               </p>
             </div>
           </div>
@@ -328,13 +328,13 @@ export default function ParceirosMotoristas() {
               <CarFront className="w-12 h-12 text-accent mx-auto mb-4" />
               <h2 className="text-4xl font-bold mb-4 tracking-tight">Incentive sem esforço. Ganhe.</h2>
               <p className="text-lg text-white/90 mb-8 max-w-xl mx-auto">
-                Cadastre o seu CNPJ na Vigor Energy agora e comece a rentabilizar o espaço do seu carro durante todas as corridas do mês!
+                Seja um parceiro Vigor Energy agora e comece a rentabilizar o espaço do seu carro durante todas as viagens do mês!
               </p>
               <button
                 onClick={() => setIsPartnerModalOpen(true)}
                 className="bg-accent hover:bg-accent-hover text-text-dark px-8 py-4 rounded-full font-bold text-lg transition-transform transform hover:-translate-y-1 shadow-lg shadow-accent/20"
               >
-                Cadastrar meu CNPJ
+                Quero ser parceiro
               </button>
             </div>
           </div>
