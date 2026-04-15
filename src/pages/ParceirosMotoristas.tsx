@@ -244,7 +244,7 @@ export default function ParceirosMotoristas() {
               </div>
               <h4 className="text-xl font-bold mb-3 tracking-tight text-accent">Sua Comissão</h4>
               <p className="text-gray-300">
-                Ganhe <strong>10% sobre o valor médio</strong> da fatura do consumidor ou <strong>R$50,00 fixo</strong> por fechamento. Você emite a NF e recebe direto na conta do seu CNPJ.
+                Ganhe <strong>10% sobre o valor médio</strong> da fatura do consumidor ou <strong>R$50,00 fixo</strong> por fechamento.
               </p>
             </div>
           </div>

@@ -61,13 +61,13 @@ export default function DriverPartnerRegistrationModal({ isOpen, onClose }: Driv
       const { error } = await supabase
         .from('parceiros')
         .insert([
-          {
-            nome: formData.name,
-            whatsapp: formData.whatsapp,
-            cnpj: formData.cnpj,
-            cidade: formData.cidade,
-            campanha: 'Parceiro motorista'
-          }
+            {
+              nome: formData.name,
+              whatsapp: formData.whatsapp,
+              cnpj: formData.cnpj,
+              cidade: formData.cidade,
+              campanha: 'motorista-parceiro'
+            }
         ]);
 
       if (error) {
@@ -110,16 +110,18 @@ export default function DriverPartnerRegistrationModal({ isOpen, onClose }: Driv
             <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mb-6">
               <CheckCircle2 className="w-10 h-10 text-primary" />
             </div>
-            <h2 className="text-3xl font-bold text-text-dark mb-4 tracking-tight">Cadastro Recebido!</h2>
-            <p className="text-lg text-text-muted mb-8 leading-relaxed">
-              Recebemos suas informações com sucesso. Nossa equipe entrará em contato pelo WhatsApp para agendar seu treinamento e entrega do material.
+            <h2 className="text-3xl font-bold text-text-dark mb-4 tracking-tight text-primary">Só falta mais um passo!</h2>
+            <p className="text-lg text-text-muted mb-8 leading-relaxed font-medium">
+              Para concluir o seu cadastro, entre no grupo de avisos para Motoristas parceiros da Vigor Energy.
             </p>
-            <button
-              onClick={resetAndClose}
-              className="bg-primary hover:bg-primary-dark text-white font-bold py-4 px-8 rounded-xl shadow-lg shadow-primary/30 transition-all hover:-translate-y-1 w-full"
+            <a
+              href="https://chat.whatsapp.com/I9B1lW9Rdam0SG7ubWJ1tw"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-[#25D366] hover:bg-[#128C7E] text-white font-bold py-4 px-8 rounded-xl shadow-lg shadow-[#25D366]/30 transition-all hover:-translate-y-1 w-full flex items-center justify-center gap-2"
             >
-              Concluir
-            </button>
+              Entrar no Grupo de Avisos
+            </a>
           </div>
         ) : (
           <>
@@ -171,19 +173,18 @@ export default function DriverPartnerRegistrationModal({ isOpen, onClose }: Driv
 
               <div>
                 <label htmlFor="cnpj" className="block text-sm font-semibold text-text-dark mb-1 xl:flex xl:items-baseline xl:justify-between">
-                  <span>CNPJ *</span>
-                  <span className="text-xs font-normal text-primary mt-1 xl:mt-0 block text-right">Obrigatório possuir CNPJ ativo (pode ser MEI)</span>
+                  <span>CNPJ</span>
+                  <span className="text-xs font-normal text-primary mt-1 xl:mt-0 block text-right font-medium italic">Opcional (Pode ser MEI ou CPF)</span>
                 </label>
                 <input
                   type="text"
                   id="cnpj"
                   name="cnpj"
-                  required
                   value={formData.cnpj}
                   onChange={handleMasks}
                   maxLength={18}
                   className="w-full px-4 py-3 rounded-xl border border-gray-light/80 bg-offwhite focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all text-text-dark"
-                  placeholder="00.000.000/0000-00"
+                  placeholder="00.000.000/0000-00 (Opcional)"
                 />
               </div>
 
