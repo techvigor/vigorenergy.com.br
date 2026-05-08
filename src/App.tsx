@@ -5,12 +5,14 @@ import Parceiros from './pages/Parceiros';
 import UploadFaturas from './pages/UploadFaturas';
 import ParceirosMotoristas from './pages/ParceirosMotoristas';
 import PassageiroVigor from './pages/PassageiroVigor';
+import EnergiaRedirect from './pages/EnergiaRedirect';
 
 export default function App() {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/energia" element={<EnergiaRedirect />} />
         <Route path="/selecao-vigor-energy" element={<SelecaoVigorEnergy />} />
         <Route path="/parceiros" element={<Parceiros />} />
         <Route path="/parceiros-motoristas" element={<ParceirosMotoristas />} />
