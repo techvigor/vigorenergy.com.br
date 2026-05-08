@@ -297,7 +297,7 @@ export default function SimulatorForm() {
                 <div className="mt-12 text-center text-white/50 text-xs md:text-sm font-medium max-w-4xl mx-auto space-y-2 opacity-80 hover:opacity-100 transition-opacity">
                     <p>* Custo de disponibilidade + Média da taxa de iluminação pública.</p>
                     <p className="leading-relaxed">
-                        Os valores são aproximados e condicionados ao tipo de sistema e taxas de disponibilidade e iluminação pública. O desconto é de ATÉ 28% na energia injetada. A fatura de energia da distribuidora continua sendo enviada junto ao nosso boleto e nela constarão os custos mínimos e taxa de iluminação pública nas quais a Vigor Energy não pode atuar para reduzir o valor.
+                        Os valores são aproximados e condicionados ao tipo de sistema e taxas de disponibilidade e iluminação pública. O desconto é de ATÉ 22% na energia injetada. A fatura de energia da distribuidora continua sendo enviada junto ao nosso boleto e nela constarão os custos mínimos e taxa de iluminação pública nas quais a Vigor Energy não pode atuar para reduzir o valor.
                     </p>
                 </div>
             </div>

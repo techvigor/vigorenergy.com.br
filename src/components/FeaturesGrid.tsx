@@ -15,7 +15,7 @@ const features = [
         icon: TrendingDown,
         title: 'Economia na sua Conta',
         description:
-            'Reduza sua conta de energia em até 28% após a aprovação da distribuidora local.',
+            'Reduza sua conta de energia em até 22% após a aprovação da distribuidora local.',
     },
     {
         icon: ShieldCheck,
@@ -98,7 +98,7 @@ export default function FeaturesGrid() {
                             </div>
                             <h3 className="text-xl font-bold text-text-dark mb-3">Economia garantida</h3>
                             <p className="text-text-muted leading-relaxed text-sm md:text-base">
-                                Reduza sua conta de luz em até 28% de forma previsível desde o primeiro mês, aliviando suas despesas fixas de longo prazo.
+                                Reduza sua conta de luz em até 22% de forma previsível desde o primeiro mês, aliviando suas despesas fixas de longo prazo.
                             </p>
                         </div>
 

@@ -65,7 +65,7 @@ export default function ParceirosMotoristas() {
               <span className="text-accent underline decoration-primary decoration-4 underline-offset-8">E você ganha por cada indicação.</span>
             </h1>
             <p className="text-lg lg:text-2xl text-white/90 mb-10 max-w-3xl leading-relaxed drop-shadow-md">
-              Aumente sua renda enquanto dirige! Ofereça aos seus passageiros até <strong className="text-accent font-bold">28% de desconto</strong> na conta de luz da Equatorial. Sem vender nada, apenas com um QR Code no seu carro.
+              Aumente sua renda enquanto dirige! Ofereça aos seus passageiros até <strong className="text-accent font-bold">22% de desconto</strong> na conta de luz da Equatorial. Sem vender nada, apenas com um QR Code no seu carro.
             </p>
           </div>
 
@@ -109,7 +109,7 @@ export default function ParceirosMotoristas() {
               </div>
               <h4 className="text-3xl font-bold text-text-dark mb-4 tracking-tight">Vantagens Imbatíveis para o Passageiro</h4>
               <p className="text-text-muted mb-8 text-lg">
-                O passageiro recebe até <strong className="text-text-dark font-semibold">28% de desconto</strong> na conta de luz da Equatorial Goiás.
+                O passageiro recebe até <strong className="text-text-dark font-semibold">22% de desconto</strong> na conta de luz da Equatorial Goiás.
               </p>
 
               <div className="grid md:grid-cols-3 gap-4">

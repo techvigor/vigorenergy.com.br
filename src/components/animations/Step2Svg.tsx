@@ -44,7 +44,7 @@ export default function Step2Svg() {
         <g>
           <rect x="50" y="60" width="140" height="190" rx="12" fill="#FFFFFF" stroke="#727F48" strokeWidth="4" />
           <rect x="65" y="75" width="110" height="40" rx="4" fill="#E0E0E0" />
-          <text x="170" y="102" fontFamily="Inter, sans-serif" fontSize="18" fontWeight="bold" fill="#727F48" textAnchor="end">28%</text>
+          <text x="170" y="102" fontFamily="Inter, sans-serif" fontSize="18" fontWeight="bold" fill="#727F48" textAnchor="end">22%</text>
 
           {/* Calc buttons */}
           <rect x="65" y="130" width="25" height="25" rx="4" fill="#E0E0E0" />
@@ -77,7 +77,7 @@ export default function Step2Svg() {
           <g className="step2-discount">
             <rect x="360" y="50" width="90" height="30" rx="15" fill="#727F48" />
             <polygon points="405,80 395,90 385,80" fill="#727F48" />
-            <text x="405" y="70" fontFamily="Inter, sans-serif" fontSize="14" fontWeight="bold" fill="#FFFFFF" textAnchor="middle">-28% Conta</text>
+            <text x="405" y="70" fontFamily="Inter, sans-serif" fontSize="14" fontWeight="bold" fill="#FFFFFF" textAnchor="middle">-22% Conta</text>
           </g>
         </g>
       </svg>
