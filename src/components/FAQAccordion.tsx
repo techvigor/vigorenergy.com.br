@@ -15,7 +15,7 @@ const faqs = [
     {
         question: 'Qual a economia média na conta de luz?',
         answer:
-            'Nossos clientes economizam em média de 15% a 28% na conta de luz, dependendo do seu consumo e região. Após você realizar a simulação de economia, nós calculamos sua média de consumo à partir da sua conta de luz e informamos exatamente quanto você pode economizar.',
+            'Nossos clientes economizam em média de 15% a 22% na conta de luz, dependendo do seu consumo e região. Após você realizar a simulação de economia, nós calculamos sua média de consumo à partir da sua conta de luz e informamos exatamente quanto você pode economizar.',
     },
     {
         question: 'Existe algum contrato de fidelidade?',

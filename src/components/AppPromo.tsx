@@ -30,7 +30,7 @@ export default function AppPromo() {
                                     <div className="p-4 flex-1 flex flex-col gap-3">
                                         <div className="text-xs text-text-muted">Sua economia</div>
                                         <div className="text-2xl font-extrabold text-primary">R$ 1.284,00</div>
-                                        <div className="text-xs text-accent font-semibold">↑ 28% este mês</div>
+                                        <div className="text-xs text-accent font-semibold">↑ 22% este mês</div>
                                         <div className="mt-2 bg-offwhite rounded-xl p-3 space-y-2">
                                             <div className="flex justify-between text-xs"><span className="text-text-muted">Jan</span><span className="font-semibold">R$ 89</span></div>
                                             <div className="flex justify-between text-xs"><span className="text-text-muted">Fev</span><span className="font-semibold">R$ 102</span></div>

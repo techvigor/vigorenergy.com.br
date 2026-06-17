@@ -114,7 +114,7 @@ export default function Parceiros() {
               </div>
               <h4 className="text-3xl font-bold text-text-dark mb-4 tracking-tight">Assinatura de Energia Vigor</h4>
               <p className="text-text-muted mb-8 text-lg">
-                Energia solar compartilhada. <strong className="text-text-dark font-semibold">O cliente economiza até 28% na conta de luz</strong> sem instalar nada. Sem obras, sem investimento, e de forma rápida e prática.
+                Energia solar compartilhada. <strong className="text-text-dark font-semibold">O cliente economiza até 22% na conta de luz</strong> sem instalar nada. Sem obras, sem investimento, e de forma rápida e prática.
               </p>
 
               <div className="flex flex-col md:flex-row justify-center gap-4">
@@ -165,7 +165,7 @@ export default function Parceiros() {
           <div className="space-y-8">
             {[
               { Svg: Step1Svg, title: 'Upload da conta ou cadastro manual', desc: 'Cadastre os dados do cliente ou envie a conta de luz. O sistema lê os dados automaticamente via IA.' },
-              { Svg: Step2Svg, title: 'Cálculo de economia', desc: 'Simulação instantânea evidenciando os 28% de desconto projetados.' },
+              { Svg: Step2Svg, title: 'Cálculo de economia', desc: 'Simulação instantânea evidenciando os 22% de desconto projetados.' },
               { Svg: Step3Svg, title: 'Termo gerado', desc: 'PDF automático e profissional, já com o seu bônus atrelado no sistema.' },
               { Svg: Step4Svg, title: 'Aprovação online', desc: 'O cliente recebe um link via WhatsApp/E-mail e assina digitalmente em segundos.' },
               { Svg: Step5Svg, title: 'Bônus na conta', desc: 'Assim que o contrato é ativado, sua comissão é liberada no painel.' }
@@ -325,7 +325,7 @@ export default function Parceiros() {
           <div className="mt-12 max-w-7xl mx-auto bg-gradient-to-br from-primary to-primary-dark rounded-3xl p-8 md:p-12 text-center text-white shadow-xl shadow-primary/20">
             <h3 className="text-2xl md:text-3xl font-bold mb-4 tracking-tight text-accent">"Eu não sei vender energia!"</h3>
             <p className="text-lg text-white/90 mb-6 leading-relaxed">
-              Fique tranquilo. A Vigor Energy possui o módulo <strong className="font-semibold text-white">Academy</strong>, onde você aprende do absoluto zero. Entregamos os scripts de abordagem, os argumentos de conversão (os 28% de desconto vendem sozinhos) e ensinamos a usar a plataforma.
+              Fique tranquilo. A Vigor Energy possui o módulo <strong className="font-semibold text-white">Academy</strong>, onde você aprende do absoluto zero. Entregamos os scripts de abordagem, os argumentos de conversão (os 22% de desconto vendem sozinhos) e ensinamos a usar a plataforma.
               <br />
               <b>Nós capacitamos você para liderar!</b>
             </p>
@@ -347,7 +347,7 @@ export default function Parceiros() {
               ))}
             </div>
             <h3 className="text-xl md:text-2xl font-medium leading-relaxed mb-8 text-text-dark">
-              "A tecnologia da Vigor muda o jogo. Eu apresento os 28% de desconto, o sistema lê a conta por IA e finaliza o contrato. Hoje coordeno minha própria equipe de vendedores parceiros performando diariamente usando o método deles."
+              "A tecnologia da Vigor muda o jogo. Eu apresento os 22% de desconto, o sistema lê a conta por IA e finaliza o contrato. Hoje coordeno minha própria equipe de vendedores parceiros performando diariamente usando o método deles."
             </h3>
             <div className="flex items-center justify-center gap-4">
               <div className="w-12 h-12 bg-primary rounded-xl flex items-center justify-center text-xl font-bold text-white">

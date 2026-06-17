@@ -5,6 +5,7 @@ import Parceiros from './pages/Parceiros';
 import UploadFaturas from './pages/UploadFaturas';
 import ParceirosMotoristas from './pages/ParceirosMotoristas';
 import PassageiroVigor from './pages/PassageiroVigor';
+import EnergiaRedirect from './pages/EnergiaRedirect';
 import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';
 import AdminLogin from './pages/admin/AdminLogin';
@@ -22,6 +23,7 @@ export default function App() {
         <Routes>
           {/* Public routes */}
           <Route path="/" element={<Home />} />
+          <Route path="/energia" element={<EnergiaRedirect />} />
           <Route path="/selecao-vigor-energy" element={<SelecaoVigorEnergy />} />
           <Route path="/parceiros" element={<Parceiros />} />
           <Route path="/parceiros-motoristas" element={<ParceirosMotoristas />} />

@@ -109,7 +109,7 @@ export default function PassageiroVigor() {
             </div>
 
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white leading-tight mb-4 tracking-tight drop-shadow-sm">
-              Ganhe até <span className="text-accent underline decoration-4 underline-offset-4">28% de desconto</span> na sua conta de luz
+              Ganhe até <span className="text-accent underline decoration-4 underline-offset-4">22% de desconto</span> na sua conta de luz
             </h1>
 
             <p className="text-white/80 text-lg md:text-xl font-medium max-w-lg mx-auto drop-shadow-sm">
@@ -267,7 +267,7 @@ export default function PassageiroVigor() {
                 {
                   icon: PiggyBank,
                   title: 'Economia na sua Conta',
-                  description: 'Reduza sua conta de energia em até 28% no mês, sem fidelidade ou taxas extras.',
+                  description: 'Reduza sua conta de energia em até 22% no mês, sem fidelidade ou taxas extras.',
                 },
                 {
                   icon: ShieldCheck,
