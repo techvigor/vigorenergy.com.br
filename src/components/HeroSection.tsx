@@ -60,7 +60,7 @@ export default function HeroSection() {
                     </span>
                     <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6">
                         Reduza sua conta de luz em até{' '}
-                        <span className="text-accent">22%</span> sem investir nada
+                        <span className="text-accent">28%</span> sem investir nada
                     </h1>
                     <p className="text-lg md:text-xl text-white/80 mb-10 max-w-3xl leading-relaxed font-medium">
                         Assine energia solar e comece a economizar imediatamente.
