@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { MapPin, Phone, Mail, Instagram, Linkedin } from 'lucide-react';
 
 const quickLinks = [
@@ -109,18 +110,18 @@ export default function Footer() {
                         © {new Date().getFullYear()} Vigor Energy. Todos os direitos reservados.
                     </p>
                     <div className="flex gap-6">
-                        <a
-                            href="#"
+                        <Link
+                            to="/politica-de-privacidade"
                             className="text-white/50 text-sm hover:text-white/80 transition-colors"
                         >
                             Política de Privacidade
-                        </a>
-                        <a
-                            href="#"
+                        </Link>
+                        <Link
+                            to="/termos-de-uso"
                             className="text-white/50 text-sm hover:text-white/80 transition-colors"
                         >
                             Termos de Uso
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div>

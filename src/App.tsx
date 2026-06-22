@@ -8,6 +8,8 @@ import PassageiroVigor from './pages/PassageiroVigor';
 import EnergiaRedirect from './pages/EnergiaRedirect';
 import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';
+import PoliticaDePrivacidade from './pages/PoliticaDePrivacidade';
+import TermosDeUso from './pages/TermosDeUso';
 import AdminLogin from './pages/admin/AdminLogin';
 import AdminLayout from './pages/admin/AdminLayout';
 import AdminDashboard from './pages/admin/AdminDashboard';
@@ -31,6 +33,8 @@ export default function App() {
           <Route path="/upload" element={<UploadFaturas />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
+          <Route path="/politica-de-privacidade" element={<PoliticaDePrivacidade />} />
+          <Route path="/termos-de-uso" element={<TermosDeUso />} />
 
           {/* Admin login (public) */}
           <Route path="/admin/login" element={<AdminLogin />} />
