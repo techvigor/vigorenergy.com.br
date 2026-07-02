@@ -88,7 +88,7 @@ export default function PoliticaDePrivacidade() {
         <div className="min-h-screen bg-white">
             <Navbar />
 
-            <main className="max-w-4xl mx-auto px-4 lg:px-8 py-20">
+            <main className="max-w-4xl mx-auto px-4 lg:px-8 pt-32 pb-20">
                 <div className="mb-10">
                     <p className="text-sm text-gray-500 mb-2">Última atualização: 22 de junho de 2026</p>
                     <h1 className="text-4xl font-bold text-gray-900 mb-4">Política de Privacidade</h1>

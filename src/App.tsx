@@ -10,6 +10,7 @@ import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';
 import PoliticaDePrivacidade from './pages/PoliticaDePrivacidade';
 import TermosDeUso from './pages/TermosDeUso';
+import EstatutoAssociacao from './pages/EstatutoAssociacao';
 import AdminLogin from './pages/admin/AdminLogin';
 import AdminLayout from './pages/admin/AdminLayout';
 import AdminDashboard from './pages/admin/AdminDashboard';
@@ -35,6 +36,7 @@ export default function App() {
           <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/politica-de-privacidade" element={<PoliticaDePrivacidade />} />
           <Route path="/termos-de-uso" element={<TermosDeUso />} />
+          <Route path="/estatuto-associacao" element={<EstatutoAssociacao />} />
 
           {/* Admin login (public) */}
           <Route path="/admin/login" element={<AdminLogin />} />
