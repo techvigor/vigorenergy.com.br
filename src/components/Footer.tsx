@@ -4,9 +4,9 @@ import { MapPin, Phone, Mail, Instagram, Linkedin } from 'lucide-react';
 const quickLinks = [
     { label: 'Vantagens', href: '#vantagens' },
     { label: 'Diferenciais', href: '#diferenciais' },
-
     { label: 'Simulação', href: '#simulador' },
     { label: 'FAQ', href: '#faq' },
+    { label: 'Apresentação', href: 'https://hub.vigorenergy.com.br/#/apresentacao', target: '_blank', rel: 'noopener noreferrer' },
 ];
 
 const socialLinks = [
@@ -37,6 +37,8 @@ export default function Footer() {
                                 <li key={link.href}>
                                     <a
                                         href={link.href}
+                                        target={link.target}
+                                        rel={link.rel}
                                         className="text-white/70 text-sm hover:text-accent transition-colors duration-200"
                                     >
                                         {link.label}
