@@ -63,7 +63,7 @@ export default function HeroSection() {
                         <span className="text-accent">28%</span> sem investir nada
                     </h1>
                     <p className="text-lg md:text-xl text-white/80 mb-10 max-w-3xl leading-relaxed font-medium">
-                        Assine energia solar e comece a economizar imediatamente.
+                        Assine energia solar e comece a economizar.
                         Sem obras, sem equipamentos, sem burocracia. Energia limpa direto na sua conta.
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4">
