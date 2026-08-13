@@ -7,14 +7,249 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description"
     content="Vigor Energy - Assinatura de energia solar. Reduza sua conta de luz em até 28% sem investir nada. Energia limpa e economica." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
-    rel="stylesheet" />
+
+  <!-- Fonte self-hosted (Inter, variável, subset latin — cobre acentuação do PT-BR). Sem CDN de terceiros. -->
+  <link rel="preload" href="/fonts/inter-var-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <style>
+    @font-face {
+      font-family: 'Inter';
+      src: url('/fonts/inter-var-latin.woff2') format('woff2');
+      font-weight: 100 900;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    /*
+      CSS crítico do hero da LP /economize — inline, fora do bundle, pra pintar
+      antes de qualquer JS/CSS externo. Oculto por padrão: só aparece em /economize
+      (o script logo após o markup do hero decide isso, de forma síncrona).
+    */
+    #lp-hero-shell {
+      display: none;
+    }
+
+    #lp-hero-shell,
+    #lp-hero-shell * {
+      box-sizing: border-box;
+    }
+
+    .lp-hero {
+      background: #263b28;
+      color: #fff;
+      font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+      padding: 28px 16px 24px;
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 14px;
+    }
+
+    .lp-hero__eyebrow {
+      display: inline-block;
+      align-self: flex-start;
+      font-size: .75rem;
+      font-weight: 600;
+      letter-spacing: .02em;
+      color: #F6A937;
+      background: rgba(246, 169, 55, .12);
+      border: 1px solid rgba(246, 169, 55, .35);
+      padding: 6px 12px;
+      border-radius: 999px;
+    }
+
+    .lp-hero__h1 {
+      font-size: clamp(1.5rem, 6vw, 2rem);
+      line-height: 1.2;
+      font-weight: 800;
+      margin: 0;
+      min-height: calc(1.2em * 3);
+    }
+
+    .lp-hero__sub {
+      font-size: .95rem;
+      line-height: 1.5;
+      color: rgba(255, 255, 255, .82);
+      margin: 0;
+      max-width: 44ch;
+    }
+
+    .lp-hero__sim {
+      background: #fff;
+      color: #1F2937;
+      border-radius: 20px;
+      padding: 16px;
+      box-shadow: 0 10px 30px -12px rgba(0, 0, 0, .4);
+    }
+
+    .lp-hero__sim label {
+      display: block;
+      font-size: .8rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #1F2937;
+    }
+
+    .lp-hero__sim-row {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    #lp-static-bill {
+      width: 100%;
+      font-size: 1.25rem;
+      font-weight: 700;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 2px solid #E5E7EB;
+      outline: none;
+      font-family: inherit;
+      color: #1F2937;
+      background: #fff;
+    }
+
+    #lp-static-btn {
+      width: 100%;
+      background: #5F6C37;
+      color: #fff;
+      font-weight: 800;
+      font-size: 1rem;
+      padding: 14px;
+      border: 0;
+      border-radius: 12px;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .lp-hero__badges {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 14px;
+      padding: 0;
+      margin: 0;
+      font-size: .75rem;
+      color: rgba(255, 255, 255, .75);
+    }
+
+    .lp-hero__badges li {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .lp-hero__badges li::before {
+      content: '✓';
+      color: #F6A937;
+      font-weight: 900;
+    }
+
+    @media (min-width: 768px) {
+      .lp-hero {
+        padding: 56px 32px;
+        min-height: auto;
+      }
+
+      .lp-hero__h1 {
+        font-size: clamp(2rem, 4vw, 2.75rem);
+      }
+
+      .lp-hero__sim-row {
+        flex-direction: row;
+      }
+
+      #lp-static-btn {
+        width: auto;
+        padding-left: 28px;
+        padding-right: 28px;
+        white-space: nowrap;
+      }
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .lp-hero__sim {
+        animation: lp-hero-reveal .4s ease-out;
+      }
+    }
+
+    @keyframes lp-hero-reveal {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+
   <title>Vigor Energy | Energia Solar por Assinatura</title>
 </head>
 
 <body>
+  <!--
+    Hero estático da LP /economize — HTML puro, sem depender do React montar.
+    Resolve LCP (item 9 do spec) e garante que o hero apareça com JS desabilitado.
+    O React "adota" este container via createRoot próprio (ver src/main.tsx) e assume
+    a interatividade sem re-pintar nada — por isso o markup abaixo espelha exatamente
+    o que o componente HeroIsland renderiza.
+  -->
+  <div id="lp-hero-shell">
+    <header class="lp-hero" aria-label="Vigor Energy — economize na conta de luz">
+      <span class="lp-hero__eyebrow">Energia por assinatura · Usinas em Goiás</span>
+      <h1 class="lp-hero__h1" id="lp-hero-h1" data-h1-slot>Até 28% de desconto na conta de luz. Sem obra, sem
+        painel, sem investir nada.</h1>
+      <p class="lp-hero__sub">Sua energia continua chegando pela Equatorial, do mesmo jeito. Muda só o valor da
+        tarifa.</p>
+      <div class="lp-hero__sim">
+        <label for="lp-static-bill">Qual o valor médio da sua conta de luz?</label>
+        <div class="lp-hero__sim-row">
+          <input id="lp-static-bill" type="text" inputmode="decimal" placeholder="R$ 350,00"
+            aria-label="Valor médio da conta de luz" />
+          <button id="lp-static-btn" type="button">Ver minha economia</button>
+        </div>
+      </div>
+      <ul class="lp-hero__badges">
+        <li>Sem instalação</li>
+        <li>Sem investimento</li>
+        <li>Sem fidelidade obrigatória</li>
+      </ul>
+    </header>
+  </div>
+
+  <script>
+    // Roda de forma síncrona durante o parsing do HTML, antes do módulo React (que é
+    // type="module", portanto sempre deferred) e antes de qualquer pintura deste trecho.
+    // Só age em /economize — em todas as outras rotas do site o shell continua oculto.
+    (function () {
+      if (window.location.pathname.replace(/\/$/, '') !== '/economize') return;
+      var shell = document.getElementById('lp-hero-shell');
+      if (!shell) return;
+      shell.style.display = 'block';
+      try {
+        // Substituído em build/dev time por vite.config.ts a partir de
+        // src/lib/lp-economize/h1-map.json — fonte única, sem lista duplicada.
+        var map = "__LP_H1_MAP__";
+        var params = new URLSearchParams(window.location.search);
+        var utmContent = params.get('utm_content') || '';
+        var h1 = document.getElementById('lp-hero-h1');
+        if (h1 && map && map.rules && utmContent) {
+          for (var i = 0; i < map.rules.length; i++) {
+            if (utmContent.indexOf(map.rules[i].contains) !== -1) {
+              h1.textContent = map.rules[i].h1;
+              break;
+            }
+          }
+        }
+      } catch (e) {
+        // Nunca deixa a página quebrar por causa do message-match — H1 padrão permanece.
+      }
+    })();
+  </script>
+
   <div id="root"></div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.dots.min.js"></script>

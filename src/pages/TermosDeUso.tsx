@@ -6,7 +6,7 @@ const sections = [
         title: '1. Aceitação dos Termos',
         content: `Ao acessar ou utilizar os serviços da Vigor Energy, você declara ter lido, compreendido e concordado com estes Termos de Uso. Caso não concorde com qualquer disposição aqui prevista, solicitamos que não utilize nossos serviços.
 
-Estes Termos constituem um acordo juridicamente vinculante entre você ("Cliente") e a **Vigor Energy Soluções em Energia Ltda.**, inscrita no CNPJ sob nº 00.000.000/0001-00, com sede na R. 7, 530 - St. Oeste, Goiânia - GO, 74110-090.`,
+Estes Termos constituem um acordo juridicamente vinculante entre você ("Cliente") e a **Vigor Energy Soluções em Energia Ltda.**, inscrita no CNPJ sob nº 57.072.689/0001-87, com sede na R. 7, 530 - St. Oeste, Goiânia - GO, 74110-090.`,
     },
     {
         title: '2. Descrição dos Serviços',

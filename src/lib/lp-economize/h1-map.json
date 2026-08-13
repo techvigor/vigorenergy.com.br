@@ -1,0 +1,21 @@
+{
+  "default": "Até 28% de desconto na conta de luz. Sem obra, sem painel, sem investir nada.",
+  "rules": [
+    {
+      "contains": "R06-NAO-E-GOLPE",
+      "h1": "Não é golpe. É energia por assinatura — e é regulamentada por lei."
+    },
+    {
+      "contains": "R13-SEM-FIDELIDADE",
+      "h1": "Até 28% menos na conta de luz. E você escolhe: sem fidelidade, 12 ou 24 meses."
+    },
+    {
+      "contains": "R04-DUAS-PERGUNTAS",
+      "h1": "Mora em Goiás e paga mais de R$300 de luz? Você pode pagar até 28% menos."
+    },
+    {
+      "contains": "R01-PARE",
+      "h1": "Pare de pagar a conta de luz cheia."
+    }
+  ]
+}

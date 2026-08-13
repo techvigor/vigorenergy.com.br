@@ -1,28 +1,44 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from './pages/Home';
-import SelecaoVigorEnergy from './pages/SelecaoVigorEnergy';
-import Parceiros from './pages/Parceiros';
-import UploadFaturas from './pages/UploadFaturas';
-import ParceirosMotoristas from './pages/ParceirosMotoristas';
-import PassageiroVigor from './pages/PassageiroVigor';
-import EnergiaRedirect from './pages/EnergiaRedirect';
-import Blog from './pages/Blog';
-import BlogPost from './pages/BlogPost';
-import PoliticaDePrivacidade from './pages/PoliticaDePrivacidade';
-import TermosDeUso from './pages/TermosDeUso';
-import EstatutoAssociacao from './pages/EstatutoAssociacao';
-import AdminLogin from './pages/admin/AdminLogin';
-import AdminLayout from './pages/admin/AdminLayout';
-import AdminDashboard from './pages/admin/AdminDashboard';
-import AdminBlogList from './pages/admin/AdminBlogList';
-import AdminBlogEditor from './pages/admin/AdminBlogEditor';
-import ProtectedRoute from './components/ProtectedRoute';
-import { AuthProvider } from './contexts/AuthContext';
+import { lazy, Suspense } from 'react';
+import { BrowserRouter as Router, Routes, Route, Outlet } from 'react-router-dom';
+
+const ProtectedRoute = lazy(() => import('./components/ProtectedRoute'));
+const AuthProviderOutlet = lazy(() =>
+  import('./contexts/AuthContext').then((m) => ({
+    default: () => (
+      <m.AuthProvider>
+        <Outlet />
+      </m.AuthProvider>
+    ),
+  }))
+);
+
+// Code-split por rota: cada página vira um chunk carregado sob demanda, não tudo no bundle
+// inicial. Crítico pra /economize, que precisa ficar bem abaixo de 100KB de JS (tráfego pago,
+// LCP em 4G) e não tem motivo pra baixar o editor Tiptap do admin ou o three.js/vanta do Home.
+const Home = lazy(() => import('./pages/Home'));
+const SelecaoVigorEnergy = lazy(() => import('./pages/SelecaoVigorEnergy'));
+const Parceiros = lazy(() => import('./pages/Parceiros'));
+const UploadFaturas = lazy(() => import('./pages/UploadFaturas'));
+const ParceirosMotoristas = lazy(() => import('./pages/ParceirosMotoristas'));
+const PassageiroVigor = lazy(() => import('./pages/PassageiroVigor'));
+const EnergiaRedirect = lazy(() => import('./pages/EnergiaRedirect'));
+const Blog = lazy(() => import('./pages/Blog'));
+const BlogPost = lazy(() => import('./pages/BlogPost'));
+const PoliticaDePrivacidade = lazy(() => import('./pages/PoliticaDePrivacidade'));
+const TermosDeUso = lazy(() => import('./pages/TermosDeUso'));
+const EstatutoAssociacao = lazy(() => import('./pages/EstatutoAssociacao'));
+const Economize = lazy(() => import('./pages/Economize'));
+const Obrigado = lazy(() => import('./pages/Obrigado'));
+const AdminLogin = lazy(() => import('./pages/admin/AdminLogin'));
+const AdminLayout = lazy(() => import('./pages/admin/AdminLayout'));
+const AdminDashboard = lazy(() => import('./pages/admin/AdminDashboard'));
+const AdminBlogList = lazy(() => import('./pages/admin/AdminBlogList'));
+const AdminBlogEditor = lazy(() => import('./pages/admin/AdminBlogEditor'));
 
 export default function App() {
   return (
-    <AuthProvider>
-      <Router>
+    <Router>
+      <Suspense fallback={null}>
         <Routes>
           {/* Public routes */}
           <Route path="/" element={<Home />} />
@@ -37,21 +53,27 @@ export default function App() {
           <Route path="/politica-de-privacidade" element={<PoliticaDePrivacidade />} />
           <Route path="/termos-de-uso" element={<TermosDeUso />} />
           <Route path="/estatuto-associacao" element={<EstatutoAssociacao />} />
+          <Route path="/economize" element={<Economize />} />
+          <Route path="/obrigado" element={<Obrigado />} />
 
-          {/* Admin login (public) */}
-          <Route path="/admin/login" element={<AdminLogin />} />
-
-          {/* Admin protected routes */}
-          <Route element={<ProtectedRoute />}>
-            <Route element={<AdminLayout />}>
-              <Route path="/admin" element={<AdminDashboard />} />
-              <Route path="/admin/blog" element={<AdminBlogList />} />
-              <Route path="/admin/blog/new" element={<AdminBlogEditor />} />
-              <Route path="/admin/blog/:id" element={<AdminBlogEditor />} />
+          {/*
+            AuthProvider (e o SDK do Supabase que ele carrega) fica só a partir daqui —
+            nenhuma rota pública precisa de sessão de auth, e /economize em especial não
+            pode pagar o peso do SDK completo só porque o admin existe em algum lugar do app.
+          */}
+          <Route element={<AuthProviderOutlet />}>
+            <Route path="/admin/login" element={<AdminLogin />} />
+            <Route element={<ProtectedRoute />}>
+              <Route element={<AdminLayout />}>
+                <Route path="/admin" element={<AdminDashboard />} />
+                <Route path="/admin/blog" element={<AdminBlogList />} />
+                <Route path="/admin/blog/new" element={<AdminBlogEditor />} />
+                <Route path="/admin/blog/:id" element={<AdminBlogEditor />} />
+              </Route>
             </Route>
           </Route>
         </Routes>
-      </Router>
-    </AuthProvider>
+      </Suspense>
+    </Router>
   );
 }
