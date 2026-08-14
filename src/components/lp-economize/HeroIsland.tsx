@@ -61,9 +61,9 @@ export default function HeroIsland() {
   const linkWhatsAppFechamento = `https://wa.me/${WHATSAPP_NUMERO}?text=${encodeURIComponent(WHATSAPP_MENSAGENS.fechamento)}`;
 
   return (
-    <header id="simulador" className="lp-hero" aria-label="Simulador de economia Vigor Energy">
+    <header id="simulador" className="lp-hero" aria-label="Vigor Energy — economize na conta de luz">
       <span className="lp-hero__eyebrow">Energia por assinatura · Usinas em Goiás</span>
-      <h1 className="lp-hero__h1">{h1Texto}</h1>
+      <h1 className="lp-hero__h1" id="lp-hero-h1" data-h1-slot="">{h1Texto}</h1>
       <p className="lp-hero__sub">
         Sua energia continua chegando pela Equatorial, do mesmo jeito. Muda só o valor da tarifa.
       </p>
@@ -74,10 +74,10 @@ export default function HeroIsland() {
         </div>
       ) : (
         <div className="lp-hero__sim">
-          <label htmlFor="lp-bill-input">Qual o valor médio da sua conta de luz?</label>
+          <label htmlFor="lp-static-bill">Qual o valor médio da sua conta de luz?</label>
           <div className="lp-hero__sim-row">
             <input
-              id="lp-bill-input"
+              id="lp-static-bill"
               type="text"
               inputMode="decimal"
               placeholder="R$ 350,00"
@@ -88,7 +88,7 @@ export default function HeroIsland() {
                 setCalculated(false);
               }}
             />
-            <button type="button" onClick={handleCalcular}>
+            <button id="lp-static-btn" type="button" onClick={handleCalcular}>
               Ver minha economia
             </button>
           </div>
