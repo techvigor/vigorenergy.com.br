@@ -2,6 +2,7 @@ import { useRef, useState, type FormEvent } from 'react';
 import { Loader2, MessageCircle } from 'lucide-react';
 import Honeypot from './Honeypot';
 import FaturaUpload from './FaturaUpload';
+import CidadeCombobox from './CidadeCombobox';
 import { formatarWhatsApp, digitosWhatsApp, FAIXAS_CONTA } from '../../lib/lp-economize/format';
 import {
   validarNome,
@@ -15,7 +16,6 @@ import {
   STATUS_FATURAS_OPCOES,
   type StatusFaturas,
 } from '../../lib/lp-economize/validation';
-import { GOIAS_CIDADES } from '../../lib/lp-economize/goiasCidades';
 import { WHATSAPP_MENSAGENS, WHATSAPP_NUMERO } from '../../lib/lp-economize/config';
 import { gerarEventId, trackLead, trackLeadDesqualificado } from '../../lib/lp-economize/tracking';
 import { obterOrigemLead } from '../../lib/lp-economize/utms';
@@ -242,27 +242,18 @@ export default function LeadForm({ faixaContaInicial, valorContaInformado, onSuc
         <label htmlFor="lp-cidade" className="block text-sm font-semibold text-text-dark mb-1.5">
           Cidade
         </label>
-        <input
+        <CidadeCombobox
           id="lp-cidade"
           ref={cidadeRef}
-          type="text"
-          list="lp-cidades-lista"
           value={cidade}
-          onChange={(e) => setCidade(e.target.value)}
+          onChange={(v) => {
+            setCidade(v);
+            if (errors.cidade) setErrors((prev) => ({ ...prev, cidade: undefined }));
+          }}
           onBlur={() => validarCampo('cidade')}
-          aria-invalid={!!errors.cidade}
-          aria-describedby={errors.cidade ? 'lp-cidade-erro' : undefined}
-          placeholder="Digite e escolha sua cidade"
-          autoComplete="off"
-          className={`w-full px-4 py-3 rounded-xl border-2 outline-none transition-colors text-text-dark font-medium ${
-            errors.cidade ? 'border-red-400 focus:border-red-500' : 'border-gray-light focus:border-primary'
-          }`}
+          error={errors.cidade}
+          ariaDescribedby={errors.cidade ? 'lp-cidade-erro' : undefined}
         />
-        <datalist id="lp-cidades-lista">
-          {GOIAS_CIDADES.map((c) => (
-            <option key={c} value={c} />
-          ))}
-        </datalist>
         {errors.cidade && (
           <p id="lp-cidade-erro" className="text-red-600 text-xs mt-1.5 font-medium">
             {errors.cidade}
@@ -333,7 +324,7 @@ export default function LeadForm({ faixaContaInicial, valorContaInformado, onSuc
           {STATUS_FATURAS_OPCOES.map((opcao) => (
             <label
               key={opcao.id}
-              className={`flex items-center gap-3 px-4 py-3 rounded-xl border-2 cursor-pointer transition-colors ${
+              className={`flex items-center gap-4 px-4 py-3 rounded-xl border-2 cursor-pointer transition-colors ${
                 statusFaturas === opcao.id ? 'border-primary bg-primary/5' : 'border-gray-light'
               }`}
             >
@@ -346,7 +337,7 @@ export default function LeadForm({ faixaContaInicial, valorContaInformado, onSuc
                   setStatusFaturas(opcao.id);
                   setErrors((prev) => ({ ...prev, statusFaturas: undefined }));
                 }}
-                className="accent-[#5F6C37]"
+                className="w-4 h-4 flex-shrink-0 accent-[#5F6C37]"
               />
               <span className="text-sm font-medium text-text-dark">{opcao.label}</span>
             </label>

@@ -3,11 +3,6 @@ import { ChevronDown } from 'lucide-react';
 
 const faqs = [
   {
-    pergunta: 'Isso é golpe?',
-    resposta:
-      'Não. Energia por assinatura é regulamentada no Brasil. A Vigor trabalha com usinas localizadas em Goiás e o desconto aparece na sua própria conta de luz. Não existe taxa de adesão nem cobrança antecipada.',
-  },
-  {
     pergunta: 'Vai faltar energia na minha casa?',
     resposta:
       'Não. Sua energia continua chegando pela rede da Equatorial, exatamente como hoje. Em caso de queda, o atendimento é o mesmo de sempre.',

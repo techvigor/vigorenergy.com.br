@@ -47,6 +47,18 @@ export function formatarBRL(valor: number): string {
   return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 }
 
+/** Remove acentos e baixa a caixa — usado pra buscar "goiania" e achar "Goiânia". */
+export function normalizarTexto(texto: string): string {
+  // marcas diacriticas combinantes que sobram depois do normalize('NFD') decompor
+  // "a com circunflexo" em "a" + acento; range escrito via escape unicode, nao
+  // caractere literal, de proposito, pra nao depender do encoding do arquivo/terminal.
+  return texto
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .trim();
+}
+
 /** Faixas de conta usadas no select do formulário (pré-preenchido pelo valor do simulador). */
 export const FAIXAS_CONTA = [
   { id: '300_500', label: 'R$ 300 a R$ 500', min: 300, max: 500 },
