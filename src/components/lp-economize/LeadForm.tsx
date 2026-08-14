@@ -338,6 +338,7 @@ export default function LeadForm({ faixaContaInicial, valorContaInformado, onSuc
                   setErrors((prev) => ({ ...prev, statusFaturas: undefined }));
                 }}
                 className="w-4 h-4 flex-shrink-0 accent-[#5F6C37]"
+                style={{ marginRight: '0.75rem' }}
               />
               <span className="text-sm font-medium text-text-dark">{opcao.label}</span>
             </label>
