@@ -251,8 +251,15 @@
   </script>
 
   <div id="root"></div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.dots.min.js"></script>
+  <!--
+    defer (não async): a ordem de execução relativa entre scripts com defer e scripts
+    type="module" é garantida pela spec — three.js e vanta continuam terminando antes do
+    main.tsx montar o React, exatamente como antes, só que sem bloquear o parsing/pintura
+    do HTML. Medido em produção com Lighthouse: os dois eram render-blocking em toda rota
+    (inclusive /economize, que não usa nenhum dos dois), custando ~1,2s estimados de LCP.
+  -->
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.dots.min.js"></script>
   <script type="module" src="/src/main.tsx"></script>
 </body>
 
