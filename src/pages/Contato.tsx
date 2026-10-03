@@ -49,9 +49,8 @@ const redesSociais = [
 ];
 
 export default function Contato() {
-  // Sobe o scroll para o topo ao carregar a página e ajusta o título da aba enquanto ela estiver aberta
+  // Ajusta o título da aba enquanto a página estiver aberta (o scroll ao topo é feito no App)
   useEffect(() => {
-    window.scrollTo(0, 0);
     const tituloAnterior = document.title;
     document.title = 'Contato | Vigor Energy';
     return () => {

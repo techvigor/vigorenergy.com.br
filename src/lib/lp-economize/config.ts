@@ -33,6 +33,7 @@ export const WHATSAPP_NUMERO = '5562991308408'; // Júlia (Inside Sales)
 export const WHATSAPP_MENSAGENS = {
   fechamento: 'Oi! Vi o anúncio da Vigor Energy e quero saber quanto posso economizar na minha conta de luz.',
   obrigado: 'Oi Júlia! Acabei de fazer meu cadastro no site e quero a simulação da minha economia.',
+  links: 'Oi! Vim pelo Instagram e quero saber mais sobre o desconto na conta de luz.', // página /links (link da bio)
 } as const;
 
 export type H1Regra = { contains: string; h1: string };

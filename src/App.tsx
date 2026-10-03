@@ -1,5 +1,5 @@
-import { lazy, Suspense } from 'react';
-import { BrowserRouter as Router, Routes, Route, Outlet } from 'react-router-dom';
+import { lazy, Suspense, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, Outlet, useLocation, useNavigationType } from 'react-router-dom';
 
 const ProtectedRoute = lazy(() => import('./components/ProtectedRoute'));
 const AuthProviderOutlet = lazy(() =>
@@ -31,15 +31,33 @@ const Economize = lazy(() => import('./pages/Economize'));
 const Obrigado = lazy(() => import('./pages/Obrigado'));
 const Simulador = lazy(() => import('./pages/Simulador'));
 const Contato = lazy(() => import('./pages/Contato'));
+const Links = lazy(() => import('./pages/Links'));
 const AdminLogin = lazy(() => import('./pages/admin/AdminLogin'));
 const AdminLayout = lazy(() => import('./pages/admin/AdminLayout'));
 const AdminDashboard = lazy(() => import('./pages/admin/AdminDashboard'));
 const AdminBlogList = lazy(() => import('./pages/admin/AdminBlogList'));
 const AdminBlogEditor = lazy(() => import('./pages/admin/AdminBlogEditor'));
 
+// O BrowserRouter não leva o scroll ao topo ao trocar de página: sem isto, quem rola uma página
+// e clica num link chega na próxima já rolada (ex.: /links -> /blog). Só age em navegações novas
+// (PUSH/REPLACE) e sem hash — "voltar" do navegador e âncoras (#vantagens, #faq...) ficam como estão.
+// behavior 'instant': o index.css define scroll-behavior: smooth (bom pras âncoras), mas página nova
+// deve já abrir no topo, sem animação de subida.
+function ScrollToTopOnNavigate() {
+  const { pathname, hash } = useLocation();
+  const navigationType = useNavigationType();
+
+  useEffect(() => {
+    if (navigationType !== 'POP' && !hash) window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  }, [pathname, hash, navigationType]);
+
+  return null;
+}
+
 export default function App() {
   return (
     <Router>
+      <ScrollToTopOnNavigate />
       <Suspense fallback={null}>
         <Routes>
           {/* Public routes */}
@@ -59,6 +77,7 @@ export default function App() {
           <Route path="/obrigado" element={<Obrigado />} />
           <Route path="/simulador" element={<Simulador />} />
           <Route path="/contato" element={<Contato />} />
+          <Route path="/links" element={<Links />} />
 
           {/*
             AuthProvider (e o SDK do Supabase que ele carrega) fica só a partir daqui —
