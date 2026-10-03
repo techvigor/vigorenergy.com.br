@@ -5,9 +5,9 @@ import { Menu, X } from 'lucide-react';
 const navLinks = [
     { label: 'Vantagens', href: '#vantagens' },
     { label: 'Diferenciais', href: '#diferenciais' },
-    { label: 'Tire suas dúvidas', href: '#faq' },
     { label: 'Blog', href: '/blog', page: true },
     { label: 'Seja Parceiro', href: '/parceiros', external: true },
+    { label: 'Contato', href: '/contato', page: true },
 ];
 
 export default function Navbar() {
@@ -100,7 +100,7 @@ export default function Navbar() {
                 {/* Right CTA (Desktop only) */}
                 <div className="hidden lg:flex items-center shrink-0 z-10">
                     <Link
-                        to="/#simulador"
+                        to="/simulador"
                         className="bg-accent inline-flex items-center justify-center px-6 py-2 rounded-full border border-gray-light/60 text-text-dark text-md font-bold hover:border-accent hover:animate-pulse-orange transition-all duration-300"
                     >
                         Simular economia
@@ -159,7 +159,7 @@ export default function Navbar() {
                     })}
                     <div className="h-px w-full bg-gray-light/60 my-1" />
                     <Link
-                        to="/#simulador"
+                        to="/simulador"
                         onClick={() => setOpen(false)}
                         className="px-4 py-3 rounded-2xl text-sm font-medium text-accent hover:bg-accent/10 transition-colors text-center mt-1 outline outline-1 outline-accent/30"
                     >

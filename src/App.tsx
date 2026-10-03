@@ -29,6 +29,8 @@ const TermosDeUso = lazy(() => import('./pages/TermosDeUso'));
 const EstatutoAssociacao = lazy(() => import('./pages/EstatutoAssociacao'));
 const Economize = lazy(() => import('./pages/Economize'));
 const Obrigado = lazy(() => import('./pages/Obrigado'));
+const Simulador = lazy(() => import('./pages/Simulador'));
+const Contato = lazy(() => import('./pages/Contato'));
 const AdminLogin = lazy(() => import('./pages/admin/AdminLogin'));
 const AdminLayout = lazy(() => import('./pages/admin/AdminLayout'));
 const AdminDashboard = lazy(() => import('./pages/admin/AdminDashboard'));
@@ -55,6 +57,8 @@ export default function App() {
           <Route path="/estatuto-associacao" element={<EstatutoAssociacao />} />
           <Route path="/economize" element={<Economize />} />
           <Route path="/obrigado" element={<Obrigado />} />
+          <Route path="/simulador" element={<Simulador />} />
+          <Route path="/contato" element={<Contato />} />
 
           {/*
             AuthProvider (e o SDK do Supabase que ele carrega) fica só a partir daqui —

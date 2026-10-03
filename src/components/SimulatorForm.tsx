@@ -1,8 +1,9 @@
 import { useState, type ChangeEvent, type FormEvent } from 'react';
-import { Home, Building2, Building, PiggyBank, RotateCcw, Plus, Equal, X, MapPin, Phone, User, Send, CheckCircle } from 'lucide-react';
+import { Home, Building2, Building, PiggyBank, RotateCcw, X, MapPin, Phone, User, Send, CheckCircle } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 
-export default function SimulatorForm() {
+// headingAs: 'h1' na página dedicada /simulador, onde o título da seção é o título da página.
+export default function SimulatorForm({ headingAs: Heading = 'h2' }: { headingAs?: 'h1' | 'h2' }) {
     const [step, setStep] = useState(1);
     const [billValue, setBillValue] = useState('');
     const [profile, setProfile] = useState('Residência');
@@ -124,9 +125,9 @@ export default function SimulatorForm() {
             </div>
             <div className="max-w-7xl mx-auto px-4 relative z-10">
                 <div className="text-center mb-10">
-                    <h2 className="text-3xl md:text-5xl lg:text-[54px] font-extrabold mb-8 leading-tight">
+                    <Heading className="text-3xl md:text-5xl lg:text-[54px] font-extrabold mb-8 leading-tight">
                         Veja o quanto você irá economizar
-                    </h2>
+                    </Heading>
                     <div className="inline-block px-8 py-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white font-bold text-sm tracking-widest uppercase shadow-lg">
                         {step === 1 ? 'Antes da assinatura Vigor Energy' : 'Depois da assinatura Vigor Energy'}
                     </div>
@@ -208,42 +209,27 @@ export default function SimulatorForm() {
                                 <RotateCcw className="w-5 h-5" /> Calcular novamente
                             </button>
 
-                            {/* Math Section (Left Side) */}
-                            <div className="flex-1 flex flex-col md:flex-row items-center justify-center gap-6 pt-6 xl:pt-14 relative z-10">
-
-                                {/* Boleto Vigor */}
-                                <div className="bg-gray-50 border border-gray-200 p-8 rounded-[2rem] min-h-[300px] w-full max-w-[280px] text-center shadow-sm relative transition-transform hover:-translate-y-1">
-                                    <span className="text-xs font-black text-gray-400 uppercase tracking-widest mb-4 block">Boleto</span>
+                            {/* Boleto unificado (Left Side): um único boleto Vigor Energy, já com o total da Equatorial embutido */}
+                            <div className="flex-1 flex items-center justify-center pt-6 xl:pt-14 relative z-10">
+                                <div className="bg-gray-50 border border-gray-200 p-8 md:p-10 rounded-[2rem] w-full max-w-[420px] text-center shadow-sm relative transition-transform hover:-translate-y-1">
+                                    <span className="text-xs font-black text-gray-400 uppercase tracking-widest mb-4 block">Boleto unificado</span>
                                     <div className="flex justify-center mb-6 h-10 items-center">
                                         <img src="/logomarca_transp.png" alt="Vigor Energy" className="h-full object-contain filter drop-shadow-sm" />
                                     </div>
-                                    <p className="text-3xl font-black text-vigor-dark">{formatBRL(vigorBill)}</p>
+                                    <div className="text-gray-400 font-bold line-through decoration-red-400/60 mb-2 text-lg">
+                                        De: {formatBRL(parsedValue)}
+                                    </div>
+                                    <span className="block text-sm tracking-widest text-gray-500 uppercase font-black mb-1">Para:</span>
+                                    <p className="text-4xl md:text-5xl font-black text-primary drop-shadow-sm">
+                                        {formatBRL(newTotal)}<span className="text-vigor-accent text-xl relative -top-4">*</span>
+                                    </p>
+                                    <div className="mt-6 flex items-start gap-3 text-left bg-primary/5 border border-primary/15 rounded-2xl p-4">
+                                        <CheckCircle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                                        <p className="text-sm text-gray-600 leading-snug">
+                                            <strong className="text-vigor-dark">Valor já considera o total da Equatorial.</strong> Você paga tudo em um único boleto.
+                                        </p>
+                                    </div>
                                     {renderBarcode()}
-                                </div>
-
-                                <div className="text-gray-300 flex-shrink-0 animate-pulse"><Plus className="w-8 h-8 md:w-12 md:h-12" /></div>
-
-                                {/* Fatura Distribuidora */}
-                                <div className="bg-gray-50 border border-gray-200 p-8 rounded-[2rem] min-h-[300px] w-full max-w-[280px] text-center shadow-sm relative transition-transform hover:-translate-y-1">
-                                    <span className="text-xs font-black text-gray-400 uppercase tracking-widest mb-4 block">Fatura</span>
-                                    <div className="flex justify-center mb-6 h-10 items-center">
-                                        <span className="font-extrabold text-gray-600 tracking-widest text-sm md:text-base">DISTRIBUIDORA</span>
-                                    </div>
-                                    <p className="text-3xl font-black text-gray-800">{formatBRL(fixedCost)}<span className="text-vigor-accent text-xl relative -top-2">*</span></p>
-                                    {renderBarcode()}
-                                </div>
-
-                                <div className="text-gray-300 flex-shrink-0 hidden md:block"><Equal className="w-8 h-8 md:w-12 md:h-12" /></div>
-
-                                {/* Resumo Conta (Desktop & Mobile) */}
-                                <div className="text-center md:text-left flex flex-col justify-center bg-gray-50 md:bg-transparent p-6 md:p-0 rounded-3xl w-full md:w-auto">
-                                    <div className="text-gray-400 font-bold line-through decoration-red-400/60 mb-2 flex items-center justify-center md:justify-start gap-2 text-lg">
-                                        De: <span>{formatBRL(parsedValue)}</span>
-                                    </div>
-                                    <div className="text-gray-800 font-black flex flex-col items-center md:items-start leading-none gap-1">
-                                        <span className="text-sm tracking-widest text-gray-500 uppercase">Para:</span>
-                                        <span className="text-4xl lg:text-4xl text-primary drop-shadow-sm">{formatBRL(newTotal)}</span>
-                                    </div>
                                 </div>
                             </div>
 
@@ -295,9 +281,9 @@ export default function SimulatorForm() {
 
                 {/* Disclaimer */}
                 <div className="mt-12 text-center text-white/50 text-xs md:text-sm font-medium max-w-4xl mx-auto space-y-2 opacity-80 hover:opacity-100 transition-opacity">
-                    <p>* Custo de disponibilidade + Média da taxa de iluminação pública.</p>
+                    <p>* Valor estimado do boleto unificado, já considerando o total da fatura da Equatorial (custo de disponibilidade + média da taxa de iluminação pública).</p>
                     <p className="leading-relaxed">
-                        Os valores são aproximados e condicionados ao tipo de sistema e taxas de disponibilidade e iluminação pública. O desconto é de ATÉ 28% na energia injetada. A fatura de energia da distribuidora continua sendo enviada junto ao nosso boleto e nela constarão os custos mínimos e taxa de iluminação pública nas quais a Vigor Energy não pode atuar para reduzir o valor.
+                        Os valores são aproximados e condicionados ao tipo de sistema e taxas de disponibilidade e iluminação pública. O desconto é de ATÉ 28% na energia injetada. No modelo de boleto unificado, o valor da fatura da Equatorial já vem incluído no boleto Vigor Energy, inclusive os custos mínimos e a taxa de iluminação pública, nos quais a Vigor Energy não pode atuar para reduzir o valor.
                     </p>
                 </div>
             </div>

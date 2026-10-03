@@ -76,7 +76,7 @@ Para exercer seus direitos, entre em contato pelo e-mail: **privacidade@vigorene
         content: `Para dúvidas, solicitações ou reclamações relacionadas ao tratamento dos seus dados pessoais, entre em contato com nosso Encarregado de Proteção de Dados:
 
 • **E-mail:** privacidade@vigorenergy.com.br
-• **Endereço:** R. 7, 530 - St. Oeste, Goiânia - GO, 74110-090
+• **Endereço:** R. 6, 498 - St. Oeste, Goiânia - GO, 74115-070
 • **Telefone:** (62) 99118-3449
 
 Você também pode registrar reclamações perante a Autoridade Nacional de Proteção de Dados (ANPD) em www.gov.br/anpd.`,

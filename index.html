@@ -202,11 +202,16 @@
   <script>
     // Roda de forma síncrona durante o parsing do HTML, antes do módulo React (que é
     // type="module", portanto sempre deferred) e antes de qualquer pintura deste trecho.
-    // Só age em /economize — em todas as outras rotas do site o shell continua oculto.
+    // Só age em /economize — em todas as outras rotas do site o shell é removido do DOM.
+    // Não basta deixá-lo oculto: o <header id="simulador"> dele é o primeiro do documento e
+    // "sequestra" os links #simulador do site (scroll mira um elemento invisível e não rola).
     (function () {
-      if (window.location.pathname.replace(/\/$/, '') !== '/economize') return;
       var shell = document.getElementById('lp-hero-shell');
       if (!shell) return;
+      if (window.location.pathname.replace(/\/$/, '') !== '/economize') {
+        shell.parentNode.removeChild(shell);
+        return;
+      }
       shell.style.display = 'block';
       try {
         // Substituído em build/dev time por vite.config.ts a partir de

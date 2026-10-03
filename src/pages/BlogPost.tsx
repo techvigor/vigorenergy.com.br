@@ -132,7 +132,7 @@ export default function BlogPost() {
                 Simule agora quanto você pode economizar com energia solar por assinatura.
               </p>
               <a
-                href="/#simulador"
+                href="/simulador"
                 className="inline-block bg-accent text-text-dark font-bold px-8 py-3 rounded-full hover:bg-accent-hover transition-colors"
               >
                 Simular economia

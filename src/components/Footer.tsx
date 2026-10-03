@@ -4,7 +4,7 @@ import { MapPin, Phone, Mail, Instagram, Linkedin } from 'lucide-react';
 const quickLinks = [
     { label: 'Vantagens', href: '#vantagens' },
     { label: 'Diferenciais', href: '#diferenciais' },
-    { label: 'Simulação', href: '#simulador' },
+    { label: 'Simulação', href: '/simulador' },
     { label: 'FAQ', href: '#faq' },
     { label: 'Apresentação', href: 'https://hub.vigorenergy.com.br/#/apresentacao', target: '_blank', rel: 'noopener noreferrer' },
 ];
@@ -55,9 +55,9 @@ export default function Footer() {
                             <li className="flex items-start gap-3">
                                 <MapPin className="text-accent flex-shrink-0 mt-0.5" size={16} />
                                 <span className="text-white/70 text-sm">
-                                    R. 7, 530 - St. Oeste
+                                    R. 6, 498 - St. Oeste
                                     <br />
-                                    Goiânia - GO, 74110-090
+                                    Goiânia - GO, 74115-070
                                 </span>
                             </li>
                             <li className="flex items-center gap-3">
