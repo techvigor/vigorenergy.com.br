@@ -1,5 +1,6 @@
 import { lazy, Suspense, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Outlet, useLocation, useNavigationType } from 'react-router-dom';
+import WhatsAppFloatingButton from './components/WhatsAppFloatingButton';
 
 const ProtectedRoute = lazy(() => import('./components/ProtectedRoute'));
 const AuthProviderOutlet = lazy(() =>
@@ -97,6 +98,8 @@ export default function App() {
           </Route>
         </Routes>
       </Suspense>
+      {/* Fora do Suspense: aparece junto com o shell, sem esperar o chunk da página carregar. */}
+      <WhatsAppFloatingButton />
     </Router>
   );
 }

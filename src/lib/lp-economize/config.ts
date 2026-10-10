@@ -26,11 +26,17 @@ export const NUMERO_ASSINANTES: number | null = 1000; // "Mais de 1.000" — ver
 export const FATURA_ANTES: { valor: number; imagemUrl: string } | null = null; // TODO: validar valores e autorização de uso
 export const FATURA_DEPOIS: { valor: number; imagemUrl: string } | null = null; // TODO: validar valores e autorização de uso
 
-/** Número único do WhatsApp usado em toda a LP (CTA fixo, fechamento, /obrigado). Formato: 55DDDNUMERO, só dígitos. */
-export const WHATSAPP_NUMERO = '5562991308408'; // Júlia (Inside Sales)
+/** Número único do WhatsApp usado na LP (fechamento, /obrigado) e em /links. Formato: 55DDDNUMERO, só dígitos. */
+export const WHATSAPP_NUMERO = '5562991183449'; // Júlia (Inside Sales)
+
+/** Números das opções do botão flutuante de todo o site (WhatsAppFloatingButton). Mesmo formato. */
+export const WHATSAPP_COMERCIAL = '5562991308408'; // Júlia (Inside Sales)
+export const WHATSAPP_SUPORTE = '5562991183449'; // suporte e dúvidas
 
 /** Mensagens pré-preenchidas por origem/contexto de clique. */
 export const WHATSAPP_MENSAGENS = {
+  site: 'Oi! Vim pelo site da Vigor Energy e gostaria de mais informações.', // botão flutuante → Comercial, demais páginas
+  suporte: 'Oi! Vim pelo site da Vigor Energy e preciso de ajuda com uma dúvida.', // botão flutuante → Suporte
   fechamento: 'Oi! Vi o anúncio da Vigor Energy e quero saber quanto posso economizar na minha conta de luz.',
   obrigado: 'Oi Júlia! Acabei de fazer meu cadastro no site e quero a simulação da minha economia.',
   links: 'Oi! Vim pelo Instagram e quero saber mais sobre o desconto na conta de luz.', // página /links (link da bio)
