@@ -18,6 +18,9 @@
   --color-vigor-900: #14532d;
   --color-vigor-dark: #263b28;
   --color-vigor-accent: #e69a25;
+  /* simulador de bonificação: blocos da régua sobre o vigor-dark e o sol como texto em fundo claro */
+  --color-vigor-lime: #C3CF92;
+  --color-accent-ink: #8A5A0F;
   --color-offwhite: #F9FAFB;
   --color-gray-light: #E5E7EB;
   --color-text-dark: #1F2937;
@@ -30,6 +33,25 @@
   --animate-float-slow: float 25s ease-in-out infinite 2s;
   --animate-pulse-orange: pulse-orange 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   --animate-fade-up: fade-up 0.35s ease-out;
+  --animate-regua-entra: regua-entra 1.4s cubic-bezier(0.23, 1, 0.32, 1);
+  --animate-ficha-entra: ficha-entra 1.4s cubic-bezier(0.23, 1, 0.32, 1);
+
+  --ease-saida: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-movimento: cubic-bezier(0.77, 0, 0.175, 1);
+
+  /* cliente novo na régua do simulador: o bloco e a ficha nascem no tom do sol e assentam */
+  @keyframes regua-entra {
+    from {
+      background-color: var(--color-accent);
+    }
+  }
+
+  @keyframes ficha-entra {
+    from {
+      border-color: var(--color-accent);
+      background-color: rgb(246 169 55 / 0.18);
+    }
+  }
 
   @keyframes fade-up {
     from {

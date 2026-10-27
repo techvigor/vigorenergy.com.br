@@ -18,6 +18,7 @@ import Step3Svg from '../components/animations/Step3Svg';
 import Step4Svg from '../components/animations/Step4Svg';
 import Step5Svg from '../components/animations/Step5Svg';
 import PartnerRegistrationModal from '../components/PartnerRegistrationModal';
+import SimuladorBonificacao from '../components/parceiros/SimuladorBonificacao';
 
 // --- COMPONENTS ---
 
@@ -63,10 +64,10 @@ export default function Parceiros() {
           <div className="flex flex-col items-center">
             <h1 className="text-5xl lg:text-6xl font-bold text-text-dark leading-tight mb-6 tracking-tight bg-white/50 rounded-5xl px-6 py-4">
               Seu cliente economiza energia.<br />
-              <span className="text-primary">Você ganha até 80% de comissão.</span>
+              <span className="text-primary">Você ganha até 120% de comissão.</span>
             </h1>
             <p className="text-lg lg:text-xl text-text-muted mb-10 max-w-3xl leading-relaxed bg-white/50 rounded-5xl p-6">
-              O programa definitivo de energia por assinatura. Produto sustentável que reduz custos para clientes. <strong className="text-text-dark font-semibold">Ganhe até 80% do valor da primeira fatura!</strong>
+              O programa definitivo de energia por assinatura. Produto sustentável que reduz custos para clientes. <strong className="text-text-dark font-semibold">Ganhe até 120% do valor da primeira fatura!</strong>
             </p>
           </div>
 
@@ -120,7 +121,7 @@ export default function Parceiros() {
               <div className="flex flex-col md:flex-row justify-center gap-4">
                 <div className="bg-primary/5 rounded-2xl p-6 border border-primary/20 flex-1">
                   <div className="text-primary font-bold text-sm mb-1 uppercase tracking-wider">Venda Direta</div>
-                  <div className="text-3xl font-bold text-text-dark tracking-tight">Até 80%</div>
+                  <div className="text-3xl font-bold text-text-dark tracking-tight">Até 120%</div>
                   <div className="text-sm text-text-muted mt-1">da 1ª fatura do cliente</div>
                 </div>
                 <div className="bg-accent/10 rounded-2xl p-6 border border-accent/20 flex-1">
@@ -199,6 +200,9 @@ export default function Parceiros() {
           </div>
         </div>
       </section>
+
+      {/* --- SIMULADOR DE BONIFICAÇÃO --- */}
+      <SimuladorBonificacao onCadastro={() => setIsPartnerModalOpen(true)} />
 
       {/* --- TEAM/NETWORK SECTION (DARK MODE) --- */}
       <section className="py-24 bg-vigor-dark text-white relative overflow-hidden border-b-4 border-accent">
@@ -307,7 +311,7 @@ export default function Parceiros() {
               { icon: GraduationCap, title: 'Treinamento Completo', desc: 'Não precisa entender de energia. Fornecemos toda a capacitação técnica e comercial para você e sua equipe.' },
               { icon: Users, title: 'Gestão de Vendedores', desc: 'Plataforma pronta para você cadastrar seus vendedores diretos e acompanhar as vendas de cada um deles.' },
               { icon: LayoutDashboard, title: 'Plataforma Tech', desc: 'Acesso ao nosso CRM exclusivo, IA de leitura de faturas e geração de contratos 100% digitais.' },
-              { icon: DollarSign, title: 'Até 80% de Bônus', desc: 'Comissionamento agressivo nas suas vendas diretas, sendo um dos maiores repasses do mercado.' },
+              { icon: DollarSign, title: 'Até 120% de Bônus', desc: 'Comissionamento agressivo nas suas vendas diretas, sendo um dos maiores repasses do mercado.' },
               { icon: Zap, title: 'Ativação Rápida', desc: 'Processo desburocratizado para que seus clientes comecem a economizar (e você a ganhar) no menor tempo possível.' },
               { icon: ShieldCheck, title: 'Risco Zero', desc: 'Nós cuidamos da burocracia, do relacionamento com a concessionária e do risco da operação.' }
             ].map((benefit, idx) => (
