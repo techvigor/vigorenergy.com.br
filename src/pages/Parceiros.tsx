@@ -63,11 +63,11 @@ export default function Parceiros() {
           </div>
           <div className="flex flex-col items-center">
             <h1 className="text-5xl lg:text-6xl font-bold text-text-dark leading-tight mb-6 tracking-tight bg-white/50 rounded-5xl px-6 py-4">
-              Seu cliente economiza energia.<br />
+              Seu consumidor economiza energia.<br />
               <span className="text-primary">Você ganha até 120% de comissão.</span>
             </h1>
             <p className="text-lg lg:text-xl text-text-muted mb-10 max-w-3xl leading-relaxed bg-white/50 rounded-5xl p-6">
-              O programa definitivo de energia por assinatura. Produto sustentável que reduz custos para clientes. <strong className="text-text-dark font-semibold">Ganhe até 120% do valor da primeira fatura!</strong>
+              O programa definitivo de energia por assinatura. Produto sustentável que reduz custos para consumidores. <strong className="text-text-dark font-semibold">Ganhe até 120% do valor da primeira fatura!</strong>
             </p>
           </div>
 
@@ -100,7 +100,7 @@ export default function Parceiros() {
             <h2 className="text-accent font-bold tracking-wide uppercase text-sm mb-2">O que você vai vender</h2>
             <h3 className="text-3xl md:text-4xl font-bold text-text-dark mb-4 tracking-tight">Um produto de altíssima conversão</h3>
             <p className="text-lg text-text-muted max-w-2xl mx-auto">
-              Energia limpa que reduz a conta de luz. O cliente economiza, o planeta agradece e você ganha comissões pelo seu trabalho.
+              Energia limpa que reduz a conta de luz. O consumidor economiza, o planeta agradece e você ganha comissões pelo seu trabalho.
             </p>
           </div>
 
@@ -115,14 +115,14 @@ export default function Parceiros() {
               </div>
               <h4 className="text-3xl font-bold text-text-dark mb-4 tracking-tight">Assinatura de Energia Vigor</h4>
               <p className="text-text-muted mb-8 text-lg">
-                Energia solar compartilhada. <strong className="text-text-dark font-semibold">O cliente economiza até 22% na conta de luz</strong> sem instalar nada. Sem obras, sem investimento, e de forma rápida e prática.
+                Energia solar compartilhada. <strong className="text-text-dark font-semibold">O consumidor economiza até 22% na conta de luz</strong> sem instalar nada. Sem obras, sem investimento, e de forma rápida e prática.
               </p>
 
               <div className="flex flex-col md:flex-row justify-center gap-4">
                 <div className="bg-primary/5 rounded-2xl p-6 border border-primary/20 flex-1">
                   <div className="text-primary font-bold text-sm mb-1 uppercase tracking-wider">Venda Direta</div>
                   <div className="text-3xl font-bold text-text-dark tracking-tight">Até 120%</div>
-                  <div className="text-sm text-text-muted mt-1">da 1ª fatura do cliente</div>
+                  <div className="text-sm text-text-muted mt-1">da 1ª fatura do consumidor</div>
                 </div>
                 <div className="bg-accent/10 rounded-2xl p-6 border border-accent/20 flex-1">
                   <div className="text-[#d89020] font-bold text-sm mb-1 uppercase tracking-wider">Sua Equipe</div>
@@ -160,15 +160,15 @@ export default function Parceiros() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h3 className="text-3xl font-bold text-text-dark mb-4 tracking-tight">Como funciona na prática</h3>
-            <p className="text-lg text-text-muted">5 passos simples. Sem complexidade para você e para o cliente.</p>
+            <p className="text-lg text-text-muted">5 passos simples. Sem complexidade para você e para o consumidor.</p>
           </div>
 
           <div className="space-y-8">
             {[
-              { Svg: Step1Svg, title: 'Upload da conta ou cadastro manual', desc: 'Cadastre os dados do cliente ou envie a conta de luz. O sistema lê os dados automaticamente via IA.' },
+              { Svg: Step1Svg, title: 'Upload da conta ou cadastro manual', desc: 'Cadastre os dados do consumidor ou envie a conta de luz. O sistema lê os dados automaticamente via IA.' },
               { Svg: Step2Svg, title: 'Cálculo de economia', desc: 'Simulação instantânea evidenciando os 22% de desconto projetados.' },
               { Svg: Step3Svg, title: 'Termo gerado', desc: 'PDF automático e profissional, já com o seu bônus atrelado no sistema.' },
-              { Svg: Step4Svg, title: 'Aprovação online', desc: 'O cliente recebe um link via WhatsApp/E-mail e assina digitalmente em segundos.' },
+              { Svg: Step4Svg, title: 'Aprovação online', desc: 'O consumidor recebe um link via WhatsApp/E-mail e assina digitalmente em segundos.' },
               { Svg: Step5Svg, title: 'Bônus na conta', desc: 'Assim que o contrato é ativado, sua comissão é liberada no painel.' }
             ].map((step, idx) => (
               <div key={idx} className={`flex flex-col bg-offwhite md:flex-row rounded-[2rem] p-8 md:p-12 md:py-4 items-center gap-8 md:gap-16 border border-gray-light/60 shadow-sm hover:border-primary/50 transition-colors ${idx % 2 !== 0 ? 'md:flex-row-reverse' : ''}`}>
@@ -312,7 +312,7 @@ export default function Parceiros() {
               { icon: Users, title: 'Gestão de Vendedores', desc: 'Plataforma pronta para você cadastrar seus vendedores diretos e acompanhar as vendas de cada um deles.' },
               { icon: LayoutDashboard, title: 'Plataforma Tech', desc: 'Acesso ao nosso CRM exclusivo, IA de leitura de faturas e geração de contratos 100% digitais.' },
               { icon: DollarSign, title: 'Até 120% de Bônus', desc: 'Comissionamento agressivo nas suas vendas diretas, sendo um dos maiores repasses do mercado.' },
-              { icon: Zap, title: 'Ativação Rápida', desc: 'Processo desburocratizado para que seus clientes comecem a economizar (e você a ganhar) no menor tempo possível.' },
+              { icon: Zap, title: 'Ativação Rápida', desc: 'Processo desburocratizado para que seus consumidores comecem a economizar (e você a ganhar) no menor tempo possível.' },
               { icon: ShieldCheck, title: 'Risco Zero', desc: 'Nós cuidamos da burocracia, do relacionamento com a concessionária e do risco da operação.' }
             ].map((benefit, idx) => (
               <div key={idx} className="bg-white p-8 rounded-3xl border border-gray-light/60 hover:border-primary/50 transition-colors shadow-sm hover:shadow-md">
@@ -385,7 +385,7 @@ export default function Parceiros() {
             />
             <FAQItem
               question="Preciso entender muito de tecnologia?"
-              answer="Não. A nossa Inteligência Artificial faz o trabalho duro. O único esforço é cadastrar o cliente e enviar o PDF da conta de luz do cliente para o sistema. O resto é gerado automaticamente."
+              answer="Não. A nossa Inteligência Artificial faz o trabalho duro. O único esforço é cadastrar o consumidor e enviar o PDF da conta de luz do consumidor para o sistema. O resto é gerado automaticamente."
             />
             <FAQItem
               question="Como recebo minhas comissões?"

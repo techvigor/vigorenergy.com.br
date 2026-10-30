@@ -48,10 +48,10 @@ export default function SimuladorBonificacao({ onCadastro }: { onCadastro: () =>
 
   const R = useMemo(() => calcular(clientes), [clientes]);
   const fx = R.fx;
-  const rotulo = (x: Cliente, i: number) => x.nome.trim() || 'Cliente ' + (i + 1);
+  const rotulo = (x: Cliente, i: number) => x.nome.trim() || 'Consumidor ' + (i + 1);
   const temExemplo = clientes.some((x) => x.exemplo);
 
-  // o cliente do formulário, já somado ao mês, para a prévia e o bloco tracejado na régua
+  // o consumidor do formulário, já somado ao mês, para a prévia e o bloco tracejado na régua
   const c = lerConsumo(form.consumo);
   const sg = segDe(c);
   const iEditando = editando ? clientes.findIndex((x) => x.id === editando) : -1;
@@ -66,14 +66,14 @@ export default function SimuladorBonificacao({ onCadastro }: { onCadastro: () =>
 
   let bloqueio = '';
   const lotado = !editando && clientes.length >= MAX_CLIENTES;
-  if (lotado) bloqueio = `A simulação já tem ${MAX_CLIENTES} clientes.`;
+  if (lotado) bloqueio = `A simulação já tem ${MAX_CLIENTES} consumidores.`;
   else if (form.consumo.trim() && !Number.isFinite(c)) bloqueio = 'Use só números no consumo.';
   else if (c > CONSUMO_MAX) bloqueio = `Consumo acima de ${kwh(CONSUMO_MAX)} kWh por mês.`;
-  else if (c < REGRA.minimo) bloqueio = `Abaixo de ${kwh(REGRA.minimo)} kWh por mês: o cliente não entra na conta.`;
+  else if (c < REGRA.minimo) bloqueio = `Abaixo de ${kwh(REGRA.minimo)} kWh por mês: o consumidor não entra na conta.`;
   else if (sg && form.d > sg.max) bloqueio = `No segmento ${sg.n}, o desconto vai até ${sg.max}%.`;
   const podeAdicionar = !bloqueio && Number.isFinite(c) && !!l1?.ok;
 
-  // o que o cliente do formulário rende no plano padrão, quando o desconto pedido é maior
+  // o que o consumidor do formulário rende no plano padrão, quando o desconto pedido é maior
   const ganhoPadrao = useMemo(() => {
     if (!podeAdicionar || form.d <= REGRA.padrao || !R1 || !l1) return null;
     const lista = clientes.map((x) => ({ c: x.c, d: x.d }));
@@ -111,7 +111,7 @@ export default function SimuladorBonificacao({ onCadastro }: { onCadastro: () =>
         fx
           ? `${fixo ? 'Fixa' : 'Variável'}. Faixa F${fx.i + 1}, ${pc(fx.pct)} da fatura com desconto. ` +
               (fixo ? `Bonificação do mês ${r$(R.B)}. Pix I ${r$(R.E)}. Pix II ${r$(R.S)}.` : `Pix I ${r$(R.E)}. Recorrente ${r$(R.P)} por mês.`)
-          : 'Nenhum cliente na simulação.',
+          : 'Nenhum consumidor na simulação.',
       );
     }, 800);
     return () => clearTimeout(t);
@@ -130,7 +130,7 @@ export default function SimuladorBonificacao({ onCadastro }: { onCadastro: () =>
       const id = novoId();
       setClientes((cs) => [...cs, { id, c, d: form.d, nome }]);
       setRealce(id);
-      setAviso({ tx: `${nome || 'Cliente ' + (clientes.length + 1)} entrou na régua.` });
+      setAviso({ tx: `${nome || 'Consumidor ' + (clientes.length + 1)} entrou na régua.` });
     }
     setForm(formVazio);
     consumoRef.current?.focus();
@@ -168,7 +168,7 @@ export default function SimuladorBonificacao({ onCadastro }: { onCadastro: () =>
   function limparExemplo() {
     if (editando && clientes.find((x) => x.id === editando)?.exemplo) cancelarEdicao();
     setClientes((cs) => cs.filter((x) => !x.exemplo));
-    setAviso({ tx: 'Exemplo removido. Adicione os seus clientes.' });
+    setAviso({ tx: 'Exemplo removido. Adicione os seus consumidores.' });
     consumoRef.current?.focus();
   }
 
@@ -189,7 +189,7 @@ export default function SimuladorBonificacao({ onCadastro }: { onCadastro: () =>
   }
   const faltaPouco = !!fx && FX[fx.i][0] !== Infinity && FX[fx.i][0] + 1 - R.V < REGRA.minimo;
 
-  // blocos da régua: um por cliente que entra na conta, na ordem da lista
+  // blocos da régua: um por consumidor que entra na conta, na ordem da lista
   let acumulado = 0;
   let numero = 0;
   const blocos = R.linhas.map((l, i) => {
@@ -205,11 +205,11 @@ export default function SimuladorBonificacao({ onCadastro }: { onCadastro: () =>
   const nOk = R.linhas.filter((l) => l.ok).length;
   const nEx = clientes.filter((x) => x.exemplo).length;
   const sub = fx
-    ? `Faixa F${fx.i + 1} (${pc(fx.pct)} da fatura com desconto) · ${nOk} ${nOk > 1 ? 'clientes' : 'cliente'}` +
+    ? `Faixa F${fx.i + 1} (${pc(fx.pct)} da fatura com desconto) · ${nOk} ${nOk > 1 ? 'consumidores' : 'consumidor'}` +
       (nEx === nOk ? ' de exemplo' : nEx ? ` (${nEx} de exemplo)` : '')
-    : 'Adicione um cliente para ver a sua bonificação.';
+    : 'Adicione um consumidor para ver a sua bonificação.';
 
-  // prévia do formulário: o que o cliente rende e o que ele faz com a faixa do mês
+  // prévia do formulário: o que o consumidor rende e o que ele faz com a faixa do mês
   let efeito = '';
   if (R1 && l1?.ok && podeAdicionar) {
     const de = fx ? fx.pct : 0, para = R1.fx ? R1.fx.pct : 0;
@@ -236,7 +236,7 @@ export default function SimuladorBonificacao({ onCadastro }: { onCadastro: () =>
             Simule sua bonificação
           </h2>
           <p className="text-lg text-text-muted max-w-2xl mx-auto">
-            Some os clientes que você fecharia em um mês. Quanto mais kWh no mês, maior a faixa, e ela vale para todos eles.
+            Some os consumidores que você fecharia em um mês. Quanto mais kWh no mês, maior a faixa, e ela vale para todos eles.
           </p>
         </div>
 
@@ -281,7 +281,7 @@ export default function SimuladorBonificacao({ onCadastro }: { onCadastro: () =>
               </div>
             </div>
 
-            {/* régua do mês: a escada das faixas em cima, os clientes enchendo o trilho embaixo */}
+            {/* régua do mês: a escada das faixas em cima, os consumidores enchendo o trilho embaixo */}
             <div>
               <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
                 <h3 className="font-semibold">Régua do mês</h3>
@@ -291,7 +291,7 @@ export default function SimuladorBonificacao({ onCadastro }: { onCadastro: () =>
                     {prox.startsWith('faltam') ? (
                       <>
                         faltam <b className="text-accent">{kwh(FX[fx.i][0] + 1 - R.V)} kWh</b> para {pc(FX[fx.i + 1][1])}
-                        {faltaPouco && ', basta mais um cliente'}
+                        {faltaPouco && ', basta mais um consumidor'}
                       </>
                     ) : (
                       <b className="text-accent">{prox}</b>
@@ -369,12 +369,12 @@ export default function SimuladorBonificacao({ onCadastro }: { onCadastro: () =>
                   ))}
                 </div>
               </div>
-              <p className="mt-1 text-sm text-white/65">Cada bloco é um cliente. A faixa vem da soma do mês, e o percentual dela vale para todos.</p>
+              <p className="mt-1 text-sm text-white/65">Cada bloco é um consumidor. A faixa vem da soma do mês, e o percentual dela vale para todos.</p>
 
               <ul className="mt-5 flex flex-wrap gap-2 items-center">
                 {clientes.length === 0 && (
                   <li className="flex flex-wrap items-center gap-3 text-sm text-white/80">
-                    Nenhum cliente ainda. Adicione o primeiro abaixo.
+                    Nenhum consumidor ainda. Adicione o primeiro abaixo.
                     <button type="button" onClick={verExemplo} className="font-semibold text-accent underline underline-offset-4 decoration-1 hover:text-white">
                       Ver um exemplo
                     </button>
@@ -441,7 +441,7 @@ export default function SimuladorBonificacao({ onCadastro }: { onCadastro: () =>
             <div>
               <h3 className="font-semibold">Você recebe</h3>
               {!fx ? (
-                <p className="mt-3 text-sm text-white/75">Adicione um cliente para ver quanto e quando.</p>
+                <p className="mt-3 text-sm text-white/75">Adicione um consumidor para ver quanto e quando.</p>
               ) : (
                 <div className="mt-4 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-5">
                   <div className="flex items-center gap-3 min-w-0">
@@ -473,7 +473,7 @@ export default function SimuladorBonificacao({ onCadastro }: { onCadastro: () =>
                       <div className="leading-tight">
                         <b className="block text-xl font-bold tabular-nums">{r$(R.P)} por mês</b>
                         <span className="text-sm text-white/70">
-                          recorrente estimado, nos meses em que o cliente pagar, por {REGRA.recorrenteAnos} anos depois da assinatura
+                          recorrente estimado, nos meses em que o consumidor pagar, por {REGRA.recorrenteAnos} anos depois da assinatura
                         </span>
                       </div>
                     </div>
@@ -483,11 +483,11 @@ export default function SimuladorBonificacao({ onCadastro }: { onCadastro: () =>
             </div>
           </div>
 
-          {/* adicionar cliente: a faixa clara do mesmo painel */}
+          {/* adicionar consumidor: a faixa clara do mesmo painel */}
           <form onSubmit={salvar} className="bg-white text-text-dark p-5 sm:p-8 md:px-10" aria-labelledby="sim-add">
             <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
               <h3 id="sim-add" className="font-bold text-lg tracking-tight">
-                {editando ? 'Editar cliente' : 'Adicionar cliente'}
+                {editando ? 'Editar consumidor' : 'Adicionar consumidor'}
               </h3>
               {editando && (
                 <button type="button" onClick={cancelarEdicao} className="text-sm font-semibold text-primary underline underline-offset-4 decoration-1 hover:text-primary-dark">
@@ -580,7 +580,7 @@ export default function SimuladorBonificacao({ onCadastro }: { onCadastro: () =>
             {podeAdicionar && l1 && (
               <div className="mt-4 grid gap-2 text-sm text-text-muted">
                 <p>
-                  Este cliente rende{' '}
+                  Este consumidor rende{' '}
                   {fixo ? (
                     <>
                       <b className="text-text-dark tabular-nums">{r$(l1.B)}</b> (Pix I {r$(l1.E)} + Pix II {r$(l1.S)})
@@ -610,7 +610,7 @@ export default function SimuladorBonificacao({ onCadastro }: { onCadastro: () =>
                   ) : (
                     <span className="inline-flex items-center gap-1.5 font-semibold text-primary">
                       <Check className="w-4 h-4" aria-hidden="true" />
-                      Plano padrão: o maior ganho por cliente
+                      Plano padrão: o maior ganho por consumidor
                     </span>
                   )}
                 </p>
@@ -646,7 +646,7 @@ export default function SimuladorBonificacao({ onCadastro }: { onCadastro: () =>
           </button>
           <p className="mt-6 text-sm text-text-muted max-w-2xl mx-auto">
             Simulação com valores brutos, antes de impostos e retenções. Não é garantia de pagamento: os valores finais seguem o
-            Contrato de Parceria e dependem das faturas pagas pelos clientes. Regra de bonificação de {REGRA.vigencia}.
+            Contrato de Parceria e dependem das faturas pagas pelos consumidores. Regra de bonificação de {REGRA.vigencia}.
           </p>
         </div>
         <p className="sr-only" aria-live="polite">

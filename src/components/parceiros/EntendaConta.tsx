@@ -19,9 +19,9 @@ import {
 } from '../../lib/parceiros/bonificacao';
 
 const FX = REGRA.faixas;
-const TETO_MIL = 1000 * REGRA.tarifa;
-// quanto 1.000 kWh rendem em cada faixa, com o desconto padrão
+// quanto 1.000 kWh rendem em cada faixa, com o desconto padrão; a maior barra ocupa a altura toda
 const POR_MIL = FX.map((f) => cent(1000 * REGRA.tarifa * (1 - REGRA.padrao / 100) * f[1]));
+const MAIOR_MIL = Math.max(...POR_MIL);
 const DESCONTOS = [20, 22, 25, 28, 30, 35];
 
 // um termo da conta; o operador vem colado nele, para a linha nunca quebrar entre o "=" e o resultado
@@ -59,7 +59,7 @@ export default function EntendaConta({ R, clientes, fixo }: { R: Resultado; clie
   const oks = clientes.map((x, i) => ({ x, i })).filter(({ i }) => R.linhas[i].ok);
   const atual = oks.find(({ x }) => x.id === sel) ?? oks[0];
   const l = atual ? R.linhas[atual.i] : null;
-  const rotulo = (x: Cliente, i: number) => x.nome.trim() || 'Cliente ' + (i + 1);
+  const rotulo = (x: Cliente, i: number) => x.nome.trim() || 'Consumidor ' + (i + 1);
 
   return (
     <details className="group mt-6 bg-white border border-gray-light/60 rounded-3xl shadow-sm">
@@ -72,21 +72,21 @@ export default function EntendaConta({ R, clientes, fixo }: { R: Resultado; clie
       </summary>
 
       <div className="border-t border-gray-light/60 p-5 sm:p-6 md:p-8 grid grid-cols-[minmax(0,1fr)] gap-14 text-text-dark">
-        {/* a conta de um cliente em blocos: fatura, bonificação e como recebe */}
+        {/* a conta de um consumidor em blocos: fatura, bonificação e como recebe */}
         <section aria-labelledby="ec-conta">
           <h3 id="ec-conta" className="text-xl font-bold tracking-tight">
             A conta, passo a passo
           </h3>
           <p className="mt-1 text-text-muted max-w-[65ch]">
-            A bonificação é calculada uma vez, no mês em que a Vigor aceita o cliente. A fatura com desconto usa o consumo médio
+            A bonificação é calculada uma vez, no mês em que a Vigor aceita o consumidor. A fatura com desconto usa o consumo médio
             dos últimos 12 meses e não muda com bandeira, reajuste ou consumo do mês.
           </p>
 
           {!fx || !l || !atual ? (
-            <p className="mt-6 text-sm text-text-muted">Adicione um cliente com {kwh(REGRA.minimo)} kWh ou mais para ver a conta desenhada.</p>
+            <p className="mt-6 text-sm text-text-muted">Adicione um consumidor com {kwh(REGRA.minimo)} kWh ou mais para ver a conta desenhada.</p>
           ) : (
             <>
-              <div className="mt-6 flex flex-wrap gap-2" role="group" aria-label="Cliente da conta">
+              <div className="mt-6 flex flex-wrap gap-2" role="group" aria-label="Consumidor da conta">
                 {oks.map(({ x, i }) => (
                   <button
                     key={x.id}
@@ -114,7 +114,7 @@ export default function EntendaConta({ R, clientes, fixo }: { R: Resultado; clie
                   <Tok v={r$(l.F)} leg="fatura com desconto" />
                   <Tok op="×" v={pc(fx.pct)} leg={`faixa F${fx.i + 1}: o mês soma ${kwh(R.V)} kWh`} />
                   {l.d > REGRA.padrao && <Tok op="×" v={pc(redutor(l.d))} leg={`redutor (${l.d}% de desconto)`} />}
-                  <Tok op="=" v={r$(l.B)} leg={l.teto ? `no teto de ${r$(REGRA.tarifa)} por kWh` : 'bonificação deste cliente'} res />
+                  <Tok op="=" v={r$(l.B)} leg="bonificação deste consumidor" res />
                 </Linha>
 
                 <Linha rot="Na Fixa" sua={fixo}>
@@ -150,7 +150,7 @@ export default function EntendaConta({ R, clientes, fixo }: { R: Resultado; clie
                 </Linha>
               </div>
               <p className="mt-3 text-sm text-text-muted max-w-[65ch]">
-                {r$(REGRA.tarifa)} é a tarifa média que a Vigor usa só para esta regra. A conta real do cliente muda todo mês. Na
+                {r$(REGRA.tarifa)} é a tarifa média que a Vigor usa só para esta regra. A conta real do consumidor muda todo mês. Na
                 Variável, o recorrente em reais é uma estimativa feita com a fatura com desconto: o valor real segue a fatura paga.
               </p>
             </>
@@ -158,13 +158,13 @@ export default function EntendaConta({ R, clientes, fixo }: { R: Resultado; clie
         </section>
 
         <div className="grid grid-cols-[minmax(0,1fr)] gap-14 lg:grid-cols-2 lg:gap-12">
-          {/* faixas: quanto 1.000 kWh rendem em cada uma, com o teto */}
+          {/* faixas: quanto 1.000 kWh rendem em cada uma */}
           <section aria-labelledby="ec-faixas">
             <h3 id="ec-faixas" className="text-xl font-bold tracking-tight">
               Quanto rende cada 1.000 kWh
             </h3>
             <p className="mt-1 text-text-muted">Em cada faixa do mês, com {REGRA.padrao}% de desconto.</p>
-            {/* celular: uma linha por faixa, a barra cresce até o teto */}
+            {/* celular: uma linha por faixa, a barra cresce com o valor */}
             <ul className="mt-6 grid gap-2.5 sm:hidden">
               {POR_MIL.map((v, i) => (
                 <li key={i} className="grid grid-cols-[4.75rem_minmax(0,1fr)_4.5rem] items-center gap-3">
@@ -176,30 +176,22 @@ export default function EntendaConta({ R, clientes, fixo }: { R: Resultado; clie
                       {FX[i][0] === Infinity ? `${mil(inicioFaixa(i))} ou +` : `até ${mil(FX[i][0] === 39999 ? 40000 : FX[i][0])}`}
                     </span>
                   </span>
-                  <i className={`block h-3 rounded-full ${fx?.i === i ? 'bg-accent' : 'bg-primary/85'}`} style={{ width: `${(v / TETO_MIL) * 100}%` }} />
+                  <i className={`block h-3 rounded-full ${fx?.i === i ? 'bg-accent' : 'bg-primary/85'}`} style={{ width: `${(v / MAIOR_MIL) * 100}%` }} />
                   <b className={`text-sm text-right tabular-nums ${fx?.i === i ? 'text-accent-ink' : ''}`}>
                     {r$0(v)}
                     {fx?.i === i && <span className="sr-only"> (sua faixa)</span>}
                   </b>
                 </li>
               ))}
-              <li className="text-xs text-text-muted">
-                Teto: {r$0(TETO_MIL)} por 1.000 kWh ({r$(REGRA.tarifa)} por kWh).
-              </li>
             </ul>
             <div className="mt-6 relative hidden sm:block">
               <div className="relative h-44 border-b border-gray-light">
-                <div className="absolute inset-x-0 top-0 border-t border-dashed border-text-muted/60" aria-hidden="true">
-                  <span className="absolute -top-5 left-0 text-xs font-semibold text-text-muted">
-                    teto: {r$0(TETO_MIL)} ({r$(REGRA.tarifa)} por kWh)
-                  </span>
-                </div>
                 <div className="absolute inset-0 grid grid-cols-6 gap-2 sm:gap-3 items-end px-1">
                   {POR_MIL.map((v, i) => (
                     <i
                       key={i}
                       className={`block rounded-t-md transition-colors duration-300 ${fx?.i === i ? 'bg-accent' : 'bg-primary/85'}`}
-                      style={{ height: `${(v / TETO_MIL) * 100}%` }}
+                      style={{ height: `${(v / MAIOR_MIL) * 100}%` }}
                     />
                   ))}
                 </div>
@@ -220,14 +212,14 @@ export default function EntendaConta({ R, clientes, fixo }: { R: Resultado; clie
               </ul>
             </div>
             <p className="mt-4 text-sm text-text-muted">
-              A faixa é a soma do consumo dos clientes aceitos no mês e recomeça a cada mês. O percentual vale para todos eles.
+              A faixa é a soma do consumo dos consumidores aceitos no mês e recomeça a cada mês. O percentual vale para todos eles.
             </p>
           </section>
 
           {/* desconto: de cada 10 moedas da bonificação, quantas ficam com você */}
           <section aria-labelledby="ec-desconto">
             <h3 id="ec-desconto" className="text-xl font-bold tracking-tight">
-              Quanto mais desconto, menos você recebe
+              Quanto menor o desconto, maior a comissão
             </h3>
             <p className="mt-1 text-text-muted">De cada 10 moedas da bonificação, quantas ficam com você.</p>
             <ul className="mt-6 grid gap-3.5">
@@ -284,12 +276,12 @@ export default function EntendaConta({ R, clientes, fixo }: { R: Resultado; clie
             <div>
               <h4 className="font-semibold">Quem conta para a faixa</h4>
               <ul className="mt-3 grid gap-2 text-sm text-text-muted list-disc pl-5 marker:text-primary">
-                <li>Cada cliente precisa ter pelo menos {kwh(REGRA.minimo)} kWh por mês.</li>
+                <li>Cada consumidor precisa ter pelo menos {kwh(REGRA.minimo)} kWh por mês.</li>
                 <li>Só Grupo B (B1, B2 e B3). Grupo A, Grupo A optante B e tarifa social não podem assinar.</li>
                 <li>A venda só conta depois da assinatura do titular, da análise de cadastro e da ligação de confirmação da Vigor.</li>
-                <li>O mesmo cliente (CPF, CNPJ ou unidade consumidora) não gera bonificação nova antes de 24 meses.</li>
+                <li>O mesmo consumidor (CPF, CNPJ ou unidade consumidora) não gera bonificação nova antes de 24 meses.</li>
                 <li>
-                  Se você só indicar e a Vigor fizer a venda, recebe {r$0(REGRA.indicacao)} por cliente fechado, no lugar da bonificação.
+                  Se você só indicar e a Vigor fizer a venda, recebe {r$0(REGRA.indicacao)} por consumidor fechado, no lugar da bonificação.
                 </li>
               </ul>
             </div>
@@ -298,13 +290,13 @@ export default function EntendaConta({ R, clientes, fixo }: { R: Resultado; clie
               <ul className="mt-3 grid gap-2 text-sm text-text-muted list-disc pl-5 marker:text-primary">
                 <li>
                   <b className="text-text-dark">Fixa:</b> Pix I no dia 10 do mês seguinte ao aceite. Pix II no dia 10 do mês seguinte à
-                  1ª fatura paga, mesmo se o cliente pagar com atraso.
+                  1ª fatura paga, mesmo se o consumidor pagar com atraso.
                 </li>
                 <li>
-                  <b className="text-text-dark">Variável:</b> o mesmo Pix I. Depois, todo mês em que o cliente pagar,{' '}
+                  <b className="text-text-dark">Variável:</b> o mesmo Pix I. Depois, todo mês em que o consumidor pagar,{' '}
                   {pc(REGRA.recBase)} do valor pago vezes o redutor, por {REGRA.recorrenteAnos} anos depois da assinatura.
                 </li>
-                <li>Você escolhe Fixa ou Variável no contrato, e ela vale para todos os seus clientes.</li>
+                <li>Você escolhe Fixa ou Variável no contrato, e ela vale para todos os seus consumidores.</li>
                 <li>
                   A Vigor paga uma vez por mês, contra nota fiscal da sua empresa. Total abaixo de {r$0(REGRA.pagamentoMinimo)} passa
                   para o mês seguinte.
@@ -317,9 +309,9 @@ export default function EntendaConta({ R, clientes, fixo }: { R: Resultado; clie
                 <li>Fatura não paga não gera pagamento. Fatura negociada conta quando for paga.</li>
                 <li>
                   1ª fatura sem pagamento em 60 dias: o Pix I sai das suas próximas bonificações, até metade de cada pagamento. Se o
-                  cliente pagar depois, ele volta.
+                  consumidor pagar depois, ele volta.
                 </li>
-                <li>Na Variável, se o cliente sair cedo, você pode ganhar menos que na Fixa.</li>
+                <li>Na Variável, se o consumidor sair cedo, você pode ganhar menos que na Fixa.</li>
                 <li>Fraude, aliciamento ou descumprimento do contrato encerram os pagamentos.</li>
               </ul>
             </div>
