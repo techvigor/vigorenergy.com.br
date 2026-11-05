@@ -24,7 +24,7 @@ export default function Footer() {
                         <img src="/logomarca_transp.png" alt="Vigor Energy" className="h-9 mb-4 brightness-0 invert" />
                         <p className="text-white/70 text-sm leading-relaxed">
                             Energia solar por assinatura. Economia garantida, sem
-                            complexidade. Junte-se a milhares de clientes que já estão
+                            complexidade. Junte-se a milhares de consumidores que já estão
                             economizando.
                         </p>
                     </div>
