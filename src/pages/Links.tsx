@@ -12,7 +12,7 @@ import {
   Linkedin,
   type LucideIcon,
 } from 'lucide-react';
-import { WHATSAPP_MENSAGENS, WHATSAPP_NUMERO } from '../lib/lp-economize/config';
+import { WHATSAPP_MENSAGENS, WHATSAPP_COMERCIAL } from '../lib/lp-economize/config';
 
 /**
  * Página de "link na bio" do Instagram (vigorenergy.com.br/links). Mobile-first: quase todo
@@ -28,7 +28,7 @@ type LinkItem = {
   externo?: boolean;
 };
 
-const linkWhatsApp = `https://wa.me/${WHATSAPP_NUMERO}?text=${encodeURIComponent(WHATSAPP_MENSAGENS.links)}`;
+const linkWhatsApp = `https://wa.me/${WHATSAPP_COMERCIAL}?text=${encodeURIComponent(WHATSAPP_MENSAGENS.links)}`;
 
 const links: LinkItem[] = [
   { label: 'Falar no WhatsApp', descricao: 'Tire suas dúvidas com o nosso time', icon: MessageCircle, to: linkWhatsApp, externo: true },

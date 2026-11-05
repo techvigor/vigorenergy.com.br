@@ -16,7 +16,7 @@ import {
   STATUS_FATURAS_OPCOES,
   type StatusFaturas,
 } from '../../lib/lp-economize/validation';
-import { WHATSAPP_MENSAGENS, WHATSAPP_NUMERO } from '../../lib/lp-economize/config';
+import { WHATSAPP_MENSAGENS, WHATSAPP_COMERCIAL } from '../../lib/lp-economize/config';
 import { gerarEventId, trackLead, trackLeadDesqualificado } from '../../lib/lp-economize/tracking';
 import { obterOrigemLead } from '../../lib/lp-economize/utms';
 import { enviarLead, enviarFatura, confirmarFatura } from '../../lib/lp-economize/api';
@@ -178,7 +178,7 @@ export default function LeadForm({ faixaContaInicial, valorContaInformado, onSuc
     }
   };
 
-  const linkWhatsAppFallback = `https://wa.me/${WHATSAPP_NUMERO}?text=${encodeURIComponent(WHATSAPP_MENSAGENS.fechamento)}`;
+  const linkWhatsAppFallback = `https://wa.me/${WHATSAPP_COMERCIAL}?text=${encodeURIComponent(WHATSAPP_MENSAGENS.fechamento)}`;
 
   return (
     <form id="lp-lead-form" onSubmit={handleSubmit} noValidate className="space-y-4">

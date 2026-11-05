@@ -1,5 +1,5 @@
 import { MessageCircle } from 'lucide-react';
-import { WHATSAPP_MENSAGENS, WHATSAPP_NUMERO } from '../../lib/lp-economize/config';
+import { WHATSAPP_MENSAGENS, WHATSAPP_COMERCIAL } from '../../lib/lp-economize/config';
 
 function irParaSimulador(e: React.MouseEvent) {
   e.preventDefault();
@@ -8,7 +8,7 @@ function irParaSimulador(e: React.MouseEvent) {
 }
 
 export default function FechamentoWhatsapp() {
-  const linkWhatsApp = `https://wa.me/${WHATSAPP_NUMERO}?text=${encodeURIComponent(WHATSAPP_MENSAGENS.fechamento)}`;
+  const linkWhatsApp = `https://wa.me/${WHATSAPP_COMERCIAL}?text=${encodeURIComponent(WHATSAPP_MENSAGENS.fechamento)}`;
 
   return (
     <section className="py-16 md:py-24 bg-offwhite">

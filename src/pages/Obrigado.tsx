@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { MessageCircle } from 'lucide-react';
-import { WHATSAPP_MENSAGENS, WHATSAPP_NUMERO } from '../lib/lp-economize/config';
+import { WHATSAPP_MENSAGENS, WHATSAPP_COMERCIAL } from '../lib/lp-economize/config';
 
 /**
  * Rota /obrigado — noindex primário via header X-Robots-Tag (vercel.json), já que é
@@ -19,7 +19,7 @@ export default function Obrigado() {
     };
   }, []);
 
-  const linkWhatsApp = `https://wa.me/${WHATSAPP_NUMERO}?text=${encodeURIComponent(WHATSAPP_MENSAGENS.obrigado)}`;
+  const linkWhatsApp = `https://wa.me/${WHATSAPP_COMERCIAL}?text=${encodeURIComponent(WHATSAPP_MENSAGENS.obrigado)}`;
 
   return (
     <div className="min-h-screen bg-vigor-dark text-white flex items-center justify-center px-4 py-16">

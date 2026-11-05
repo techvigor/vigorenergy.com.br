@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import LeadForm from './LeadForm';
 import { formatarMoeda, parseMoeda, formatarBRL, faixaContaPorValor } from '../../lib/lp-economize/format';
-import { TAXA_ECONOMIA_ESTIMADA, VALOR_MINIMO_CONTA, resolverH1, WHATSAPP_MENSAGENS, WHATSAPP_NUMERO } from '../../lib/lp-economize/config';
+import { TAXA_ECONOMIA_ESTIMADA, VALOR_MINIMO_CONTA, resolverH1, WHATSAPP_MENSAGENS, WHATSAPP_COMERCIAL } from '../../lib/lp-economize/config';
 import { trackSimulacaoCalculada, trackLeadDesqualificado, iniciarPixel } from '../../lib/lp-economize/tracking';
 import { capturarOrigemLead } from '../../lib/lp-economize/utms';
 
@@ -58,7 +58,7 @@ export default function HeroIsland() {
     }, 300);
   };
 
-  const linkWhatsAppFechamento = `https://wa.me/${WHATSAPP_NUMERO}?text=${encodeURIComponent(WHATSAPP_MENSAGENS.fechamento)}`;
+  const linkWhatsAppFechamento = `https://wa.me/${WHATSAPP_COMERCIAL}?text=${encodeURIComponent(WHATSAPP_MENSAGENS.fechamento)}`;
 
   return (
     <header id="simulador" className="lp-hero" aria-label="Vigor Energy — economize na conta de luz">

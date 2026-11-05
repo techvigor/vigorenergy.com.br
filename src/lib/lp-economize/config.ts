@@ -26,10 +26,11 @@ export const NUMERO_ASSINANTES: number | null = 1000; // "Mais de 1.000" — ver
 export const FATURA_ANTES: { valor: number; imagemUrl: string } | null = null; // TODO: validar valores e autorização de uso
 export const FATURA_DEPOIS: { valor: number; imagemUrl: string } | null = null; // TODO: validar valores e autorização de uso
 
-/** Número único do WhatsApp usado na LP (fechamento, /obrigado) e em /links. Formato: 55DDDNUMERO, só dígitos. */
-export const WHATSAPP_NUMERO = '5562991183449'; // Júlia (Inside Sales)
-
-/** Números das opções do botão flutuante de todo o site (WhatsAppFloatingButton). Mesmo formato. */
+/**
+ * Números do WhatsApp do site. Formato: 55DDDNUMERO, só dígitos.
+ * COMERCIAL: todo link "falar com a Júlia" (LP /economize, /obrigado, /links) e a opção Comercial
+ * do botão flutuante. SUPORTE: só a opção "Suporte e dúvidas" do botão flutuante.
+ */
 export const WHATSAPP_COMERCIAL = '5562991308408'; // Júlia (Inside Sales)
 export const WHATSAPP_SUPORTE = '5562991183449'; // suporte e dúvidas
 
