@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
+import { SUBSCRIBER_PORTAL_URL } from '../lib/links';
 
 const navLinks = [
     { label: 'Vantagens', href: '#vantagens' },
-    { label: 'Diferenciais', href: '#diferenciais' },
     { label: 'Blog', href: '/blog', page: true },
     { label: 'Seja Parceiro', href: '/parceiros', external: true },
     { label: 'Contato', href: '/contato', page: true },
@@ -47,12 +47,12 @@ export default function Navbar() {
     return (
         <header className="fixed top-4 md:top-6 left-0 w-full z-50 flex justify-center px-4">
             {/* Pill Container */}
-            <nav className="relative w-full max-w-6xl bg-white/95 backdrop-blur-xl border border-gray-light/60 rounded-full px-5 md:px-6 py-2.5 md:py-3 flex items-center justify-between shadow-lg">
+            <nav className="relative w-full max-w-6xl bg-white/95 backdrop-blur-xl border border-gray-light/60 rounded-full px-5 md:px-6 py-2.5 md:py-3 flex items-center justify-between lg:grid lg:grid-cols-[1fr_auto_1fr] lg:gap-x-4 shadow-lg">
 
                 {/* Logo */}
                 <Link
                     to="/"
-                    className="flex items-center shrink-0 z-10"
+                    className="flex items-center shrink-0 z-10 lg:justify-self-start"
                     onClick={() => {
                         window.scrollTo({ top: 0, behavior: 'smooth' });
                     }}
@@ -61,7 +61,7 @@ export default function Navbar() {
                 </Link>
 
                 {/* Center Links (Desktop only) */}
-                <div className="hidden lg:flex items-center justify-center gap-1 absolute left-1/2 -translate-x-1/2">
+                <div className="hidden lg:flex items-center justify-center gap-1">
                     {navLinks.map((link) => {
                         const isActive = activeRoute === link.href;
                         const className = `relative px-3 lg:px-4 xl:px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 whitespace-nowrap ${isActive
@@ -98,10 +98,18 @@ export default function Navbar() {
                 </div>
 
                 {/* Right CTA (Desktop only) */}
-                <div className="hidden lg:flex items-center shrink-0 z-10">
+                <div className="hidden lg:flex items-stretch gap-2 shrink-0 z-10 lg:justify-self-end">
+                    <a
+                        href={SUBSCRIBER_PORTAL_URL}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center px-5 py-2 rounded-full border border-primary/40 text-primary text-sm font-semibold whitespace-nowrap hover:bg-primary hover:text-white hover:border-white transition-all duration-300"
+                    >
+                        Já sou assinante
+                    </a>
                     <Link
                         to="/simulador"
-                        className="bg-accent inline-flex items-center justify-center px-6 py-2 rounded-full border border-gray-light/60 text-text-dark text-md font-bold hover:border-accent hover:animate-pulse-orange transition-all duration-300"
+                        className="bg-accent inline-flex items-center justify-center px-6 py-2 rounded-full border border-gray-light/60 text-text-dark text-md font-bold whitespace-nowrap hover:border-accent hover:animate-pulse-orange transition-all duration-300"
                     >
                         Simular economia
                     </Link>
@@ -118,7 +126,7 @@ export default function Navbar() {
 
             {/* Mobile Menu Dropdown */}
             <div
-                className={`lg:hidden absolute top-full left-4 right-4 mt-2 bg-white border border-gray-light/60 rounded-3xl overflow-hidden transition-all duration-300 backdrop-blur-xl shadow-xl ${open ? 'max-h-80 opacity-100 p-2' : 'max-h-0 opacity-0 p-0 border-transparent'
+                className={`lg:hidden absolute top-full left-4 right-4 mt-2 bg-white border border-gray-light/60 rounded-3xl overflow-hidden transition-all duration-300 backdrop-blur-xl shadow-xl ${open ? 'max-h-96 opacity-100 p-2' : 'max-h-0 opacity-0 p-0 border-transparent'
                     }`}
             >
                 <nav className="flex flex-col gap-1">
@@ -158,6 +166,15 @@ export default function Navbar() {
                         );
                     })}
                     <div className="h-px w-full bg-gray-light/60 my-1" />
+                    <a
+                        href={SUBSCRIBER_PORTAL_URL}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={() => setOpen(false)}
+                        className="px-4 py-3 rounded-2xl text-sm font-medium text-primary hover:bg-primary hover:text-white hover:outline-white transition-colors text-center mt-1 outline outline-1 outline-primary/30"
+                    >
+                        Já sou assinante
+                    </a>
                     <Link
                         to="/simulador"
                         onClick={() => setOpen(false)}

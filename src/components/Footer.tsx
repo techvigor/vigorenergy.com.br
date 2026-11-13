@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { MapPin, Phone, Mail, Instagram, Linkedin } from 'lucide-react';
+import { SUBSCRIBER_PORTAL_URL } from '../lib/links';
 
 const quickLinks = [
     { label: 'Vantagens', href: '#vantagens' },
@@ -7,6 +8,7 @@ const quickLinks = [
     { label: 'Simulação', href: '/simulador' },
     { label: 'FAQ', href: '#faq' },
     { label: 'Apresentação', href: 'https://hub.vigorenergy.com.br/#/apresentacao', target: '_blank', rel: 'noopener noreferrer' },
+    { label: 'Já sou assinante', href: SUBSCRIBER_PORTAL_URL, target: '_blank', rel: 'noopener noreferrer' },
 ];
 
 const socialLinks = [
